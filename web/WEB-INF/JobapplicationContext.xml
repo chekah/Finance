@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="ersalBeBankTask" class="aminParsian.service.jobs.ErsalBeBankTask"/>
+    <bean id="ersalBeBankJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="ersalBeBankTask"/>
+        <property name="targetMethod" value="ersalBeBank"/>
+    </bean>
+
+<bean id="ersalBeBankCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ersalBeBankJob"/>
+        <property name="cronExpression" value="0 0/5 8-18 * * ?"/>
+        <!--<property name="cronExpression" value="0 00 9 * * ?"/>-->
+    </bean>
+
+    <!--rahe2-->
+    <bean id="feedBackServiceTask" class="aminParsian.service.jobs.FeedBackServiceTask" />
+    <bean name="feedBackJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="feedBackServiceTask" />
+        <property name="targetMethod" value="getFeedBackACH" />
+    </bean>
+
+    <bean id="feedBackcronTrigger8" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="feedBackJob"/>
+        <property name="cronExpression" value="0 0/50 15-20 * * ?"/>
+        <!--<property name="cronExpression" value="0 0 14 15 ?"/>-->
+    </bean>
+
+    <bean id="smsServiceTask" class="aminParsian.service.jobs.SmsServiceTask" />
+    <bean name="smsServiceJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="smsServiceTask" />
+        <property name="targetMethod" value="sendSms" />
+    </bean>
+
+
+    <bean id="smsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="smsServiceJob"/>
+        <property name="cronExpression" value="0 00 17 * * ?"/>
+        <!--<property name="cronExpression" value="0 0 14 15 ?"/>-->
+    </bean>
+
+    <bean id="fillReceptionExcelTask" class="aminParsian.service.jobs.FillReceptionExcelTask" />
+    <bean name="fillReceptionExcelJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="fillReceptionExcelTask" />
+        <property name="targetMethod" value="fillReceptionExcel" />
+    </bean>
+    <!--
+    انتقال از نات اگزیست به اگزیست
+    -->
+    <bean id="fillReceptionExcelCronTrigger0" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="fillReceptionExcelJob"/>
+        <property name="cronExpression" value="0 15 10 * * ?"/>
+    </bean>
+    <bean id="fillReceptionExcelCronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="fillReceptionExcelJob"/>
+        <property name="cronExpression" value="0 53 14 * * ?"/>
+    </bean>
+    <!--**********************************************************ساخت دستور پرداخت********************************************************-->
+    <bean id="createCredebitForReceptionExcelTask" class="aminParsian.service.jobs.CreateCredebitForReceptionExcelTask" />
+    <bean name="createCredebitForReceptionExcelJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="createCredebitForReceptionExcelTask" />
+        <property name="targetMethod" value="saveCredebitForReceptionExcel" />
+    </bean>
+
+    <bean id="createCredebitForReceptionExcelCronTrigger0" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createCredebitForReceptionExcelJob"/>
+        <property name="cronExpression" value="0 23 19 * * ?"/>
+    </bean>
+    <bean id="createCredebitForReceptionExcelCronTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="createCredebitForReceptionExcelJob"/>
+        <property name="cronExpression" value="0 20 18 * * ?"/>
+    </bean>
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+<!--                <ref bean="feedBackJob" />-->
+<!--                <ref bean="ersalBeBankJob"/>-->
+<!--                <ref bean="smsServiceJob" />-->
+<!--                <ref bean="fillReceptionExcelJob" />-->
+<!--                <ref bean="createCredebitForReceptionExcelJob"/>-->
+            </list>
+        </property>
+
+    <property name="triggers">
+        <list>
+<!--        <ref bean="feedBackcronTrigger8"/>-->
+<!--        <ref bean="smsCronTrigger"/>-->
+<!--        <ref bean="ersalBeBankCronTrigger"/>-->
+<!--        <ref bean="fillReceptionExcelCronTrigger0"/>-->
+<!--        <ref bean="fillReceptionExcelCronTrigger1"/>-->
+<!--        <ref bean="createCredebitForReceptionExcelCronTrigger0"/>-->
+<!--        <ref bean="createCredebitForReceptionExcelCronTrigger1"/>-->
+        </list>
+    </property>
+    </bean>
+</beans>

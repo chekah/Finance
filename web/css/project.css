@@ -1,0 +1,333 @@
+
+.searchpanel{
+    padding: 0px;
+    text-align: center;
+    background-color:transparent;
+    position: relative;
+}
+
+.flip {
+    padding-right: 15px;
+    text-align: center;
+    background-color:#ffe0cc;
+    border-radius: 5px;
+    border: solid 1px #ff944d;
+    text-align: right;
+    position: relative;
+    -moz-box-shadow: inset 0 0 10px #ff944d;
+    -webkit-box-shadow: inset 0 0 10px #ff944d;
+    box-shadow: inset 0 0 10px #ff944d;
+    color: #000000;
+    font-weight: bold;
+}
+
+.searchpanel {
+    display: none;
+    padding: 0px;
+    position: relative;
+}
+
+
+.searchpanelproject {
+    display: none;
+    padding: 0px;
+    position: relative;
+    width: 100%;
+}
+
+
+
+.searchformtable
+{
+   text-align: right;
+    direction: rtl;
+    position: relative;
+    top: 0px;
+    topmargin: 0%;
+
+}
+
+
+.panelproject
+{
+    position: relative;
+    height: 130px;
+    background-color: #f7ecb5;
+}
+
+
+ .formpanel
+ {
+     text-align: right;
+     width: 1000px;
+     right: 5%;
+ }
+
+
+.righttoleft
+{
+    text-align: right;
+    direction: rtl;
+
+}
+
+.th1
+{
+    width: 20%;
+
+}
+
+.th2
+{
+    width: 25%;
+}
+
+
+.th3
+{
+    width: 20%;
+}
+
+.th4
+{
+    width: 25%;
+}
+
+.th5
+{
+    width: 10%;
+}
+
+
+.lefttoright
+{
+    direction: ltr;
+    text-align: left;
+}
+
+.righttoleft
+{
+    direction: rtl;
+    text-align: right;
+}
+
+
+.loginBody{
+    font-family: B Nazanin,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    background-image: url("/image/background.jpg") ;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 96%;
+
+}
+
+.loginPanel
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -moz-border-radius: 5%;
+    border-radius:5%;
+}
+
+.loginTable
+{
+    border-spacing:1em;
+    top:0%;
+    position: relative;
+    direction: rtl;
+    text-align: center;
+}
+
+
+.ltr
+{
+    direction: ltr;
+    text-align: left;
+}
+
+.rtl
+{
+    direction: rtl;
+    text-align: right;
+}
+table.contentTable
+{
+    font-weight: bold;
+    width: 600px;
+    border: 2px double #eeb44f;
+    margin-right: 80px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color:#fef0c5;
+    padding: 15px 5px;
+    margin:0 auto;
+    box-shadow:inset -3px 15px 15px 5px #fcf8f2;
+
+}
+.designtextarea{
+    width: 220px;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+input.miniInput{
+    width: 60pt;
+    text-align: center;
+}
+
+
+.hidden {
+    visibility: hidden;
+}
+
+.hiddenDiv {
+    display: none;
+}
+
+.miniButton{
+
+    border-radius: 8px;
+    background: #ffd799;
+    background-image: -webkit-linear-gradient(top, #ffd799, #f7bd66);
+    background-image: -moz-linear-gradient(top, #ffd799, #f7bd66);
+    background-image: -ms-linear-gradient(top, #ffd799, #f7bd66);
+    background-image: -o-linear-gradient(top, #ffd799, #f7bd66);
+    background-image: linear-gradient(to bottom, #ffd799, #f7bd66);
+
+    color: #856354;
+    font-weight: bold;
+    padding: 1px 4px 1px 4px;
+    border-collapse: collapse;
+    width: 60px;
+    height: 30px;
+
+}
+
+.displaytable
+{
+    width:100%;
+    margin:0
+}
+
+.minidisplaytable
+{
+    width:30%;
+    margin:0
+
+}
+.header
+{
+    color: rgb(51, 51, 51)
+}
+
+.message {
+    width: 220px;
+    border-radius: 25px;
+    background: transparent;
+    color: red;
+    text-align: center;
+
+}
+.minimessage {
+    width: 150px;
+    text-align: center;
+    color: red;
+}
+
+.myheader {
+    background: rgb(255, 243, 204);
+    text-align:right;
+    direction: rtl;
+
+}
+
+.required {
+    color: red;
+}
+
+
+
+.disabledTab{
+    pointer-events: none;
+    opacity:0.6;
+}
+
+
+
+.newdiv{
+    visibility:hidden;
+}
+
+.staticTitleBar, .expandableTitleBar{
+    overflow-x:auto;
+    padding: 0px;
+    text-align: center;
+    background-color: #fff3cc;
+    border: solid 1px #c3c3c3;
+    text-align: right;
+    position: relative;
+}
+
+/*---------------------------------------------------------------------------*/
+
+.inputList{
+    direction:rtl;
+    /*width:90%;*/
+    margin-left:auto;
+    margin-right:auto;
+    /*border-spacing:5px;*/
+}
+.inputList input, .inputList select, .inputList textarea{
+     float:left;
+ }
+.inputList input, .inputList select{
+      text-align:center;
+  }
+
+.inputCol{
+    width:50%;
+}
+
+.content .inputList{
+    width:90%;
+}
+
+.div_inputList{
+    float:right;
+    width:50%;
+    padding:3px 0px;
+}
+
+.div_inputList input{
+    float:left;
+}
+
+
+.headers {
+    background-image: url("/image/header1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}
+
+.texttd{
+    text-align: left;
+}
+
+.labelOfTD{
+    text-align: right;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: gray;
+}
+
+.btn-info {
+    width: 80px;
+}

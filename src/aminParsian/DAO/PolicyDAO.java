@@ -1,0 +1,624 @@
+package aminParsian.DAO;
+
+//import org.apache.axis.utils.StringUtils;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
+import org.hibernate.criterion.Restrictions;
+import aminParsian.displaytag.PaginatedListImpl;
+import aminParsian.displaytag.PagingUtil;
+import aminParsian.model.*;
+//import aminParsian.model.Dictionary;
+import aminParsian.util.BaseDAO;
+import aminParsian.util.DataValidation;
+import aminParsian.util.DateUtil;
+import aminParsian.viewModel.*;
+
+import java.lang.Exception;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class PolicyDAO extends BaseDAO {
+    private ErrorsDAO errorsDAO;
+
+
+
+    public ErrorsDAO getErrorsDAO() {
+        return errorsDAO;
+    }
+
+    public void setErrorsDAO(ErrorsDAO errorsDAO) {
+        this.errorsDAO = errorsDAO;
+    }
+
+
+
+
+    public Policy findById(BigDecimal id) {
+        return (Policy) super.findById(Policy.class, id);
+    }
+
+    public Object saveOrUpdate(Policy i) {
+        super.saveOrUpdate(i);
+        return super.findById(Policy.class, currentSession().getIdentifier(i));
+
+    }
+
+    public List<Errors> doDataValidation(Policy policy) {
+        List<Errors> errors = new ArrayList<Errors>();
+
+        if (DataValidation.isValidJalaliDate(policy.getBegindate().toString()) != 1) {
+            Errors error = (Errors) errorsDAO.findById(Errors.class, new BigDecimal(2));
+            error.setMsg(error.getMsg().replace("[thisfield]", "تاريخ شروع "));
+            errors.add(error);
+        }
+
+        if (DataValidation.isValidJalaliDate(policy.getEnddate().toString()) != 1) {
+            Errors error = (Errors) errorsDAO.findById(Errors.class, new BigDecimal(2));
+            error.setMsg(error.getMsg().replace("[thisfield]", " تاريخ پايان"));
+            errors.add(error);
+        }
+
+        return errors;
+    }
+
+
+    public InsuredPerson findByPersonAndPolicy(BigDecimal patientID, BigDecimal policyID) {
+        String hql = "select ip  from   InsuredPerson ip  inner join  ip.policy po  where po.id=" + policyID + " AND ip.id=" + patientID + "";
+        List<InsuredPerson> insuredPerson = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql).list();
+
+        if (insuredPerson == null || insuredPerson.size() == 0) {
+            return null;
+        }
+        return insuredPerson.get(0);
+
+    }
+
+
+    public Policy findByPolicyNo(String policyNo) {
+
+        try {
+            String s = "select p from Policy p  where p.state <90 and p.policyno='" + policyNo + "'";
+
+            return (Policy) super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(s).uniqueResult();
+        } catch (Throwable e) {
+            return new Policy();
+        }
+    }
+
+
+    public InsuredPerson findInsuredPersonByPersonIDAndPolicyID(BigDecimal personID, BigDecimal policyID) {
+        String hql = "select ip  from   InsuredPerson ip  " +
+                "inner join  ip.policy po  " +
+                "inner join ip.person  p" +
+                " where ip.state < 100 and  po.id=" + policyID + " AND p.id=" + personID + "";
+        List<InsuredPerson> insuredPerson = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql).list();
+
+        if (insuredPerson == null || insuredPerson.size() == 0) {
+            return null;
+        }
+        return insuredPerson.get(0);
+
+    }
+
+    public List<InsuredPerson> getMainInsuredPersonsByPolicy(BigDecimal policyID) {
+        String hql = "select ip from InsuredPerson ip " +
+                "join ip.policy p " +
+                "where ip.state =1 and ip.familyrelation=1 and p.id=:policyID ";
+        try {
+            Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+            query.setParameter("policyID", policyID);
+            return query.list();
+        } catch (Exception e) {
+            return null;
+        } catch (Error e) {
+            return null;
+        }
+    }
+
+
+
+
+    public List<InsuredPerson> getInsuredPersonByPolicyAndPersonelID(String policyNo, String personelID) {
+
+        String hql = " select ip from InsuredPerson  ip " +
+                " join ip.policy po " +
+                " where po.policyno =:policyNo and ip.personelid =:personelID and ip.state <90 and po.state < 100 order by  ip.familyrelation asc ";
+
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("policyNo", policyNo);
+        query.setParameter("personelID", personelID);
+
+        List<InsuredPerson> list = query.list();
+
+        return list;
+    }
+
+
+
+    public List<ViewInsuredPerson> findMainInsuredPersonByPolicyAndMainNationalID(String nationalID ,BigDecimal policyID) {
+        String sql = "select p.policyno, " +
+                "  per.name || ' ' || per.family as fullname, " +
+                "  per.idno, " +
+                "  per.nationalid nationalID, " +
+                "  per.persianbirthdate, " +
+                "  per.fathername, " +
+                "  nesbat.namefarsi as nesbati, " +
+                "  gender.namefarsi as gender, " +
+                "  ip.id as codeBimeShode, " +
+                "  ip.personelID, " +
+                "  mp.id codeBimehShodeAsli, " +
+                "  mper.nationalid as nationalIDAsli, " +
+                "  mper.name || ' ' || mper.family as fullnameAsli, " +
+                "  a.beginDate, " +
+                "  a.enddate, " +
+                "  a.sheba, " +
+                "  c.mobile " +
+                "  from insuredperson ip " +
+                "  inner join policy p " +
+                "  on p.id = ip.policyid " +
+                "  inner join person per " +
+                "  on per.id = ip.personid " +
+                "  left join contact c " +
+                "  on per.id = c.personid " +
+                "  inner join insuredperson mp " +
+                "  on mp.id= ip.mainpersonid " +
+                "  left join account a " +
+                "  on mp.id = a.insuredpersonid " +
+                "  inner join person mper " +
+                "  on mper.id = mp.personid " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1002  )nesbat " +
+                "  ON ip.FAMILYRELATION = nesbat.code " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1001  )gender " +
+                "  ON per.gender = gender.code " +
+                "  where per.state < 100 and ip.state < 100 and p.state < 100 and a.state < 100 and ip.FAMILYRELATION = 1 ";
+        if (policyID != null) {
+
+            sql += " AND p.id = " + policyID + "";
+        }
+        if (nationalID != null && nationalID.isEmpty() == false) {
+
+            sql += " AND per.nationalID = '" + nationalID + "'";
+        }
+
+        sql +=" order by ip.personelid ";
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+
+
+        PaginatedListImpl<ViewInsuredPerson> resultList = new PaginatedListImpl<ViewInsuredPerson>();
+
+        List<Object[]> result = query.list();
+        List<ViewInsuredPerson> viewInsuredPersonList = new ArrayList<>();
+        if(result!=null){
+            int size = result.size();
+            for(int i = 0  ; i < size ; i++){
+                Object[] temp = result.get(i);
+
+
+                ViewInsuredPerson viewInsuredPerson = new ViewInsuredPerson();
+
+                if(temp[0] != null){
+                    viewInsuredPerson.setPolicyNo((String) temp[0]);
+                }
+                if(temp[1] != null){
+                    viewInsuredPerson.setFullName((String) temp[1]);
+                }
+                if(temp[2] != null){
+                    viewInsuredPerson.setIdNo((String) temp[2]);
+                }
+                if(temp[3] != null){
+                    viewInsuredPerson.setNationalID(temp[3].toString());
+                }
+                if(temp[4] != null){
+                    viewInsuredPerson.setBirthDate(temp[4].toString());
+                }
+                if(temp[5] != null){
+                    viewInsuredPerson.setFatherName( temp[5].toString());
+                }
+                if(temp[6] != null){
+                    viewInsuredPerson.setFamilyRelation( temp[6].toString());
+                }
+                if(temp[7] != null){
+                    viewInsuredPerson.setGender((String) temp[7]);
+                }
+                if(temp[8] != null){
+                    viewInsuredPerson.setInsuredPersonCode(new BigDecimal(temp[8].toString()));
+                }
+                if(temp[9] != null){
+                    viewInsuredPerson.setPersonelID(temp[9].toString());
+                }
+                if(temp[10] != null){
+                    viewInsuredPerson.setMainInsuredPersonCode((new BigDecimal( temp[10].toString())));
+                }
+                if(temp[11] != null){
+                    viewInsuredPerson.setNationalIDAsli(temp[11].toString());
+                }
+                if(temp[12] != null){
+                    viewInsuredPerson.setFullNameAsli( temp[12].toString());
+                }
+                if(temp[13] != null){
+                    viewInsuredPerson.setBeginDate(DateUtil.getStrDate(new Long (temp[13].toString())));
+                }
+                if(temp[14] != null){
+                    viewInsuredPerson.setEndDate(DateUtil.getStrDate(new Long (temp[14].toString())));
+                }
+                if(temp[15] != null){
+                    viewInsuredPerson.setSheba(temp[15].toString());
+                }
+                if(temp[16] != null){
+                    viewInsuredPerson.setMobile(new BigInteger( temp[16].toString()));
+                }
+
+
+                viewInsuredPersonList.add(viewInsuredPerson);
+
+            }
+        }
+
+
+        return viewInsuredPersonList;
+    }
+
+
+
+    public PaginatedListImpl<ViewInsuredPerson> insuredPersonListReport(boolean flag, int page, String personelID, BigDecimal policyID, String nationalID, String mainNationalID, String createDateFrom, String createDateTo, Long hasShebaID, Long hasMobileID, String sheba, BigInteger mobile, Long stateCode) {
+        String sql = "select p.policyno, " +
+                "  per.name || ' ' || per.family as fullname, " +
+                "  per.idno, " +
+                "  per.nationalid nationalID, " +
+                "  per.persianbirthdate, " +
+                "  per.fathername, " +
+                "  nesbat.namefarsi as nesbati, " +
+                "  gender.namefarsi as gender, " +
+                "  ip.id as codeBimeShode, " +
+                "  ip.personelID, " +
+                "  mp.id codeBimehShodeAsli, " +
+                "  mper.nationalid as nationalIDAsli, " +
+                "  mper.name || ' ' || mper.family as fullnameAsli, " +
+                "  a.beginDate, " +
+                "  a.enddate, " +
+                "  a.sheba, " +
+                "  c.mobile," +
+                "  p.policyname," +
+                "  ip.id as insuredPersonID,  " +
+                "  s.state as stateCode, " +
+                "  suspondState.namefarsi as suspondState" +
+                "  from insuredperson ip " +
+                "  inner join policy p " +
+                "  on p.id = ip.policyid " +
+                "  inner join person per " +
+                "  on per.id = ip.personid " +
+                "  left join (select * from contact where state < 100 )c " +
+                "  on per.id = c.personid " +
+                "  inner join insuredperson mp " +
+                "  on mp.id= ip.mainpersonid " +
+                "  left join (select * from account where state<100)a " +
+                "  on mp.id = a.insuredpersonid " +
+                "  inner join person mper " +
+                "  on mper.id = mp.personid " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1002  )nesbat " +
+                "  ON ip.FAMILYRELATION = nesbat.code " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1001  )gender " +
+                "  ON per.gender = gender.code " +
+                " left join Suspend s on s.MAININSUREDPERSONID = mp.id " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1  )suspondState " +
+                "  ON s.state = suspondState.code" +
+                "  where per.state < 100 and ip.state < 100 and p.state < 100   ";
+        if (policyID != null) {
+
+            sql += " AND p.id = " + policyID + "";
+        }
+        if (personelID != null && personelID.isEmpty() == false) {
+
+            sql += " AND ip.personelID = '" + personelID + "'";
+        }
+        if (nationalID != null && nationalID.isEmpty() == false) {
+            sql += " AND per.nationalID = '" + nationalID + "'";
+        }
+        if (mainNationalID != null  && mainNationalID.isEmpty() == false) {
+
+            sql += " AND mper.nationalID = '" + mainNationalID + "'";
+        }
+        if (createDateFrom != null && createDateFrom.isEmpty() == false) {
+            sql += " AND ip.createdate >='" + createDateFrom + "'";
+        }
+
+        if (createDateTo != null && createDateTo.isEmpty() == false) {
+            sql += " AND ip.createdate <='" + createDateTo + "'";
+        }
+        if (hasShebaID != null && hasShebaID==0l) {
+            sql += " AND a.id is null ";
+        }else if(hasShebaID != null && hasShebaID==1l){
+            sql += " AND a.id is not null ";
+        }
+        if (hasMobileID != null && hasMobileID==0l) {
+            sql += " AND c.id is null ";
+        }else if(hasMobileID != null && hasMobileID==1l){
+            sql += " AND c.id is not null ";
+        }
+        if (mobile != null) {
+            sql += " AND c.mobile = " + mobile + "";
+        }
+        if (sheba != null && sheba.isEmpty() == false) {
+            sql += " AND a.sheba = '" + sheba + "'";
+        }
+        if (stateCode != null) {
+            sql += " AND s.state = " + stateCode + "";
+        }
+        sql +=" order by ip.personelid ";
+        Query query=null;
+        if (flag == true) {
+            query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+            query.setFirstResult(0);
+            query.setMaxResults(10);
+        } else {
+            query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+        }
+
+        PaginatedListImpl<ViewInsuredPerson> resultList = new PaginatedListImpl<ViewInsuredPerson>();
+
+        List<Object[]> result = query.list();
+        List<ViewInsuredPerson> viewInsuredPersonList = new ArrayList<>();
+        if(result!=null){
+            int size = result.size();
+            for(int i = 0  ; i < size ; i++){
+                Object[] temp = result.get(i);
+
+
+                ViewInsuredPerson viewInsuredPerson = new ViewInsuredPerson();
+
+                if(temp[0] != null){
+                    viewInsuredPerson.setPolicyNo((String) temp[0]);
+                }
+                if(temp[1] != null){
+                    viewInsuredPerson.setFullName((String) temp[1]);
+                }
+                if(temp[2] != null){
+                    viewInsuredPerson.setIdNo((String) temp[2]);
+                }
+                if(temp[3] != null){
+                    viewInsuredPerson.setNationalID(temp[3].toString());
+                }
+                if(temp[4] != null){
+                    viewInsuredPerson.setBirthDate(temp[4].toString());
+                }
+                if(temp[5] != null){
+                    viewInsuredPerson.setFatherName( temp[5].toString());
+                }
+                if(temp[6] != null){
+                    viewInsuredPerson.setFamilyRelation( temp[6].toString());
+                }
+                if(temp[7] != null){
+                    viewInsuredPerson.setGender((String) temp[7]);
+                }
+                if(temp[8] != null){
+                    viewInsuredPerson.setInsuredPersonCode(new BigDecimal(temp[8].toString()));
+                }
+                if(temp[9] != null){
+                    viewInsuredPerson.setPersonelID(temp[9].toString());
+                }
+                if(temp[10] != null){
+                    viewInsuredPerson.setMainInsuredPersonCode((new BigDecimal( temp[10].toString())));
+                }
+                if(temp[11] != null){
+                    viewInsuredPerson.setNationalIDAsli(temp[11].toString());
+                }
+                if(temp[12] != null){
+                    viewInsuredPerson.setFullNameAsli( temp[12].toString());
+                }
+                if(temp[13] != null){
+                    viewInsuredPerson.setBeginDate(DateUtil.getStrDate(new Long (temp[13].toString())));
+                }
+                if(temp[14] != null){
+                    viewInsuredPerson.setEndDate(DateUtil.getStrDate(new Long (temp[14].toString())));
+                }
+                if(temp[15] != null){
+                    viewInsuredPerson.setSheba(temp[15].toString());
+                }
+                if(temp[16] != null){
+                    viewInsuredPerson.setMobile(new BigInteger( temp[16].toString()));
+                }
+                if(temp[17] != null){
+                    viewInsuredPerson.setPolicyName(temp[17].toString());
+                }
+                if(temp[18] != null){
+                    viewInsuredPerson.setInsuredPersonCode(new BigDecimal(temp[18].toString()));
+                }
+                if(temp[19] != null){
+                    viewInsuredPerson.setSuspondState(new Long(temp[19].toString()));
+                }
+                if(temp[20] != null){
+                    viewInsuredPerson.setSuspondStateStr(temp[20].toString());
+                }
+                viewInsuredPersonList.add(viewInsuredPerson);
+
+            }
+        }
+
+
+        if (!isExport()) {
+            int pagesize = ((page - 1) * PagingUtil.MAX_OBJECTS_PER_PAGE) + PagingUtil.MAX_OBJECTS_PER_PAGE;
+            int listsize = viewInsuredPersonList.size();
+            if (listsize >= pagesize)
+                resultList.setList(viewInsuredPersonList.subList(((page - 1) * PagingUtil.MAX_OBJECTS_PER_PAGE), pagesize));
+            else
+                resultList.setList(viewInsuredPersonList.subList(((page - 1) * PagingUtil.MAX_OBJECTS_PER_PAGE), listsize));
+
+            resultList.setPageNumber(1);
+            resultList.setObjectsPerPage(PagingUtil.MAX_OBJECTS_PER_PAGE);
+        } else {
+            resultList.setList(viewInsuredPersonList);
+
+            resultList.setPageNumber(1);
+            resultList.setObjectsPerPage(PagingUtil.MAX_OBJECTS_PER_PAGE);
+        }
+        resultList.setFullListSize(viewInsuredPersonList.size());
+        return resultList;
+    }
+
+    public List<ViewInsuredPerson> findInsuredPersonByPolicyAndNationalID(String nationalID, BigDecimal policyID) {
+        String sql = "select p.policyno, " +
+                "  per.name || ' ' || per.family as fullname, " +
+                "  per.idno, " +
+                "  per.nationalid nationalID, " +
+                "  per.persianbirthdate, " +
+                "  per.fathername, " +
+                "  nesbat.namefarsi as nesbati, " +
+                "  gender.namefarsi as gender, " +
+                "  ip.id as codeBimeShode, " +
+                "  ip.personelID, " +
+                "  mp.id codeBimehShodeAsli, " +
+                "  mper.nationalid as nationalIDAsli, " +
+                "  mper.name || ' ' || mper.family as fullnameAsli, " +
+                "  a.beginDate, " +
+                "  a.enddate, " +
+                "  a.sheba, " +
+                "  c.mobile " +
+                "  from insuredperson ip " +
+                "  inner join policy p " +
+                "  on p.id = ip.policyid " +
+                "  inner join person per " +
+                "  on per.id = ip.personid " +
+                "  left join contact c " +
+                "  on per.id = c.personid " +
+                "  inner join insuredperson mp " +
+                "  on mp.id= ip.mainpersonid " +
+                "  left join account a " +
+                "  on mp.id = a.insuredpersonid " +
+                "  inner join person mper " +
+                "  on mper.id = mp.personid " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1002  )nesbat " +
+                "  ON ip.FAMILYRELATION = nesbat.code " +
+                "  left JOIN  (SELECT * FROM DICTIONARY WHERE pid=1001  )gender " +
+                "  ON per.gender = gender.code " +
+                "  where per.state < 100 and ip.state < 100 and p.state < 100 and a.state < 100 ";
+        if (policyID != null) {
+
+            sql += " AND p.id = " + policyID + "";
+        }
+        if (nationalID != null && nationalID.isEmpty() == false) {
+
+            sql += " AND per.nationalID = '" + nationalID + "'";
+        }
+
+        sql += " order by ip.personelid ";
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+
+
+        PaginatedListImpl<ViewInsuredPerson> resultList = new PaginatedListImpl<ViewInsuredPerson>();
+
+        List<Object[]> result = query.list();
+        List<ViewInsuredPerson> viewInsuredPersonList = new ArrayList<>();
+        if (result != null) {
+            int size = result.size();
+            for (int i = 0; i < size; i++) {
+                Object[] temp = result.get(i);
+
+
+                ViewInsuredPerson viewInsuredPerson = new ViewInsuredPerson();
+
+                if (temp[0] != null) {
+                    viewInsuredPerson.setPolicyNo((String) temp[0]);
+                }
+                if (temp[1] != null) {
+                    viewInsuredPerson.setFullName((String) temp[1]);
+                }
+                if (temp[2] != null) {
+                    viewInsuredPerson.setIdNo((String) temp[2]);
+                }
+                if (temp[3] != null) {
+                    viewInsuredPerson.setNationalID(temp[3].toString());
+                }
+                if (temp[4] != null) {
+                    viewInsuredPerson.setBirthDate(temp[4].toString());
+                }
+                if (temp[5] != null) {
+                    viewInsuredPerson.setFatherName(temp[5].toString());
+                }
+                if (temp[6] != null) {
+                    viewInsuredPerson.setFamilyRelation(temp[6].toString());
+                }
+                if (temp[7] != null) {
+                    viewInsuredPerson.setGender((String) temp[7]);
+                }
+                if (temp[8] != null) {
+                    viewInsuredPerson.setInsuredPersonCode(new BigDecimal(temp[8].toString()));
+                }
+                if (temp[9] != null) {
+                    viewInsuredPerson.setPersonelID(temp[9].toString());
+                }
+                if (temp[10] != null) {
+                    viewInsuredPerson.setMainInsuredPersonCode((new BigDecimal(temp[10].toString())));
+                }
+                if (temp[11] != null) {
+                    viewInsuredPerson.setNationalIDAsli(temp[11].toString());
+                }
+                if (temp[12] != null) {
+                    viewInsuredPerson.setFullNameAsli(temp[12].toString());
+                }
+                if (temp[13] != null) {
+                    viewInsuredPerson.setBeginDate(DateUtil.getStrDate(new Long(temp[13].toString())));
+                }
+                if (temp[14] != null) {
+                    viewInsuredPerson.setEndDate(DateUtil.getStrDate(new Long(temp[14].toString())));
+                }
+                if (temp[15] != null) {
+                    viewInsuredPerson.setSheba(temp[15].toString());
+                }
+                if (temp[16] != null) {
+                    viewInsuredPerson.setMobile(new BigInteger(temp[16].toString()));
+                }
+
+
+                viewInsuredPersonList.add(viewInsuredPerson);
+
+            }
+        }
+
+
+        return viewInsuredPersonList;
+    }
+public Policy setStrForPolicy(Policy policy) {
+
+        if (policy.getIssuancedate() != null)
+            policy.setIssuancedateStr(DateUtil.getStrDate(policy.getIssuancedate()));
+        if (policy.getBegindate() != null)
+            policy.setBegindateStr(DateUtil.getStrDate(policy.getBegindate()));
+        if (policy.getEnddate() != null)
+            policy.setEnddateStr(DateUtil.getStrDate(policy.getEnddate()));
+
+        Suspend suspend = findSuspondByPolicy(policy.getId());
+        if(suspend!=null){
+            policy.setStateStr("تعلیق شده");
+            policy.setSuspond(1l);
+        }else{
+            policy.setStateStr("دائم");
+            policy.setSuspond(0l);
+        }
+
+        return policy;
+    }
+
+    public Suspend findSuspondByPolicy(BigDecimal policyID) {
+        String hql = "select s from Suspend s " +
+                " where s.policy.id=:policyID and s.state = 1 " ;
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("policyID", policyID);
+
+        try {
+            Suspend suspend = (Suspend) query.list().get(0);
+            return suspend;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+
+}

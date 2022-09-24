@@ -1,0 +1,3452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s3="http://service.webservicegateway.core.channelmanager.caspian.com/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.parsian-bank.ir/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://corebankingservice.endpoint.webservicegateway.core.channelmanager.caspian.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://internalbankservice.endpoint.webservicegateway.core.moderngateway.caspian.com/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.parsian-bank.ir/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://www.parsian-bank.ir/">
+<s:import namespace="http://corebankingservice.endpoint.webservicegateway.core.channelmanager.caspian.com/"/>
+<s:import namespace="http://internalbankservice.endpoint.webservicegateway.core.moderngateway.caspian.com/"/>
+<s:import namespace="http://service.webservicegateway.core.channelmanager.caspian.com/"/>
+<s:element name="login">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chUserInfoRequestBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="channelType" type="s1:channelServiceType"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="loginResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="loginResult" type="tns:loginResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="loginResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chLoginResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="errType">
+<s:restriction base="s:string">
+<s:enumeration value="OK"/>
+<s:enumeration value="SrvExceedMaxCountDay"/>
+<s:enumeration value="SrvExceedMaxCountWeek"/>
+<s:enumeration value="SrvExceedMaxCountMonth"/>
+<s:enumeration value="SrvExceedMaxCountYear"/>
+<s:enumeration value="SrvExceedMaxCountTotal"/>
+<s:enumeration value="SrvExceedMinAmntTrnx"/>
+<s:enumeration value="SrvExceedMaxAmntTrnx"/>
+<s:enumeration value="SrvExceedMaxAmntDay"/>
+<s:enumeration value="SrvExceedMaxAmntWeek"/>
+<s:enumeration value="SrvExceedMaxAmntMonth"/>
+<s:enumeration value="SrvExceedMaxAmntYear"/>
+<s:enumeration value="SrvExceedMaxAmntTotal"/>
+<s:enumeration value="AcntSrcExceedMaxCountDay"/>
+<s:enumeration value="AcntSrcExceedMaxCountWeek"/>
+<s:enumeration value="AcntSrcExceedMaxCountMonth"/>
+<s:enumeration value="AcntSrcExceedMaxCountYear"/>
+<s:enumeration value="AcntSrcExceedMaxCountTotal"/>
+<s:enumeration value="AcntSrcExceedMinAmntTrnx"/>
+<s:enumeration value="AcntSrcExceedMaxAmntTrnx"/>
+<s:enumeration value="AcntSrcExceedMaxAmntDay"/>
+<s:enumeration value="AcntSrcExceedMaxAmntWeek"/>
+<s:enumeration value="AcntSrcExceedMaxAmntMonth"/>
+<s:enumeration value="AcntSrcExceedMaxAmntYear"/>
+<s:enumeration value="AcntSrcExceedMaxAmntTotal"/>
+<s:enumeration value="CardSrcExceedMaxCountDay"/>
+<s:enumeration value="CardSrcExceedMaxCountWeek"/>
+<s:enumeration value="CardSrcExceedMaxCountMonth"/>
+<s:enumeration value="CardSrcExceedMaxCountYear"/>
+<s:enumeration value="CardSrcExceedMaxCountTotal"/>
+<s:enumeration value="CardSrcExceedMinAmntTrnx"/>
+<s:enumeration value="CardSrcExceedMaxAmntTrnx"/>
+<s:enumeration value="CardSrcExceedMaxAmntDay"/>
+<s:enumeration value="CardSrcExceedMaxAmntWeek"/>
+<s:enumeration value="CardSrcExceedMaxAmntMonth"/>
+<s:enumeration value="CardSrcExceedMaxAmntYear"/>
+<s:enumeration value="CardSrcExceedMaxAmntTotal"/>
+<s:enumeration value="AcntDstExceedMaxCountDay"/>
+<s:enumeration value="AcntDstExceedMaxCountWeek"/>
+<s:enumeration value="AcntDstExceedMaxCountMonth"/>
+<s:enumeration value="AcntDstExceedMaxCountYear"/>
+<s:enumeration value="AcntDstExceedMaxCountTotal"/>
+<s:enumeration value="AcntDstExceedMinAmntTrnx"/>
+<s:enumeration value="AcntDstExceedMaxAmntTrnx"/>
+<s:enumeration value="AcntDstExceedMaxAmntDay"/>
+<s:enumeration value="AcntDstExceedMaxAmntWeek"/>
+<s:enumeration value="AcntDstExceedMaxAmntMonth"/>
+<s:enumeration value="AcntDstExceedMaxAmntYear"/>
+<s:enumeration value="AcntDstExceedMaxAmntTotal"/>
+<s:enumeration value="CardDstExceedMaxCountDay"/>
+<s:enumeration value="CardDstExceedMaxCountWeek"/>
+<s:enumeration value="CardDstExceedMaxCountMonth"/>
+<s:enumeration value="CardDstExceedMaxCountYear"/>
+<s:enumeration value="CardDstExceedMaxCountTotal"/>
+<s:enumeration value="CardDstExceedMinAmntTrnx"/>
+<s:enumeration value="CardDstExceedMaxAmntTrnx"/>
+<s:enumeration value="CardDstExceedMaxAmntDay"/>
+<s:enumeration value="CardDstExceedMaxAmntWeek"/>
+<s:enumeration value="CardDstExceedMaxAmntMonth"/>
+<s:enumeration value="CardDstExceedMaxAmntYear"/>
+<s:enumeration value="CardDstExceedMaxAmntTotal"/>
+<s:enumeration value="InvalidSrcAcnt"/>
+<s:enumeration value="InvalidDstAcnt"/>
+<s:enumeration value="DatabaseFail"/>
+<s:enumeration value="InvalidAmount"/>
+<s:enumeration value="InvalidSessionId"/>
+<s:enumeration value="InvalidMethodCall"/>
+<s:enumeration value="InvalidPropertyValue"/>
+<s:enumeration value="InvalidSrcCard"/>
+<s:enumeration value="InvalidDstCard"/>
+<s:enumeration value="InvalidCustomerNumber"/>
+<s:enumeration value="InternalException"/>
+<s:enumeration value="ImbalanceException"/>
+<s:enumeration value="AccessDenied"/>
+<s:enumeration value="InvalidLoanNumber"/>
+<s:enumeration value="LoanNumberExceedMaxCountDay"/>
+<s:enumeration value="LoanNumberExceedMaxCountWeek"/>
+<s:enumeration value="LoanNumberExceedMaxCountMonth"/>
+<s:enumeration value="LoanNumberExceedMaxCountYear"/>
+<s:enumeration value="LoanNumberExceedMaxCountTotal"/>
+<s:enumeration value="LoanNumberExceedMinAmntTrnx"/>
+<s:enumeration value="LoanNumberExceedMaxAmntTrnx"/>
+<s:enumeration value="LoanNumberExceedMaxAmntDay"/>
+<s:enumeration value="LoanNumberExceedMaxAmntWeek"/>
+<s:enumeration value="LoanNumberExceedMaxAmntMonth"/>
+<s:enumeration value="LoanNumberExceedMaxAmntYear"/>
+<s:enumeration value="LoanNumberExceedMaxAmntTotal"/>
+</s:restriction>
+</s:simpleType>
+<s:element name="loginAccount">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chUserInfoRequestBean"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="loginAccountResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="loginAccountResult" type="tns:loginAccountResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="loginAccountResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s2:chLoginResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+</s:sequence>
+</s:complexType>
+<s:element name="loginSwitch">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chUserInfoRequestBean"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="loginSwitchResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="loginSwitchResult" type="tns:loginSwitchResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="loginSwitchResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s3:chLoginResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+</s:sequence>
+</s:complexType>
+<s:element name="checkLoginInternetBank">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chUserInfoRequestBean"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="checkLoginInternetBankResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="checkLoginInternetBankResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="normalTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chNormalTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="normalTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="normalTransferResult" type="tns:normalTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="normalTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chNormalTransferResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="achNormalTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chAchNormalTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="achNormalTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="achNormalTransferResult" type="tns:achNormalTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="achNormalTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chNormalAchTransferResultBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="logout">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="1" maxOccurs="1" name="channelType" type="s1:channelServiceType"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="logoutResponse">
+<s:complexType/>
+</s:element>
+<s:element name="logoutAccount">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="logoutAccountResponse">
+<s:complexType/>
+</s:element>
+<s:element name="logoutSwitch">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="logoutSwitchResponse">
+<s:complexType/>
+</s:element>
+<s:element name="changePassword">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chChangePasswordRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="changePasswordResponse">
+<s:complexType/>
+</s:element>
+<s:element name="achTransferReport">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chAchTransferSearchRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="achTransferReportResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="achTransferReportResult" type="tns:achTransferReportResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="achTransferReportResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chAchTransfersResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="institutionalTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chInstitutionalTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="institutionalTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="institutionalTransferResult" type="tns:institutionalTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="institutionalTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chInstitutionalTransferResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getPaymentBillStatement">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chPaymentBillStatementRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getPaymentBillStatementResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getPaymentBillStatementResult" type="tns:getPaymentBillStatementResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getPaymentBillStatementResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chPaymentBillStatementsResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getStatement">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chStatementSearchRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getStatementResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getStatementResult" type="tns:getStatementResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getStatementResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chStatementResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="achTransactionReport">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chAchTransactionSearchRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="achTransactionReportResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="achTransactionReportResult" type="tns:achTransactionReportResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="achTransactionReportResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chAchTransactionsResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getDeposits">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chDepositSearchRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getDepositsResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getDepositsResult" type="tns:getDepositsResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getDepositsResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chDepositResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="rtgsNormalTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chRtgsNormalTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="rtgsNormalTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="rtgsNormalTransferResult" type="tns:rtgsNormalTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="rtgsNormalTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chNormalRtgsTransferResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="rtgsTransferReport">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chRtgTransferSearchRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="rtgsTransferReportResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="rtgsTransferReportResult" type="tns:rtgsTransferReportResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="rtgsTransferReportResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chRtgsTransferResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="convertIbanToDepositNumber">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chIbanToDepositRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="convertIbanToDepositNumberResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="convertIbanToDepositNumberResult" type="tns:convertIbanToDepositNumberResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="convertIbanToDepositNumberResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getCardOwner">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chCardOwnerRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getCardOwnerResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getCardOwnerResult" type="tns:getCardOwnerResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getCardOwnerResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chCardOwnerResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="cardTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chFundTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="cardTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="cardTransferResult" type="tns:cardTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="cardTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chFinancialServiceResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="batchTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chBatchTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="batchTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="batchTransferResult" type="tns:batchTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="batchTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chBatchTransferResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="achBatchTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chBatchAchTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="achBatchTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="achBatchTransferResult" type="tns:achBatchTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="achBatchTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chAchBatchTransferResultBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="normalAcntTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="tns:normalAcntTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="normalAcntTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="additionalDocumentDesc" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" name="destinationComment" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="destinationDeposit" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="sourceComment" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="sourceDeposit" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="uniqueTrackId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="normalAcntTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="normalAcntTransferResult" type="tns:acntTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="acntTransferResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="tns:acntTransferResultBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="acntTransferResultBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="referenceNumber" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="isDuplicate" type="s:boolean"/>
+</s:sequence>
+</s:complexType>
+<s:element name="batchAcntTransfer">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="tns:batchAcntTransferRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="batchAcntTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="additionalDocumentDesc" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="sourceAccounts" type="tns:ArrayOfBatchAcntTransferDetail"/>
+<s:element minOccurs="0" maxOccurs="1" name="destinationAccounts" type="tns:ArrayOfBatchAcntTransferDetail"/>
+<s:element minOccurs="0" maxOccurs="1" name="uniqueTrackId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="ArrayOfBatchAcntTransferDetail">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="batchAcntTransferDetail" nillable="true" type="tns:batchAcntTransferDetail"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="batchAcntTransferDetail">
+<s:sequence>
+<s:element minOccurs="1" maxOccurs="1" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" name="account" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="comment" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="batchAcntTransferResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="batchAcntTransferResult" type="tns:acntTransferResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getDepositOwnerName">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chDepositOwnerRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getDepositOwnerNameResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getDepositOwnerNameResult" type="tns:getDepositOwnerNameResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getDepositOwnerNameResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="cardBalanceInquiry">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chCardBalanceRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="cardBalanceInquiryResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="cardBalanceInquiryResult" type="tns:cardBalanceInquiryResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="cardBalanceInquiryResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chCardBalanceResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="cardBalanceInquiryWithCustId">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chCardBalanceRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="cardBalanceInquiryWithCustIdResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="cardBalanceInquiryWithCustIdResult" type="tns:cardBalanceInquiryWithCustIdResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="cardBalanceInquiryWithCustIdResult">
+<s:sequence>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="cif" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getCardDeposits">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chCardDepositRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getCardDepositsResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getCardDepositsResult" type="tns:getCardDepositsResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getCardDepositsResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chCardDepositResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="payLoan">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chLoanPaymentRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="payLoanResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="payLoanResult" type="tns:payLoanResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="payLoanResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chLoanPaymentResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getChequeBookList">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chBaseSearchChequeBookRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getChequeBookListResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getChequeBookListResult" type="tns:getChequeBookListResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getChequeBookListResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chChequeBooksResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getCheque">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chChequeSearchRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getChequeResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getChequeResult" type="tns:getChequeResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getChequeResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chChequeSheetsResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="doPayment">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chPaymentRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="doPaymentResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="doPaymentResult" type="tns:doPaymentResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="doPaymentResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chPaymentResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="payBill">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chBillPaymentRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="payBillResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="payBillResult" type="tns:payBillResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="payBillResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s1:chBillPaymentResponseBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getCardStatementInquiry">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chCardStatementRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getCardStatementInquiryResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getCardStatementInquiryResult" type="tns:getCardStatementInquiryResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getCardStatementInquiryResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="tns:ArrayOfChCardStatementBean"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="ArrayOfChCardStatementBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="chCardStatementBean" nillable="true" type="s1:chCardStatementBean"/>
+</s:sequence>
+</s:complexType>
+<s:element name="switchFundTransferFromPhysicalTerminal">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s3:chPhysicalCardTransferRequest"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="switchFundTransferFromPhysicalTerminalResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="switchFundTransferFromPhysicalTerminalResult" type="tns:switchFundTransferFromPhysicalTerminalResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="switchFundTransferFromPhysicalTerminalResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s3:chCardTransferResponse"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="getDestinationCardOwner">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s3:chDestinationCardOwnerRequest"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="getDestinationCardOwnerResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="getDestinationCardOwnerResult" type="tns:getDestinationCardOwnerResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="getDestinationCardOwnerResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s3:chDestinationCardOwnerResponse"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="inquiryTxnStatus">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="inquiryTxnStatusResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="inquiryTxnStatusResult" type="tns:inquiryTxnStatusResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="inquiryTxnStatusResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s3:chTxnStatusResponse"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="convertDepositNumberToIban">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="request" type="s1:chDepositNumberToIbanRequestBean"/>
+<s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="convertDepositNumberToIbanResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="convertDepositNumberToIbanResult" type="tns:convertDepositNumberToIbanResult"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="convertDepositNumberToIbanResult">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="response" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" name="error" type="tns:errType"/>
+<s:element minOccurs="0" maxOccurs="1" name="error_dpsORprop" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:schema>
+<s:schema elementFormDefault="qualified" targetNamespace="http://corebankingservice.endpoint.webservicegateway.core.channelmanager.caspian.com/">
+<s:complexType name="chUserInfoRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="username" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chOtpLoginRequestBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chUserInfoRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="authenticationType" type="s1:chAuthenticationType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="challengeIdentifier" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="signedPassword" type="s:string"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:simpleType name="chAuthenticationType">
+<s:restriction base="s:string">
+<s:enumeration value="STATIC_USERNAME_CHANNEL"/>
+<s:enumeration value="OTP_1"/>
+<s:enumeration value="OTP_2"/>
+<s:enumeration value="OTP_3"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="channelServiceType">
+<s:restriction base="s:string">
+<s:enumeration value="INTERNET_BANK"/>
+<s:enumeration value="MOBILE_BANK"/>
+<s:enumeration value="TELEPHONE_BANK"/>
+<s:enumeration value="THIRDPARTY"/>
+<s:enumeration value="BOURSE"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chLoginResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="activities" nillable="true" type="s1:activityDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientType" type="s:unsignedShort"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerNo" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="foreignName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="gender" type="s1:chGender"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastLoginTime" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="menu" type="s1:menuDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="name" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="requiredChangeSecondPassword" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sessionId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="userProfile" type="s:base64Binary"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="activityDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="activationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channel" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="expirationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isActive" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isPasswordProtected" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="limitationPatternCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="otpLimitationPatternCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="passwordType" nillable="true" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chGender">
+<s:restriction base="s:string">
+<s:enumeration value="MALE"/>
+<s:enumeration value="FEMALE"/>
+<s:enumeration value="LEGAL"/>
+<s:enumeration value="PUBLIC"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="menuDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="bankCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channel" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="menuEntries" nillable="true" type="s1:menuEntryDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="menuEntryDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="activity" type="s1:activityDto"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="children" nillable="true" type="s1:menuEntryDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="displayMode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="formName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isVisibleInRibbon" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="largeImageAddress" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="order" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="parentId" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="persianMenuTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="persianRibbonTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="shortcutKey" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="smallImageAddress" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="visibility" type="s:boolean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chNormalTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="additionalDocumentDesc" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="checkUniqueTrackingCode" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currencyCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationComment" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationDeposit" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceComment" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDeposit" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="uniqueTrackingCode" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chSecondPasswordType">
+<s:restriction base="s:string">
+<s:enumeration value="OTP"/>
+<s:enumeration value="TRANSFER_SECOND_PASS"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chNormalTransferResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serialNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAchNormalTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="checkUniqueTrackingCode" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ownerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="uniqueTrackingCode" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chNormalAchTransferResultBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ownerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverBankCode" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverBankName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceIbanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionStatus" type="s1:chDestinationTransactionStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferStatus" type="s1:chAchTransferStatus"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chDestinationTransactionStatus">
+<s:restriction base="s:string">
+<s:enumeration value="ACCEPTED"/>
+<s:enumeration value="ERROR_DUPLICATE"/>
+<s:enumeration value="ERROR_GENERAL"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chAchTransferStatus">
+<s:restriction base="s:string">
+<s:enumeration value="WAIT_FOR_CUSTOMER_ACCEPT"/>
+<s:enumeration value="WAIT_FOR_BRANCH_ACCEPT"/>
+<s:enumeration value="BRANCH_REJECT"/>
+<s:enumeration value="READY_TO_TRANSFER"/>
+<s:enumeration value="SUSPEND"/>
+<s:enumeration value="CANCEL"/>
+<s:enumeration value="PROCESSED"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chChangePasswordRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currentPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="newPassword" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAchTransferSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientTrackingCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationIbanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationOwnerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromIssueDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromRegisterDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromTransactionAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="order" type="s1:chOrderStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositIban" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="statusSet" nillable="true" type="s1:chAchTransferStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toIssueDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toRegisterDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toTransactionAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transactionStatusSet" nillable="true" type="s1:chTransactionStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chOrderStatus">
+<s:restriction base="s:string">
+<s:enumeration value="DESC"/>
+<s:enumeration value="ASC"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chTransactionStatus">
+<s:restriction base="s:string">
+<s:enumeration value="READY_FOR_PROCESS"/>
+<s:enumeration value="SUSPENDED"/>
+<s:enumeration value="CANCELED"/>
+<s:enumeration value="PROCESS_FAIL"/>
+<s:enumeration value="READY_TO_TRANSFER"/>
+<s:enumeration value="TRANSFERRED"/>
+<s:enumeration value="SETTLED"/>
+<s:enumeration value="NOT_SETTLED"/>
+<s:enumeration value="REJECTED"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chAchTransfersResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="achTransferBeans" nillable="true" type="s1:chAchTransferBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAchTransferBean">
+<s:sequence>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="acceptable" type="s:boolean"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="cancelable" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="confirmExpireDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="registerDate" type="s:dateTime"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="resumeable" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chAchTransferStatus"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="suspendable" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalDebitAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transactions" nillable="true" type="s1:chBriefAchTransactionBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chBriefAchTransactionBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="count" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionStatus" type="s1:chTransactionStatus"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chInstitutionalTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="institutionId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="payerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="paymentId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chInstitutionalTransferResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="institutionTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositBalance" type="s:decimal"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPaymentBillStatementRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="institutionId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="maximumAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="minimumAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="paymentId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPaymentBillStatementsResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="paymentBillStatements" nillable="true" type="s1:chPaymentBillStatementBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPaymentBillStatementBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="instituteId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="paymentId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chStatementSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="action" type="s1:chActionType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chStatementSearchDirection" type="s1:chStatementSearchDirection"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerDescription" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="dealReference" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromDateTime" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="order" type="s1:chOrderStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serial" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serialNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="showDealDescription" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toDateTime" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chActionType">
+<s:restriction base="s:string">
+<s:enumeration value="CREDIT"/>
+<s:enumeration value="DEBIT"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chStatementSearchDirection">
+<s:restriction base="s:string">
+<s:enumeration value="START_TO_END"/>
+<s:enumeration value="END_TO_START"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chStatementResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="statementBeans" nillable="true" type="s1:chStatementBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chStatementBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="agentBranchCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="agentBranchName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="balance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerDesc" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="date" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="registrationNumber" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sequence" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serial" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serialNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferAmount" type="s:decimal"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDefaultStatementResponseBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chStatementResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="billFields" nillable="true" type="s1:chBillBeanField"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="billPageSize" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="defaultBillStatementType" type="s1:chDefaultBillStatementBeanType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="defaultLastN" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="defaultOrder" type="s1:chOrderStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toDate" type="s:dateTime"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:simpleType name="chBillBeanField">
+<s:restriction base="s:string">
+<s:enumeration value="DEPOSIT_NUMBER"/>
+<s:enumeration value="BALANCE"/>
+<s:enumeration value="DOCUMENT_NUMBER"/>
+<s:enumeration value="CHEQUE_NUMBER"/>
+<s:enumeration value="DATE"/>
+<s:enumeration value="NOTE"/>
+<s:enumeration value="DEPOSIT_TITLE"/>
+<s:enumeration value="DEBIT"/>
+<s:enumeration value="CREDIT"/>
+<s:enumeration value="TIME"/>
+<s:enumeration value="AGENTBRANCH"/>
+<s:enumeration value="REFERENCE_NUMBER"/>
+<s:enumeration value="STATEMENT_DESCRIPTION"/>
+<s:enumeration value="BRANCH"/>
+<s:enumeration value="BILL_ROW_ID"/>
+<s:enumeration value="TRANSACTION_CODE"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chDefaultBillStatementBeanType">
+<s:restriction base="s:string">
+<s:enumeration value="FROM_LAST_VIEW_BILL_DATE"/>
+<s:enumeration value="LAST_N_DAY"/>
+<s:enumeration value="LAST_N_COUNT"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chAchTransactionSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientTrackingCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromIssueDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromRegisterDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromTransactionAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanOwnerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="includeTransactionStatus" nillable="true" type="s1:chTransactionStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositIban" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toIssueDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toRegisterDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toTransactionAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAchTransactionsResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transactions" nillable="true" type="s1:chAchTransactionBean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAchTransactionBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="cancelable" type="s:boolean"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="changeable" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanOwnerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="issueDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="resumeable" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceIbanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chTransactionStatus"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="suspendable" type="s:boolean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDepositSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositAlias" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="depositNumbers" nillable="true" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositStatus" type="s1:chDepositStatus"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="excludeCurrency" nillable="true" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="excludeType" nillable="true" type="s1:chDepositGroupType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="forSearch" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="includeCreditAccount" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="includeCurrency" nillable="true" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="includeSupportAccount" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="includeType" nillable="true" type="s1:chDepositGroupType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="personality" nillable="true" type="s1:chPersonalityType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serviceCode" type="s1:servicesCode"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="signatureStatus" nillable="true" type="s1:chSignatureOwnerStatus"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chDepositStatus">
+<s:restriction base="s:string">
+<s:enumeration value="CLOSE"/>
+<s:enumeration value="OPEN"/>
+<s:enumeration value="NEGATIVE_BLOCK"/>
+<s:enumeration value="POSITIVE_BLOCK"/>
+<s:enumeration value="BLOCK"/>
+<s:enumeration value="RESTING_AND_NEGATIVE_BLOCK"/>
+<s:enumeration value="RESTING_AND_POSITIVE_BLOCK"/>
+<s:enumeration value="RESTING_AND_BLOCK"/>
+<s:enumeration value="RESTING"/>
+<s:enumeration value="OLD"/>
+<s:enumeration value="OPENING"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chDepositGroupType">
+<s:restriction base="s:string">
+<s:enumeration value="JARI_ACCOUNT"/>
+<s:enumeration value="SPECIAL_LONG_ACCOUNT"/>
+<s:enumeration value="OTHERS"/>
+<s:enumeration value="EDARE_SHODE"/>
+<s:enumeration value="ANDOKHTE_ACCOUNT"/>
+<s:enumeration value="SPECIAL_SHORT_ACCOUNT"/>
+<s:enumeration value="PASANDAZ"/>
+<s:enumeration value="SHORT_ACCOUNT"/>
+<s:enumeration value="LONG_ACCOUNT"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chPersonalityType">
+<s:restriction base="s:string">
+<s:enumeration value="ACTUAL"/>
+<s:enumeration value="LEGAL"/>
+<s:enumeration value="SPECIAL"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="servicesCode">
+<s:restriction base="s:string">
+<s:enumeration value="CARD_TRANSFER"/>
+<s:enumeration value="NORMAL_TRANSFER"/>
+<s:enumeration value="ACH_NORMAL_TRANSFER"/>
+<s:enumeration value="RTGS_NORMAL_TRANSFER"/>
+<s:enumeration value="GET_STATEMENT"/>
+<s:enumeration value="GET_DEPOSITS"/>
+<s:enumeration value="BILL_PAYMENT_BY_ACCOUNT"/>
+<s:enumeration value="ADD_PERIOD_PERSONS"/>
+<s:enumeration value="OFFLINE_STATEMENT_REQUEST"/>
+<s:enumeration value="OFFLINE_STATEMENT_REQUEST_WITH_PAYMENT_ID"/>
+<s:enumeration value="STATEMENT_WITH_REFERENCE_CODE_REPORT"/>
+<s:enumeration value="REFERENCE_CODE_STATEMENT_BY_CHEQUE"/>
+<s:enumeration value="TRANSFER_CHEQUE_LIST"/>
+<s:enumeration value="PAY_BILL_BY_ACCOUNT"/>
+<s:enumeration value="PERIOD_LIST"/>
+<s:enumeration value="LOAD_PERIOD_PERSONS"/>
+<s:enumeration value="BATCH_BILL_PAYMENT_BY_ACCOUNT"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chSignatureOwnerStatus">
+<s:restriction base="s:string">
+<s:enumeration value="DEPOSIT_OWNER"/>
+<s:enumeration value="OWNER_OF_DEPOSIT_AND_SIGNATURE"/>
+<s:enumeration value="SIGNATURE_OWNER"/>
+<s:enumeration value="BROKER"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chDepositResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="depositBeans" nillable="true" type="s1:chDepositBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDepositBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="availableBalance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="balance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="blockedAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="creditDeposit" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="creditLoanRemainAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="creditRateAmount" type="s:double"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="creditRemainAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="dayOfDepositInterest" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositAlias" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositStatus" type="s1:chDepositStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="expireDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="extraAvailableBalance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="group" type="s1:chDepositGroupType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="iban" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="inaugurationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="interestAccount" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="lotusFlag" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="maximumBalance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="minimumBalance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="owner" type="s1:chDepositOwnerType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="owners" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="personality" type="s1:chPersonalityType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="signature" type="s1:chSignatureOwnerStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="supportCurrency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="supportDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="supportDepositStatus" type="s1:chDepositStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="supportStatus" type="s1:chSupportStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="withdrawalOption" type="s1:chWithdrawalOption"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chDepositOwnerType">
+<s:restriction base="s:string">
+<s:enumeration value="MOSHTARAK"/>
+<s:enumeration value="BE_TANHAYI"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chSupportStatus">
+<s:restriction base="s:string">
+<s:enumeration value="ACCOUNT"/>
+<s:enumeration value="DEPOSIT"/>
+</s:restriction>
+</s:simpleType>
+<s:simpleType name="chWithdrawalOption">
+<s:restriction base="s:string">
+<s:enumeration value="NONE"/>
+<s:enumeration value="MASHRUT"/>
+<s:enumeration value="BE_TANHAYEE"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chRtgsNormalTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="checkUniqueTrackingCode" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationIbanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverFamily" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverTelephoneNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="uniqueTrackingCode" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chNormalRtgsTransferResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="balance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverBankCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverBankName" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chRtgTransferSearchRequestBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chSearchBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientTrackingCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chRtgsTransferStatus"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:complexType name="chSearchBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchCode" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="order" type="s1:chOrderStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serial" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chRtgsTransferStatus">
+<s:restriction base="s:string">
+<s:enumeration value="SABT_SHODE"/>
+<s:enumeration value="TAEED_SHOBE_SHODE"/>
+<s:enumeration value="ADAM_TAEED_SHOBE"/>
+<s:enumeration value="HAZF_SHODE"/>
+<s:enumeration value="TAEED_SHOBE_SATNA"/>
+<s:enumeration value="ADAM_TAEED_SHOBE_SATNA"/>
+<s:enumeration value="ERSAL_SHODE"/>
+<s:enumeration value="TASFIYEH_SHODE"/>
+<s:enumeration value="TASFIYEH_NASHODE"/>
+<s:enumeration value="ENTEZAR_BARAYE_TAEED"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chRtgsTransferResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transferDetailsDtos" nillable="true" type="s1:chTransferDetailBean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chTransferDetailBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="branchName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationBank" type="s1:chBankBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="registerDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serial" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chRtgsTransferStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="systemCode" type="s1:chRtgsSystemCode"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chBankBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="name" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chRtgsSystemCode">
+<s:restriction base="s:string">
+<s:enumeration value="TAVASOT_KARBAR_SHOBE"/>
+<s:enumeration value="TAVASOT_SHOBE_TAEED_KONANDE"/>
+<s:enumeration value="TAVASOT_KARBAR_SHOBE_SANTA"/>
+<s:enumeration value="TAVASOT_BANKDARI_MODERN"/>
+<s:enumeration value="TAVASOT_FERESTANDE_GIRANDE_SATNA"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chIbanToDepositRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="iban" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardOwnerRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardAuthorizeParams" type="s1:chCardAuthorizeParamsBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationPan" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardAuthorizeParamsBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cvv2" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="expDate" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pin" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pinType" type="s1:chPinType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="track2" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chPinType">
+<s:restriction base="s:string">
+<s:enumeration value="CARD"/>
+<s:enumeration value="EPAY"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chCardOwnerResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="firstName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ownerBankName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chFundTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cvv2" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destination" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationType" type="s1:chDepositOrPan"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="expDate" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="mobileNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pin" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pinType" type="s1:chPinType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="track2" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chDepositOrPan">
+<s:restriction base="s:string">
+<s:enumeration value="PAN"/>
+<s:enumeration value="DEPOSIT"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chFinancialServiceResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="deposit" type="s1:chCardDepositBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="switchResponseRRN" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardDepositBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="availableBalance" type="s1:chAmountBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ledgerBalance" type="s1:chAmountBean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAmountBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="s:decimal"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCustomReturnResponseBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chFinancialServiceResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="trackingNumber" type="s:string"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:complexType name="chBatchTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="additionalDocumentDesc" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="checkUniqueTrackingCode" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="destinationBatchTransfers" nillable="true" type="s1:chDestinationBatchTransferBean"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="ignoreError" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDescription" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="uniqueTrackingCode" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDestinationBatchTransferBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationBatchTransferInfoBean" type="s1:chDestinationBatchTransferInfoBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationDepositNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDestinationBatchTransferInfoBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chBatchTransferResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="balance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="depositProblem" nillable="true" type="s1:chDepositProblemBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="doneCompletely" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDepositProblemBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="key" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="problemType" type="s1:chProblemType"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chProblemType">
+<s:restriction base="s:string">
+<s:enumeration value="INVALID_DEPOSIT_NUMBER"/>
+<s:enumeration value="INVALID_PRICE"/>
+<s:enumeration value="USER_PERMISSION_DENIED"/>
+<s:enumeration value="INVALID_CURRENCY"/>
+<s:enumeration value="INSUFFICIENT_FUNDS"/>
+<s:enumeration value="ILLEGAL_DEPOSIT_STATE"/>
+<s:enumeration value="UNKNOWN"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chBatchAchTransferRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="checkUniqueTrackingCode" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="1" maxOccurs="1" form="unqualified" name="ignoreError" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transactions" nillable="true" type="s1:chDestinationAchTransactionBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="uniqueTrackingCode" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDestinationAchTransactionBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ownerName" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chAchBatchTransferResultBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referenceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sourceIbanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chAchTransferStatus"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="transactions" nillable="true" type="s1:chDestinationAchTransactionResultBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transferDescription" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDestinationAchTransactionResultBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="factorNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ibanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ownerName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="problemType" type="s1:chAchProblemType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="receiverBankName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chDestinationTransactionStatus"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chAchProblemType">
+<s:restriction base="s:string">
+<s:enumeration value="INVALID_ACCOUNT_EXCEPTION"/>
+<s:enumeration value="PERMISSION_EXCEPTION"/>
+<s:enumeration value="ILLEGAL_SOURCE_DEPOSIT_STATE_EXCEPTION"/>
+<s:enumeration value="INVALID_IBAN_EXCEPTION"/>
+<s:enumeration value="ILLEGAL_DESTINATION_BANK_EXCEPTION"/>
+<s:enumeration value="INCORRECT_CUSTOMER_INFORMATION_EXCEPTION"/>
+<s:enumeration value="SERVICE_EXCEPTION"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chDestinationAchAutoTransactionResultBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chDestinationAchTransactionResultBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="issueDate" type="s:dateTime"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:complexType name="chDepositOwnerRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardBalanceRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardAuthorizeParams" type="s1:chCardAuthorizeParamsBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardBalanceResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="availableBalance" type="s1:chAmountBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ledgerBalance" type="s1:chAmountBean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardDepositRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardDepositResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="deposits" nillable="true" type="s1:chRelatedDepositOfCardBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chRelatedDepositOfCardBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardDepositType" type="s1:chCardDepositType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chCardDepositType">
+<s:restriction base="s:string">
+<s:enumeration value="MAIN"/>
+<s:enumeration value="SECONDARY"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chLoanPaymentRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cif" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customDepositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="loanNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="paymentMethod" type="s1:chLoanPaymentMethod"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPasswordNecessity" type="s:boolean"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chLoanPaymentMethod">
+<s:restriction base="s:string">
+<s:enumeration value="AUTO_GET_DEPOSIT"/>
+<s:enumeration value="CUSTOM_DEPOSIT"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chLoanPaymentResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="appliedAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="paymentTimeStamp" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chBaseSearchChequeBookRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chequeStatus" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="serial" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chChequeBooksResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="chequeBookDtos" nillable="true" type="s1:chChequeBookBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chChequeBookBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="issueDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="number" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfPartialCashCheque" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfPassCheque" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfPermanentBlockedCheque" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfRejectCheque" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfTemporaryBlockCheque" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="numberOfUnusedCheque" type="s:short"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pageCount" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chChequeSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chequeAmount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chequeBookNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chequeNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fromStatusDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="length" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="offset" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="payeeName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="showStopped" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="statusComment" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="statuses" nillable="true" type="s1:chChequeStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="toStatusDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chChequeStatus">
+<s:restriction base="s:string">
+<s:enumeration value="USED"/>
+<s:enumeration value="CASH"/>
+<s:enumeration value="REJECT"/>
+<s:enumeration value="RETURN"/>
+<s:enumeration value="PAY"/>
+<s:enumeration value="HOLD"/>
+<s:enumeration value="INTERBANK_BLOCK"/>
+<s:enumeration value="INVALID"/>
+<s:enumeration value="REGISTER"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chChequeSheetsResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="chequeSheetBeans" nillable="true" type="s1:chChequeSheetBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalRecord" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chChequeSheetBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="balance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="changeStatusDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="number" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="payeeName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="registerChequeDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="registerable" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="status" type="s1:chChequeStatus"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="stopDescription" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPaymentRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardAuthorizeParams" type="s1:chCardAuthorizeParamsBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channelType" type="s1:channelType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="inputParameters" nillable="true" type="s1:chPaymentInputParameterBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="mobileNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="paymentServiceId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="requireVerification" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="trackingNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="verificationExpirationTimeOut" type="s:long"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="channelType">
+<s:restriction base="s:string">
+<s:enumeration value="PERSONAL_INTERNET_BANK"/>
+<s:enumeration value="VALUABLE_CUSTOMER"/>
+<s:enumeration value="TELEPHONE_BANK"/>
+<s:enumeration value="MOBILE_BANK"/>
+<s:enumeration value="OAUTH"/>
+<s:enumeration value="BRANCH"/>
+<s:enumeration value="KIOSK"/>
+<s:enumeration value="SOFTWARE_AGENT"/>
+<s:enumeration value="TI"/>
+<s:enumeration value="BOURSE"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chPaymentInputParameterBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="key" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPaymentResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="paymentParameters" nillable="true" type="s1:chPaymentParameterBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="trackingNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPaymentParameterBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="foreignTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chBillPaymentRequestBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chBillInfoSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardAuthorizeParams" type="s1:chCardAuthorizeParamsBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="mobileNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="requireVerification" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="verificationExpirationTimeOut" type="s:long"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:complexType name="chBillInfoSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="billId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="payId" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chBillPaymentAccountRequestBean">
+<s:complexContent mixed="false">
+<s:extension base="s1:chBillInfoSearchRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="accountNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chSecondPasswordType" type="s1:chSecondPasswordType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerNumber" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="requireVerification" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="secondPassword" type="s:string"/>
+</s:sequence>
+</s:extension>
+</s:complexContent>
+</s:complexType>
+<s:complexType name="chBillPaymentResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="billForeignTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="billId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="billTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="billType" type="s1:chBillType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cycle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="date" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="fileCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="payId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="referralNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chBillType">
+<s:restriction base="s:string">
+<s:enumeration value="UNKNOWN"/>
+<s:enumeration value="WATER"/>
+<s:enumeration value="ELECTRICITY"/>
+<s:enumeration value="GAS"/>
+<s:enumeration value="IMMOBILE_PHONE"/>
+<s:enumeration value="MOBILE_PHONE"/>
+<s:enumeration value="MUNICIPALITY_DUE"/>
+<s:enumeration value="CUSTOM"/>
+<s:enumeration value="MUNICIPALITY_7"/>
+<s:enumeration value="TAX"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chCardStatementRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardAuthorizeParams" type="s1:chCardAuthorizeParamsBean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pan" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chCardStatementBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="balance" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="date" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="documentSerial" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDepositNumberToIbanRequestBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="depositNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:schema>
+<s:schema elementFormDefault="qualified" targetNamespace="http://internalbankservice.endpoint.webservicegateway.core.moderngateway.caspian.com/">
+<s:complexType name="chLoginResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="activities" nillable="true" type="s2:activityDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientType" type="s:unsignedShort"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerNo" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="foreignName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="gender" type="s2:chGender"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastLoginTime" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="menu" type="s2:menuDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="name" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="requiredChangeSecondPassword" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sessionId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="userProfile" type="s:base64Binary"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="activityDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="activationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channel" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="expirationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isActive" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isPasswordProtected" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="limitationPatternCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="otpLimitationPatternCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="passwordType" nillable="true" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chGender">
+<s:restriction base="s:string">
+<s:enumeration value="MALE"/>
+<s:enumeration value="FEMALE"/>
+<s:enumeration value="LEGAL"/>
+<s:enumeration value="PUBLIC"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="menuDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="bankCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channel" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="menuEntries" nillable="true" type="s2:menuEntryDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="menuEntryDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="activity" type="s2:activityDto"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="children" nillable="true" type="s2:menuEntryDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="displayMode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="formName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isVisibleInRibbon" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="largeImageAddress" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="order" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="parentId" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="persianMenuTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="persianRibbonTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="shortcutKey" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="smallImageAddress" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="visibility" type="s:boolean"/>
+</s:sequence>
+</s:complexType>
+</s:schema>
+<s:schema elementFormDefault="qualified" targetNamespace="http://service.webservicegateway.core.channelmanager.caspian.com/">
+<s:complexType name="chLoginResponseBean">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="activities" nillable="true" type="s3:activityDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="clientType" type="s:unsignedShort"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="customerNo" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="foreignName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="gender" type="s3:chGender"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastLoginTime" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="menu" type="s3:menuDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="name" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="requiredChangeSecondPassword" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="sessionId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="userProfile" type="s:base64Binary"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="activityDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="activationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channel" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="code" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="description" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="expirationDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isActive" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isPasswordProtected" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="limitationPatternCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="otpLimitationPatternCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="passwordType" nillable="true" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="title" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chGender">
+<s:restriction base="s:string">
+<s:enumeration value="MALE"/>
+<s:enumeration value="FEMALE"/>
+<s:enumeration value="LEGAL"/>
+<s:enumeration value="PUBLIC"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="menuDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="bankCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="channel" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="menuEntries" nillable="true" type="s3:menuEntryDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="menuEntryDto">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="activity" type="s3:activityDto"/>
+<s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="children" nillable="true" type="s3:menuEntryDto"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="displayMode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="formName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="id" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="isVisibleInRibbon" type="s:boolean"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="largeImageAddress" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="order" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="parentId" type="s:long"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="persianMenuTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="persianRibbonTitle" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="shortcutKey" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="smallImageAddress" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="version" type="s:int"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="visibility" type="s:boolean"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chPhysicalCardTransferRequest">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="amount" type="s:decimal"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationCardNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="email" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="mobileNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="pin" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="terminalType" type="s3:chTerminalType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="track2" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="trackingNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:simpleType name="chTerminalType">
+<s:restriction base="s:string">
+<s:enumeration value="MOBILE"/>
+<s:enumeration value="VRU"/>
+<s:enumeration value="INTERNET"/>
+<s:enumeration value="PIN_PAD"/>
+<s:enumeration value="KIOSK"/>
+</s:restriction>
+</s:simpleType>
+<s:complexType name="chCardTransferResponse">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ledgerBalance" type="s3:chSwitchAmount"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="totalBalance" type="s3:chSwitchAmount"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="trackingId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="trackingNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionDate" type="s:dateTime"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chSwitchAmount">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="currency" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="value" type="s:decimal"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDestinationCardOwnerRequest">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="cardNo" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="chTerminalType" type="s3:chTerminalType"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="destinationCardNo" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chDestinationCardOwnerResponse">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="firstName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="lastName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ownerBankName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="transactionNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="chTxnStatusResponse">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="responseCode" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" form="unqualified" name="traceNumber" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="loginSoapIn">
+<wsdl:part name="parameters" element="tns:login"/>
+</wsdl:message>
+<wsdl:message name="loginSoapOut">
+<wsdl:part name="parameters" element="tns:loginResponse"/>
+</wsdl:message>
+<wsdl:message name="loginAccountSoapIn">
+<wsdl:part name="parameters" element="tns:loginAccount"/>
+</wsdl:message>
+<wsdl:message name="loginAccountSoapOut">
+<wsdl:part name="parameters" element="tns:loginAccountResponse"/>
+</wsdl:message>
+<wsdl:message name="loginSwitchSoapIn">
+<wsdl:part name="parameters" element="tns:loginSwitch"/>
+</wsdl:message>
+<wsdl:message name="loginSwitchSoapOut">
+<wsdl:part name="parameters" element="tns:loginSwitchResponse"/>
+</wsdl:message>
+<wsdl:message name="checkLoginInternetBankSoapIn">
+<wsdl:part name="parameters" element="tns:checkLoginInternetBank"/>
+</wsdl:message>
+<wsdl:message name="checkLoginInternetBankSoapOut">
+<wsdl:part name="parameters" element="tns:checkLoginInternetBankResponse"/>
+</wsdl:message>
+<wsdl:message name="normalTransferSoapIn">
+<wsdl:part name="parameters" element="tns:normalTransfer"/>
+</wsdl:message>
+<wsdl:message name="normalTransferSoapOut">
+<wsdl:part name="parameters" element="tns:normalTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="achNormalTransferSoapIn">
+<wsdl:part name="parameters" element="tns:achNormalTransfer"/>
+</wsdl:message>
+<wsdl:message name="achNormalTransferSoapOut">
+<wsdl:part name="parameters" element="tns:achNormalTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="logoutSoapIn">
+<wsdl:part name="parameters" element="tns:logout"/>
+</wsdl:message>
+<wsdl:message name="logoutSoapOut">
+<wsdl:part name="parameters" element="tns:logoutResponse"/>
+</wsdl:message>
+<wsdl:message name="logoutAccountSoapIn">
+<wsdl:part name="parameters" element="tns:logoutAccount"/>
+</wsdl:message>
+<wsdl:message name="logoutAccountSoapOut">
+<wsdl:part name="parameters" element="tns:logoutAccountResponse"/>
+</wsdl:message>
+<wsdl:message name="logoutSwitchSoapIn">
+<wsdl:part name="parameters" element="tns:logoutSwitch"/>
+</wsdl:message>
+<wsdl:message name="logoutSwitchSoapOut">
+<wsdl:part name="parameters" element="tns:logoutSwitchResponse"/>
+</wsdl:message>
+<wsdl:message name="changePasswordSoapIn">
+<wsdl:part name="parameters" element="tns:changePassword"/>
+</wsdl:message>
+<wsdl:message name="changePasswordSoapOut">
+<wsdl:part name="parameters" element="tns:changePasswordResponse"/>
+</wsdl:message>
+<wsdl:message name="achTransferReportSoapIn">
+<wsdl:part name="parameters" element="tns:achTransferReport"/>
+</wsdl:message>
+<wsdl:message name="achTransferReportSoapOut">
+<wsdl:part name="parameters" element="tns:achTransferReportResponse"/>
+</wsdl:message>
+<wsdl:message name="institutionalTransferSoapIn">
+<wsdl:part name="parameters" element="tns:institutionalTransfer"/>
+</wsdl:message>
+<wsdl:message name="institutionalTransferSoapOut">
+<wsdl:part name="parameters" element="tns:institutionalTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="getPaymentBillStatementSoapIn">
+<wsdl:part name="parameters" element="tns:getPaymentBillStatement"/>
+</wsdl:message>
+<wsdl:message name="getPaymentBillStatementSoapOut">
+<wsdl:part name="parameters" element="tns:getPaymentBillStatementResponse"/>
+</wsdl:message>
+<wsdl:message name="getStatementSoapIn">
+<wsdl:part name="parameters" element="tns:getStatement"/>
+</wsdl:message>
+<wsdl:message name="getStatementSoapOut">
+<wsdl:part name="parameters" element="tns:getStatementResponse"/>
+</wsdl:message>
+<wsdl:message name="achTransactionReportSoapIn">
+<wsdl:part name="parameters" element="tns:achTransactionReport"/>
+</wsdl:message>
+<wsdl:message name="achTransactionReportSoapOut">
+<wsdl:part name="parameters" element="tns:achTransactionReportResponse"/>
+</wsdl:message>
+<wsdl:message name="getDepositsSoapIn">
+<wsdl:part name="parameters" element="tns:getDeposits"/>
+</wsdl:message>
+<wsdl:message name="getDepositsSoapOut">
+<wsdl:part name="parameters" element="tns:getDepositsResponse"/>
+</wsdl:message>
+<wsdl:message name="rtgsNormalTransferSoapIn">
+<wsdl:part name="parameters" element="tns:rtgsNormalTransfer"/>
+</wsdl:message>
+<wsdl:message name="rtgsNormalTransferSoapOut">
+<wsdl:part name="parameters" element="tns:rtgsNormalTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="rtgsTransferReportSoapIn">
+<wsdl:part name="parameters" element="tns:rtgsTransferReport"/>
+</wsdl:message>
+<wsdl:message name="rtgsTransferReportSoapOut">
+<wsdl:part name="parameters" element="tns:rtgsTransferReportResponse"/>
+</wsdl:message>
+<wsdl:message name="convertIbanToDepositNumberSoapIn">
+<wsdl:part name="parameters" element="tns:convertIbanToDepositNumber"/>
+</wsdl:message>
+<wsdl:message name="convertIbanToDepositNumberSoapOut">
+<wsdl:part name="parameters" element="tns:convertIbanToDepositNumberResponse"/>
+</wsdl:message>
+<wsdl:message name="getCardOwnerSoapIn">
+<wsdl:part name="parameters" element="tns:getCardOwner"/>
+</wsdl:message>
+<wsdl:message name="getCardOwnerSoapOut">
+<wsdl:part name="parameters" element="tns:getCardOwnerResponse"/>
+</wsdl:message>
+<wsdl:message name="cardTransferSoapIn">
+<wsdl:part name="parameters" element="tns:cardTransfer"/>
+</wsdl:message>
+<wsdl:message name="cardTransferSoapOut">
+<wsdl:part name="parameters" element="tns:cardTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="batchTransferSoapIn">
+<wsdl:part name="parameters" element="tns:batchTransfer"/>
+</wsdl:message>
+<wsdl:message name="batchTransferSoapOut">
+<wsdl:part name="parameters" element="tns:batchTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="achBatchTransferSoapIn">
+<wsdl:part name="parameters" element="tns:achBatchTransfer"/>
+</wsdl:message>
+<wsdl:message name="achBatchTransferSoapOut">
+<wsdl:part name="parameters" element="tns:achBatchTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="normalAcntTransferSoapIn">
+<wsdl:part name="parameters" element="tns:normalAcntTransfer"/>
+</wsdl:message>
+<wsdl:message name="normalAcntTransferSoapOut">
+<wsdl:part name="parameters" element="tns:normalAcntTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="batchAcntTransferSoapIn">
+<wsdl:part name="parameters" element="tns:batchAcntTransfer"/>
+</wsdl:message>
+<wsdl:message name="batchAcntTransferSoapOut">
+<wsdl:part name="parameters" element="tns:batchAcntTransferResponse"/>
+</wsdl:message>
+<wsdl:message name="getDepositOwnerNameSoapIn">
+<wsdl:part name="parameters" element="tns:getDepositOwnerName"/>
+</wsdl:message>
+<wsdl:message name="getDepositOwnerNameSoapOut">
+<wsdl:part name="parameters" element="tns:getDepositOwnerNameResponse"/>
+</wsdl:message>
+<wsdl:message name="cardBalanceInquirySoapIn">
+<wsdl:part name="parameters" element="tns:cardBalanceInquiry"/>
+</wsdl:message>
+<wsdl:message name="cardBalanceInquirySoapOut">
+<wsdl:part name="parameters" element="tns:cardBalanceInquiryResponse"/>
+</wsdl:message>
+<wsdl:message name="cardBalanceInquiryWithCustIdSoapIn">
+<wsdl:part name="parameters" element="tns:cardBalanceInquiryWithCustId"/>
+</wsdl:message>
+<wsdl:message name="cardBalanceInquiryWithCustIdSoapOut">
+<wsdl:part name="parameters" element="tns:cardBalanceInquiryWithCustIdResponse"/>
+</wsdl:message>
+<wsdl:message name="getCardDepositsSoapIn">
+<wsdl:part name="parameters" element="tns:getCardDeposits"/>
+</wsdl:message>
+<wsdl:message name="getCardDepositsSoapOut">
+<wsdl:part name="parameters" element="tns:getCardDepositsResponse"/>
+</wsdl:message>
+<wsdl:message name="payLoanSoapIn">
+<wsdl:part name="parameters" element="tns:payLoan"/>
+</wsdl:message>
+<wsdl:message name="payLoanSoapOut">
+<wsdl:part name="parameters" element="tns:payLoanResponse"/>
+</wsdl:message>
+<wsdl:message name="getChequeBookListSoapIn">
+<wsdl:part name="parameters" element="tns:getChequeBookList"/>
+</wsdl:message>
+<wsdl:message name="getChequeBookListSoapOut">
+<wsdl:part name="parameters" element="tns:getChequeBookListResponse"/>
+</wsdl:message>
+<wsdl:message name="getChequeSoapIn">
+<wsdl:part name="parameters" element="tns:getCheque"/>
+</wsdl:message>
+<wsdl:message name="getChequeSoapOut">
+<wsdl:part name="parameters" element="tns:getChequeResponse"/>
+</wsdl:message>
+<wsdl:message name="doPaymentSoapIn">
+<wsdl:part name="parameters" element="tns:doPayment"/>
+</wsdl:message>
+<wsdl:message name="doPaymentSoapOut">
+<wsdl:part name="parameters" element="tns:doPaymentResponse"/>
+</wsdl:message>
+<wsdl:message name="payBillSoapIn">
+<wsdl:part name="parameters" element="tns:payBill"/>
+</wsdl:message>
+<wsdl:message name="payBillSoapOut">
+<wsdl:part name="parameters" element="tns:payBillResponse"/>
+</wsdl:message>
+<wsdl:message name="getCardStatementInquirySoapIn">
+<wsdl:part name="parameters" element="tns:getCardStatementInquiry"/>
+</wsdl:message>
+<wsdl:message name="getCardStatementInquirySoapOut">
+<wsdl:part name="parameters" element="tns:getCardStatementInquiryResponse"/>
+</wsdl:message>
+<wsdl:message name="switchFundTransferFromPhysicalTerminalSoapIn">
+<wsdl:part name="parameters" element="tns:switchFundTransferFromPhysicalTerminal"/>
+</wsdl:message>
+<wsdl:message name="switchFundTransferFromPhysicalTerminalSoapOut">
+<wsdl:part name="parameters" element="tns:switchFundTransferFromPhysicalTerminalResponse"/>
+</wsdl:message>
+<wsdl:message name="getDestinationCardOwnerSoapIn">
+<wsdl:part name="parameters" element="tns:getDestinationCardOwner"/>
+</wsdl:message>
+<wsdl:message name="getDestinationCardOwnerSoapOut">
+<wsdl:part name="parameters" element="tns:getDestinationCardOwnerResponse"/>
+</wsdl:message>
+<wsdl:message name="inquiryTxnStatusSoapIn">
+<wsdl:part name="parameters" element="tns:inquiryTxnStatus"/>
+</wsdl:message>
+<wsdl:message name="inquiryTxnStatusSoapOut">
+<wsdl:part name="parameters" element="tns:inquiryTxnStatusResponse"/>
+</wsdl:message>
+<wsdl:message name="convertDepositNumberToIbanSoapIn">
+<wsdl:part name="parameters" element="tns:convertDepositNumberToIban"/>
+</wsdl:message>
+<wsdl:message name="convertDepositNumberToIbanSoapOut">
+<wsdl:part name="parameters" element="tns:convertDepositNumberToIbanResponse"/>
+</wsdl:message>
+<wsdl:portType name="ParsianBankSoap">
+<wsdl:operation name="login">
+<wsdl:input message="tns:loginSoapIn"/>
+<wsdl:output message="tns:loginSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="loginAccount">
+<wsdl:input message="tns:loginAccountSoapIn"/>
+<wsdl:output message="tns:loginAccountSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="loginSwitch">
+<wsdl:input message="tns:loginSwitchSoapIn"/>
+<wsdl:output message="tns:loginSwitchSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="checkLoginInternetBank">
+<wsdl:input message="tns:checkLoginInternetBankSoapIn"/>
+<wsdl:output message="tns:checkLoginInternetBankSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="normalTransfer">
+<wsdl:input message="tns:normalTransferSoapIn"/>
+<wsdl:output message="tns:normalTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="achNormalTransfer">
+<wsdl:input message="tns:achNormalTransferSoapIn"/>
+<wsdl:output message="tns:achNormalTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="logout">
+<wsdl:input message="tns:logoutSoapIn"/>
+<wsdl:output message="tns:logoutSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="logoutAccount">
+<wsdl:input message="tns:logoutAccountSoapIn"/>
+<wsdl:output message="tns:logoutAccountSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="logoutSwitch">
+<wsdl:input message="tns:logoutSwitchSoapIn"/>
+<wsdl:output message="tns:logoutSwitchSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="changePassword">
+<wsdl:input message="tns:changePasswordSoapIn"/>
+<wsdl:output message="tns:changePasswordSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="achTransferReport">
+<wsdl:input message="tns:achTransferReportSoapIn"/>
+<wsdl:output message="tns:achTransferReportSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="institutionalTransfer">
+<wsdl:input message="tns:institutionalTransferSoapIn"/>
+<wsdl:output message="tns:institutionalTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getPaymentBillStatement">
+<wsdl:input message="tns:getPaymentBillStatementSoapIn"/>
+<wsdl:output message="tns:getPaymentBillStatementSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getStatement">
+<wsdl:input message="tns:getStatementSoapIn"/>
+<wsdl:output message="tns:getStatementSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="achTransactionReport">
+<wsdl:input message="tns:achTransactionReportSoapIn"/>
+<wsdl:output message="tns:achTransactionReportSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getDeposits">
+<wsdl:input message="tns:getDepositsSoapIn"/>
+<wsdl:output message="tns:getDepositsSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="rtgsNormalTransfer">
+<wsdl:input message="tns:rtgsNormalTransferSoapIn"/>
+<wsdl:output message="tns:rtgsNormalTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="rtgsTransferReport">
+<wsdl:input message="tns:rtgsTransferReportSoapIn"/>
+<wsdl:output message="tns:rtgsTransferReportSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="convertIbanToDepositNumber">
+<wsdl:input message="tns:convertIbanToDepositNumberSoapIn"/>
+<wsdl:output message="tns:convertIbanToDepositNumberSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getCardOwner">
+<wsdl:input message="tns:getCardOwnerSoapIn"/>
+<wsdl:output message="tns:getCardOwnerSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="cardTransfer">
+<wsdl:input message="tns:cardTransferSoapIn"/>
+<wsdl:output message="tns:cardTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="batchTransfer">
+<wsdl:input message="tns:batchTransferSoapIn"/>
+<wsdl:output message="tns:batchTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="achBatchTransfer">
+<wsdl:input message="tns:achBatchTransferSoapIn"/>
+<wsdl:output message="tns:achBatchTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="normalAcntTransfer">
+<wsdl:input message="tns:normalAcntTransferSoapIn"/>
+<wsdl:output message="tns:normalAcntTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="batchAcntTransfer">
+<wsdl:input message="tns:batchAcntTransferSoapIn"/>
+<wsdl:output message="tns:batchAcntTransferSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getDepositOwnerName">
+<wsdl:input message="tns:getDepositOwnerNameSoapIn"/>
+<wsdl:output message="tns:getDepositOwnerNameSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="cardBalanceInquiry">
+<wsdl:input message="tns:cardBalanceInquirySoapIn"/>
+<wsdl:output message="tns:cardBalanceInquirySoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="cardBalanceInquiryWithCustId">
+<wsdl:input message="tns:cardBalanceInquiryWithCustIdSoapIn"/>
+<wsdl:output message="tns:cardBalanceInquiryWithCustIdSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getCardDeposits">
+<wsdl:input message="tns:getCardDepositsSoapIn"/>
+<wsdl:output message="tns:getCardDepositsSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="payLoan">
+<wsdl:input message="tns:payLoanSoapIn"/>
+<wsdl:output message="tns:payLoanSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getChequeBookList">
+<wsdl:input message="tns:getChequeBookListSoapIn"/>
+<wsdl:output message="tns:getChequeBookListSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getCheque">
+<wsdl:input message="tns:getChequeSoapIn"/>
+<wsdl:output message="tns:getChequeSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="doPayment">
+<wsdl:input message="tns:doPaymentSoapIn"/>
+<wsdl:output message="tns:doPaymentSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="payBill">
+<wsdl:input message="tns:payBillSoapIn"/>
+<wsdl:output message="tns:payBillSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getCardStatementInquiry">
+<wsdl:input message="tns:getCardStatementInquirySoapIn"/>
+<wsdl:output message="tns:getCardStatementInquirySoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="switchFundTransferFromPhysicalTerminal">
+<wsdl:input message="tns:switchFundTransferFromPhysicalTerminalSoapIn"/>
+<wsdl:output message="tns:switchFundTransferFromPhysicalTerminalSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="getDestinationCardOwner">
+<wsdl:input message="tns:getDestinationCardOwnerSoapIn"/>
+<wsdl:output message="tns:getDestinationCardOwnerSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="inquiryTxnStatus">
+<wsdl:input message="tns:inquiryTxnStatusSoapIn"/>
+<wsdl:output message="tns:inquiryTxnStatusSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="convertDepositNumberToIban">
+<wsdl:input message="tns:convertDepositNumberToIbanSoapIn"/>
+<wsdl:output message="tns:convertDepositNumberToIbanSoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ParsianBankSoap" type="tns:ParsianBankSoap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="login">
+<soap:operation soapAction="http://www.parsian-bank.ir/login" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="loginAccount">
+<soap:operation soapAction="http://www.parsian-bank.ir/loginAccount" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="loginSwitch">
+<soap:operation soapAction="http://www.parsian-bank.ir/loginSwitch" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="checkLoginInternetBank">
+<soap:operation soapAction="http://www.parsian-bank.ir/checkLoginInternetBank" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="normalTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/normalTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achNormalTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/achNormalTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="logout">
+<soap:operation soapAction="http://www.parsian-bank.ir/logout" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="logoutAccount">
+<soap:operation soapAction="http://www.parsian-bank.ir/logoutAccount" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="logoutSwitch">
+<soap:operation soapAction="http://www.parsian-bank.ir/logoutSwitch" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="changePassword">
+<soap:operation soapAction="http://www.parsian-bank.ir/changePassword" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achTransferReport">
+<soap:operation soapAction="http://www.parsian-bank.ir/achTransferReport" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="institutionalTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/institutionalTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getPaymentBillStatement">
+<soap:operation soapAction="http://www.parsian-bank.ir/getPaymentBillStatement" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getStatement">
+<soap:operation soapAction="http://www.parsian-bank.ir/getStatement" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achTransactionReport">
+<soap:operation soapAction="http://www.parsian-bank.ir/achTransactionReport" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDeposits">
+<soap:operation soapAction="http://www.parsian-bank.ir/getDeposits" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="rtgsNormalTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/rtgsNormalTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="rtgsTransferReport">
+<soap:operation soapAction="http://www.parsian-bank.ir/rtgsTransferReport" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="convertIbanToDepositNumber">
+<soap:operation soapAction="http://www.parsian-bank.ir/convertIbanToDepositNumber" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCardOwner">
+<soap:operation soapAction="http://www.parsian-bank.ir/getCardOwner" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cardTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/cardTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="batchTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/batchTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achBatchTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/achBatchTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="normalAcntTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/normalAcntTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="batchAcntTransfer">
+<soap:operation soapAction="http://www.parsian-bank.ir/batchAcntTransfer" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDepositOwnerName">
+<soap:operation soapAction="http://www.parsian-bank.ir/getDepositOwnerName" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cardBalanceInquiry">
+<soap:operation soapAction="http://www.parsian-bank.ir/cardBalanceInquiry" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cardBalanceInquiryWithCustId">
+<soap:operation soapAction="http://www.parsian-bank.ir/cardBalanceInquiryWithCustId" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCardDeposits">
+<soap:operation soapAction="http://www.parsian-bank.ir/getCardDeposits" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="payLoan">
+<soap:operation soapAction="http://www.parsian-bank.ir/payLoan" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getChequeBookList">
+<soap:operation soapAction="http://www.parsian-bank.ir/getChequeBookList" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCheque">
+<soap:operation soapAction="http://www.parsian-bank.ir/getCheque" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="doPayment">
+<soap:operation soapAction="http://www.parsian-bank.ir/doPayment" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="payBill">
+<soap:operation soapAction="http://www.parsian-bank.ir/payBill" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCardStatementInquiry">
+<soap:operation soapAction="http://www.parsian-bank.ir/getCardStatementInquiry" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="switchFundTransferFromPhysicalTerminal">
+<soap:operation soapAction="http://www.parsian-bank.ir/switchFundTransferFromPhysicalTerminal" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDestinationCardOwner">
+<soap:operation soapAction="http://www.parsian-bank.ir/getDestinationCardOwner" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="inquiryTxnStatus">
+<soap:operation soapAction="http://www.parsian-bank.ir/inquiryTxnStatus" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="convertDepositNumberToIban">
+<soap:operation soapAction="http://www.parsian-bank.ir/convertDepositNumberToIban" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ParsianBankSoap12" type="tns:ParsianBankSoap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="login">
+<soap12:operation soapAction="http://www.parsian-bank.ir/login" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="loginAccount">
+<soap12:operation soapAction="http://www.parsian-bank.ir/loginAccount" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="loginSwitch">
+<soap12:operation soapAction="http://www.parsian-bank.ir/loginSwitch" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="checkLoginInternetBank">
+<soap12:operation soapAction="http://www.parsian-bank.ir/checkLoginInternetBank" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="normalTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/normalTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achNormalTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/achNormalTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="logout">
+<soap12:operation soapAction="http://www.parsian-bank.ir/logout" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="logoutAccount">
+<soap12:operation soapAction="http://www.parsian-bank.ir/logoutAccount" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="logoutSwitch">
+<soap12:operation soapAction="http://www.parsian-bank.ir/logoutSwitch" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="changePassword">
+<soap12:operation soapAction="http://www.parsian-bank.ir/changePassword" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achTransferReport">
+<soap12:operation soapAction="http://www.parsian-bank.ir/achTransferReport" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="institutionalTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/institutionalTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getPaymentBillStatement">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getPaymentBillStatement" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getStatement">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getStatement" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achTransactionReport">
+<soap12:operation soapAction="http://www.parsian-bank.ir/achTransactionReport" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDeposits">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getDeposits" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="rtgsNormalTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/rtgsNormalTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="rtgsTransferReport">
+<soap12:operation soapAction="http://www.parsian-bank.ir/rtgsTransferReport" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="convertIbanToDepositNumber">
+<soap12:operation soapAction="http://www.parsian-bank.ir/convertIbanToDepositNumber" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCardOwner">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getCardOwner" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cardTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/cardTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="batchTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/batchTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="achBatchTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/achBatchTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="normalAcntTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/normalAcntTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="batchAcntTransfer">
+<soap12:operation soapAction="http://www.parsian-bank.ir/batchAcntTransfer" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDepositOwnerName">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getDepositOwnerName" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cardBalanceInquiry">
+<soap12:operation soapAction="http://www.parsian-bank.ir/cardBalanceInquiry" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cardBalanceInquiryWithCustId">
+<soap12:operation soapAction="http://www.parsian-bank.ir/cardBalanceInquiryWithCustId" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCardDeposits">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getCardDeposits" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="payLoan">
+<soap12:operation soapAction="http://www.parsian-bank.ir/payLoan" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getChequeBookList">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getChequeBookList" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCheque">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getCheque" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="doPayment">
+<soap12:operation soapAction="http://www.parsian-bank.ir/doPayment" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="payBill">
+<soap12:operation soapAction="http://www.parsian-bank.ir/payBill" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCardStatementInquiry">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getCardStatementInquiry" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="switchFundTransferFromPhysicalTerminal">
+<soap12:operation soapAction="http://www.parsian-bank.ir/switchFundTransferFromPhysicalTerminal" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDestinationCardOwner">
+<soap12:operation soapAction="http://www.parsian-bank.ir/getDestinationCardOwner" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="inquiryTxnStatus">
+<soap12:operation soapAction="http://www.parsian-bank.ir/inquiryTxnStatus" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="convertDepositNumberToIban">
+<soap12:operation soapAction="http://www.parsian-bank.ir/convertDepositNumberToIban" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ParsianBank">
+<wsdl:port name="ParsianBankSoap" binding="tns:ParsianBankSoap">
+<soap:address location="https://intranetsecure.parsian-bank.com/yaChannelManager2_live/parsianbank.asmx"/>
+</wsdl:port>
+<wsdl:port name="ParsianBankSoap12" binding="tns:ParsianBankSoap12">
+<soap12:address location="https://intranetsecure.parsian-bank.com/yaChannelManager2_live/parsianbank.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

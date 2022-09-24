@@ -1,0 +1,221 @@
+package aminParsian.DAO;
+
+import aminParsian.displaytag.PaginatedListImpl;
+import aminParsian.displaytag.PagingUtil;
+import aminParsian.model.CredebitState;
+import aminParsian.util.BaseDAO;
+import aminParsian.util.DateUtil;
+import aminParsian.viewModel.ViewCredebit;
+import aminParsian.viewModel.ViewCredebitState;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
+import aminParsian.model.Credebit;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by a-naderi on 7/26/2017.
+ */
+
+
+public class CredebitDAO extends BaseDAO {
+
+    private CredebitStateDAO credebitStateDAO;
+
+
+
+//    -------------------------------------------------------------------------------------------------------------------------------------------
+
+    public CredebitStateDAO getCredebitStateDAO() {
+        return credebitStateDAO;
+    }
+
+    public void setCredebitStateDAO(CredebitStateDAO credebitStateDAO) {
+        this.credebitStateDAO = credebitStateDAO;
+    }
+
+//    -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    public Credebit findById(BigDecimal id)
+    {
+        return (Credebit) super.findById(Credebit.class,id);
+    }
+
+    public  Object  saveOrUpdate(Credebit i) {
+        super.saveOrUpdate(i);
+        return super.findById(Credebit.class ,currentSession().getIdentifier(i));
+    }
+
+
+    public PaginatedListImpl<ViewCredebit> searchCredebits(String invoiceNo, String nationalNO, String policyNO, Long state, Long type, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo) {
+        String headerStr ="SELECT c.policyno, c.orgname, c.nationalid, c.personname, c.invoiceno, c.mablagh, dfn.namefarsi, c.entrydate, u.name, c.id, c.elambemalidate, c.receptiondate, c.secretariatdate, c.sheba ";
+        String fromStr = " FROM credebit c inner join (SELECT * FROM dictionary where pid=1000) dfn on c.state=dfn.code inner join users u on u.id=c.entryuserid ";
+        String whereStr = " where (1=1) ";
+
+        switch (type.intValue()){
+            case 4://معاون فني
+                whereStr += " and c.state = 1 ";
+                break;
+            case 5://معاون مالي
+                whereStr += " and c.state = 2 ";
+                break;
+            case 3://مدير مالي
+                whereStr += " and c.state in (3, 4, 5, 6)  and c.mablagh<200000000 ";
+                break;
+        }
+        if(invoiceNo != null && !invoiceNo.equals("")){
+            whereStr += " and c.invoiceno='" + invoiceNo + "' ";
+        }
+        if(nationalNO != null && !nationalNO.equals("")){
+            whereStr += " and c.nationalid='" + nationalNO.replaceAll("-","") + "' ";
+        }
+        if(policyNO != null && !policyNO.equals("")){
+            whereStr += " and c.policyno='" + policyNO + "' ";
+        }
+        if(state != null && !state.equals("")){
+            whereStr += " and c.state=" + state ;
+        }
+        if(createDateFrom != null && !createDateFrom.equals("")){
+            whereStr += " and c.createdate>='" + createDateFrom + "' " ;
+        }
+        if(createDateTo != null && !createDateTo.equals("")){
+            whereStr += " and c.createdate<='" + createDateTo + "' " ;
+        }
+        if(elamBeMaliDateFrom != null && !elamBeMaliDateFrom.equals("")){
+            whereStr += " and c.elambemalidate>='" + elamBeMaliDateFrom + "' " ;
+        }
+        if(elamBeMaliDateTo != null && !elamBeMaliDateTo.equals("")){
+            whereStr += " and c.elambemalidate<='" + elamBeMaliDateTo + "' " ;
+        }
+
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(headerStr+fromStr+whereStr);
+
+        PaginatedListImpl<ViewCredebit> resultList=new PaginatedListImpl<ViewCredebit>();
+        int page = PagingUtil.getPageNumberFromContext("page");
+        List<Object[]> result;
+        if(isExport()){
+            result = query.list();
+            resultList.setPageNumber(1);
+            resultList.setObjectsPerPage(Integer.MAX_VALUE);
+            resultList.setFullListSize(result.size());
+        }
+        else{
+            resultList.setObjectsPerPage(30);
+            resultList.setPageNumber(page);
+            int firstResult = resultList.getObjectsPerPage() * (resultList.getPageNumber() - 1);
+            query.setFirstResult(firstResult);
+            query.setMaxResults(30);
+            result =query.list();
+            Query queryCount = getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery("select count(*) "+fromStr+whereStr);
+            Long num = Long.parseLong(queryCount.list().get(0).toString());
+            resultList.setFullListSize(num.intValue());
+        }
+
+
+        List<ViewCredebit> viewCredebitList = new ArrayList<ViewCredebit>();
+
+        int resultSize = 0;
+        if(result != null){
+            resultSize = result.size();
+        }
+        for(int i=0; i<resultSize; i++) {
+            Object[] temp = result.get(i);
+
+            String policyNo = (String)temp[0];
+            String orgName = (String)temp[1];
+            String nationalID = (String)temp[2];
+            String personName = (String)temp[3];
+            String invoiceNo4 = (String)temp[4];
+            BigInteger mablagh = ((BigDecimal)temp[5]).toBigInteger();
+            String stateStr = (String) temp[6];
+            String entryDate = DateUtil.getStrDate(((BigDecimal)temp[7]).longValue());
+            String entryUser = (String) temp[8];
+            BigDecimal credebitID = (BigDecimal)temp[9];
+            String elamBeMaliDate = (String) temp[10];
+            String receptionDate = (String) temp[11];
+            String secretariatDate = (String) temp[12];
+            String sheba = (String) temp[13];
+
+            ViewCredebit viewCredebit = new ViewCredebit(policyNo, orgName, nationalID, personName, invoiceNo4, mablagh, stateStr, entryDate, entryUser, credebitID,
+                                                                                elamBeMaliDate, receptionDate, secretariatDate, sheba);
+            viewCredebitList.add(viewCredebit);
+        }
+        resultList.setList(viewCredebitList);
+        return resultList;
+    }
+
+
+    public ViewCredebit getViewCredebit(Credebit credebit) {
+        ViewCredebit viewCredebit = new ViewCredebit();
+
+        String queryStr = "select nameFarsi from dictionary where pid=1000 AND code = "+credebit.getState();
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(queryStr);
+        String state = (String)query.uniqueResult();
+
+        viewCredebit.setCredebitID(credebit.getId());
+        viewCredebit.setPolicyNo(credebit.getPolicyNo());
+        viewCredebit.setOrgName(credebit.getOrgNmae());
+        viewCredebit.setInvoiceNo(credebit.getInvoiceNo());
+        viewCredebit.setMablagh(credebit.getMablagh());
+        viewCredebit.setState(state);
+        viewCredebit.setEntryDate(DateUtil.getDateFromLong(credebit.getEntrydate()));
+        viewCredebit.setEntryTime(credebit.getEntrytime());
+        viewCredebit.setEntryUser(credebit.getUsers().getName());
+        viewCredebit.setNationalID(credebit.getNationalID());
+        viewCredebit.setPersonName(credebit.getPersonName());
+
+        Criteria criteria = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(CredebitState.class);
+        criteria.add(Restrictions.ne("state",100l));
+        criteria.add(Restrictions.eq("credebit.id",credebit.getId()));
+        List<CredebitState> csList = criteria.list();
+        Collections.sort(csList);
+
+        int csListSize = 0;
+        if(csList != null){
+            csListSize=csList.size();
+        }
+        ArrayList<ViewCredebitState> viewCredebitStateArrayList = new ArrayList<ViewCredebitState>();
+        for(int i = 0; i<csListSize; i++){
+            viewCredebitStateArrayList.add(credebitStateDAO.getViewCredebitState(csList.get(i)));
+        }
+
+        viewCredebit.setCredebitStateArrayList(viewCredebitStateArrayList);
+
+        return viewCredebit;
+    }
+
+	public Credebit findBySanamCredebitID(BigInteger credebitId) {
+        String hqlQuery = "select c from Credebit c where sanamcredebitid = "+ credebitId;
+        Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hqlQuery);
+        List<Credebit> result =query.list();
+        if(result != null && result.size()>0){
+            return result.get(0);
+        }
+        else
+            return null;
+    }
+	public Credebit manualSaveOrUpdate (Credebit credebit){
+
+        Session session = getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.setFlushMode(FlushMode.AUTO);
+
+            session.saveOrUpdate(credebit);
+            tx.commit();
+            credebit = (Credebit) session.get(Credebit.class, session.getIdentifier(credebit));
+            session.close();
+
+            return credebit;
+        }catch (Exception e){
+            return null;
+        }
+
+    }
+}

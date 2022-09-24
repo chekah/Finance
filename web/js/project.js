@@ -1,0 +1,335 @@
+
+
+function clean(elements) {
+
+    for (i = 0; i < elements.length; i++) {
+        document.getElementById(elements[i]).value = '';
+
+    }
+}
+
+
+$(document).ready(function () {
+    $("#flip").click(function () {
+        $("#panel").slideToggle("slow");
+
+    });
+});
+
+$(document).ready(function () {
+    $("#flip1").click(function () {
+        $("#panel1").slideToggle("slow");
+
+    });
+});
+
+
+$(document).ready(function () {
+    $("#panel3").show();
+    $("#flip3").click(function () {
+        $("#panel3").slideToggle("slow");
+    });
+});
+
+
+function showDiv(id) {
+
+    document.getElementById(id).style.visibility = "visible";
+    document.getElementById(id).visible = true;
+    //documet.getElementById(id).display=inline;
+}
+
+function hideDiv(id) {
+    document.getElementsByClassName(id).visibility = hidden;
+
+}
+
+//
+$(document).ready(function () {
+    $(".hiddendiv").hide();
+
+});
+
+
+function addRow(tableID) {
+
+    var table = document.getElementById(tableID);
+
+
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+
+
+    var cell1 = row.insertCell(0);
+    var element1 = document.createElement("input");
+    element1.type = "checkbox";
+    element1.name = "chkbox1";
+    cell1.appendChild(element1);
+
+
+    var cell2 = row.insertCell(1);
+    var element2 = document.createElement("input");
+    element2.type = "s:textfield";
+    element2.className = "form-control lefttoright";
+    element2.name = "textfield1";
+    cell2.appendChild(element2);
+
+
+    var cell3 = row.insertCell(2);
+    var element3 = document.createElement("input");
+    element3.type = "checkbox";
+    element3.name = "chkbox2";
+    element3.id = "check";
+    cell3.appendChild(element3);
+//        element3.onclick=element2.color=red;
+    element3.onclick = "$('#check').disabled = true;"
+
+
+    var cell4 = row.insertCell(3);
+    var element4 = document.createElement("input");
+    element4.type = "s:textfield";
+    element4.className = "miniform-control lefttoright";
+    element4.name = "textfield2";
+    cell4.appendChild(element4);
+
+    var cell5 = row.insertCell(4);
+    var element5 = document.createElement("input");
+    element5.type = "s:textfield";
+    element5.className = "miniform-control lefttoright";
+    element5.name = "textfield3";
+    cell5.appendChild(element5);
+
+
+    var cell6 = row.insertCell(5);
+    var element6 = document.createElement("input");
+    element6.type = "s:textfield";
+    element6.className = "miniform-control lefttoright";
+    element6.name = "textfield4";
+    cell6.appendChild(element6);
+
+    var cell7 = row.insertCell(6);
+    var element7 = document.createElement("input");
+    element7.type = "s:textfield";
+    element7.className = "miniform-control lefttoright";
+    element7.name = "textfield5";
+    cell7.appendChild(element7);
+
+    var cell8 = row.insertCell(7);
+    var element8 = document.createElement("input");
+    element8.type = "s:textfield";
+    element8.className = "miniform-control lefttoright";
+    element8.name = "textfield6";
+    cell8.appendChild(element8);
+
+
+}
+
+function splitMonyTextBox(ctrl) {
+    var separator = ",";
+    var int = ctrl.value.replace(new RegExp(separator, "g"), "");
+    var regexp = new RegExp("\\B(\\d{3})(" + separator + "|$)");
+    do
+    {
+        int = int.replace(regexp, separator + "$1");
+    }
+    while (int.search(regexp) >= 0)
+    ctrl.value = int;
+}
+
+
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if ((charCode > 31) && (charCode < 48 || charCode > 57))
+        return false;
+
+    return true;
+}
+
+function deleteRow(tableID) {
+    try {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        var index = rowCount - 1;
+        table.deleteRow(index);
+
+    } catch (e) {
+        alert(e);
+    }
+}
+
+$(document).ready(function () {
+
+    $('.date').mask('9999/99/99');
+    //$('.internalLetterNo').mask('9999/999999/99/9999999');
+    $('.receptionNo').mask('9999/999999/99/9999999');
+    $('.time').mask('00:00:00');
+    $('.date_time').mask('00/00/0000 00:00:00');
+    $('.cep').mask('00000-000');
+    $('.phone').mask('0000-0000');
+    $('.phone_with_ddd').mask('(00) 0000-0000');
+    $('.phone_us').mask('(000) 000-0000');
+    $('.mixed').mask('AAA 000-S0S');
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    //$('.money').mask('000.000.000.000.000,00', {reverse: true});
+    //$('.money2').mask("#.##0,00", {reverse: true});
+    $('.ip_address').mask('0ZZ.0ZZ.0ZZ.0ZZ', {
+        translation: {
+            'Z': {
+                pattern: /[0-9]/, optional: true
+            }
+        }
+    });
+});
+
+
+$(document).ready(function () {
+
+
+    $(function () {
+        var numberInputs = $(".money");
+        var convertToCurrencyDisplayFormat = function (str) {
+            var regex = /(-?[0-9]+)([0-9]{3})/;
+            str += '';
+            while (regex.test(str)) {
+                str = str.replace(regex, '$1,$2');
+            }
+            return str;
+        };
+        var stripNonNumeric = function (str) {
+            str += '';
+            str = str.replace(/[^0-9]/g, '');
+            return str;
+        };
+        numberInputs.each(function () {
+            this.value = convertToCurrencyDisplayFormat(this.value);
+        });
+        numberInputs.blur(function () {
+            this.value = convertToCurrencyDisplayFormat(this.value);
+        });
+        numberInputs.focus(function () {
+            this.value = stripNonNumeric(this.value);
+        });
+        $("form").submit(function () {
+            numberInputs.each(function () {
+                this.value = stripNonNumeric(this.value);
+            });
+        });
+    });
+
+
+});
+$(document).ready(function () {
+    $('.date').mask('9999/99/99');
+//    $('.date').mask('99/99/9999');
+    $('.time').mask('00:00:00');
+    $('.date_time').mask('00/00/0000 00:00:00');
+    $('.cep').mask('00000-000');
+    $('.phone').mask('0000-0000');
+    $('.phone_with_ddd').mask('(00) 0000-0000');
+    $('.phone_us').mask('(000) 000-0000');
+    $('.mixed').mask('AAA 000-S0S');
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+
+    $('.ip_address').mask('099.099.099.099');
+    $('.percent').mask('##0,00%', {reverse: true});
+    $('.clear-if-not-match').mask("00/00/0000", {clearIfNotMatch: true});
+    $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
+
+    $('.moarefiForm').mask('9999/99/999999');
+    $('.moarefiNO').mask('9999/999999/99/999999');
+    $('.nationalID').mask('999-999999-9');
+    $('.sheba').mask("IR999999999999999999999999");
+    $('#rahgiriCode').mask('9999/999999/99/999999');
+    $('#nationalCode').mask('999-999999-9');
+    $('.Policy').mask('9999/999999/99/999999');
+    $('.prePolicy').mask('9999/999999/99/999999');
+   
+
+
+
+
+});
+
+function radioselection(val, id) {
+    if (val == "1") {
+        document.getElementById("policywaitingPeriodCapacity").disabled = true;
+        document.getElementById("policywaitingPeriodCapacity").disabled = true;
+    }
+}
+
+$(document).ready(function () {
+    $(".EntTab").bind("keypress", function (e) {
+
+        if (e.keyCode == 13) {
+            var inps = $("input, select"); //add select too
+            for (var x = 0; x < inps.length; x++) {
+                if (inps[x] == this) {
+                    while ((inps[x]).name == (inps[x + 1]).name) {
+                        x++;
+                    }
+                    if ((x + 1) < inps.length) $(inps[x + 1]).focus();
+                }
+            }
+            e.preventDefault();
+        }
+    });
+});
+
+
+
+function makeEmpty(textfieldId, hiddenId) {
+    if (document.getElementById(textfieldId).value == "") {
+        document.getElementById(textfieldId).value = null;
+        document.getElementById(hiddenId).value = null;
+    }
+}
+
+
+function makeEmptyWithCleanOnSession(textfieldId, hiddenId, sessionName, actionName) {
+    if (document.getElementById(textfieldId).value == "") {
+        document.getElementById(textfieldId).value = null;
+        document.getElementById(hiddenId).value = null;
+
+        //alert(sessionName.toString());
+        //  alert(actionName.toString());
+        debugger;
+        $.ajax({
+            type: "POST",
+            async: false,
+            data: {"sessionName": sessionName.toString()},
+
+            url: actionName.toString(),
+            success: function (result) {
+
+                // alert(result);
+
+
+            }
+        });
+    }
+
+
+}
+
+$(document).ready(function () {
+    $('.check-box').click(function () {
+        //alert("salam");
+        var toothNumber = this.name;
+        //var nationalID = document.getElementById("nationalID").value;
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: "KhesaratMostaghimGetPreviousToothCosDetails",
+            data: "toothNumber=" + toothNumber,
+            dataType: 'text',
+            //data : "nationalID="+nationalID ,
+            success: function (result) {
+                if (!result.contains('html')) {
+                    alert(result);
+                }
+
+            }
+        });
+    });
+});
+

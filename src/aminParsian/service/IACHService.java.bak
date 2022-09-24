@@ -1,0 +1,168 @@
+package aminParsian.service;
+
+import aminParsian.displaytag.PaginatedListImpl;
+import aminParsian.model.*;
+import aminParsian.viewModel.*;
+
+import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by a-naderi on 7/25/2017.
+ */
+public interface IACHService {
+
+    public static final String SERVICE_NAME="achService";
+
+
+    PaginatedListImpl<ViewCredebit> fanniManager();
+
+    PaginatedListImpl<ViewCredebit> searchFanniManager(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    PaginatedListImpl<ViewCredebit> maliManager();
+
+    PaginatedListImpl<ViewCredebit> searchMaliManager(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    PaginatedListImpl<ViewCredebit> fanniSubManager();
+
+    PaginatedListImpl<ViewCredebit> searchFanniSubManager(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    PaginatedListImpl<ViewCredebit> maliSubManager();
+
+    PaginatedListImpl<ViewCredebit> searchMaliSubManager(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    Credebit teedMoavenFani(BigDecimal credebitID, Users users);
+
+    Credebit teedMoavenMali(BigDecimal credebitID, Users users);
+
+    Credebit ersalBeBank(BigDecimal credebitID, Users users);
+
+    ViewCredebit getViewCredebit(BigDecimal credebitID);
+
+    Credebit createCredebit(String invoiceNO, String uniqeCode, BigInteger amount, String policyNO, String orgName, String nationalID, String personName, String sheba, String elamBeMaliDate, String receptionDate, String secretariatDate);
+
+    List<Credebit> searchFanniSubManagerForTeedGrouhi(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    List<Credebit> searchMaliSubManagerForTeedGrouhi(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    List<Credebit> searchMaliManagerForTeedGrouhi(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    PaginatedListImpl<ViewCredebit> searchMaliManagerForPardakhtCheck(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+    Credebit teedPardakhtBaCheck(BigDecimal credebitID, Users user);
+
+    List<ViewSanad> mali_report_first(String createDateFrom, String createDateTo);
+
+    List<ViewSanad> mali_report_sanadPardakht1(String createDateFrom, String createDateTo);
+
+    List<ViewSanad> mali_report_sanadPardakht2(String createDateFrom, String createDateTo);
+
+    void feedBackACH(Credebit sanamcredebitid, String sessionId);
+
+    List<Credebit> getCredebitsForFeedBack();
+
+    List<Credebit> getCredebitsForSendSms();
+
+    String sendSms(Credebit credebit);
+
+    List<Credebit> getCredebitsForTestSms();
+
+    Credebit ersalBeBankMajazi(BigDecimal credebitID, Users user);
+
+    ListCredebitBank saveOrUpdateListCredebitBank(ListCredebitBank listCredebitBank);
+
+    List<ListCredebitBank> findListToErsalBeBank();
+
+    void saveOrUpdateListCredebitBankLog(ListCredebitBankLog listCredebitBankLog);
+
+    Object saveOrUpdateCredebit(Credebit credebit);
+
+    List<ViewCredebit> readExcel(File fileAddressFileName);
+
+    List<ViewCredebit> moghayeratAchBank(List<ViewCredebit> bankCredebits, List<ViewCredebit> darmanCredebits);
+
+    List<ViewCredebit> getCredebitsByPardakhtDate(String createDateFrom, String createDateTo);
+
+    List<ViewCredebit> getCredebitsByCreateDate(String createDateFrom, String createDateTo);
+
+
+    String saveCredebitForReceptionExcel(BigInteger invoiceExcelID, Users user);
+
+    PaginatedListImpl<ViewReceptionExcel> getViewReceptionExcelPaginatedList(int page, List<ViewReceptionExcel> viewExcelList);
+
+    List<ViewReceptionExcel> sabtExcelKhesarat(ReceptionExcelFiles receptionExcelFile, boolean bimarestani, File fileUpload, Users user, List<ViewReceptionExcel> viewDBReceptionExcelList, List<ViewReceptionExcel> viewReceptionExcelList);
+
+    File produceErrorExcelFile(Map<Integer, Map<Integer,String>> error, File fileUpload);
+
+    List<ViewReceptionExcel> validateExcelKhesarat(boolean bimarestani, File fileUpload, Map<Integer, Map<Integer, String>> errorMap, Users user, List<ViewReceptionExcel> viewReceptionExcelList);
+
+    List<ViewInsuredPerson> validatePersonExcel(File fileUpload, Map<Integer, Map<Integer, String>> errorMap);
+
+    public List<ViewInsuredPerson> getInsuredPersonFromFile(List<ViewInsuredPerson> viewInsuredPersonList, Users user);
+
+    public Map<String, Family> validateFamily(List<ViewInsuredPerson> viewInsuredPersonList, Map<String, String> errorMap);
+
+    public PaginatedListImpl<ViewInsuredPerson> getViewInsuredPersonPaginatedList(int page, List<ViewInsuredPerson> viewInsuredPersonList);
+
+    String savePersons(Users user, List<Family> familyList);
+    public File produceFamilyErrorExcelFile(Map<String, String> errorMap, File fileUpload, int cellNum);
+
+    List<ViewInsuredPerson> readExcelFileForSaveSheba(File fileUpload, Map<Integer, Map<Integer, String>> errorList);
+
+    ViewInsuredPerson saveSheba(ViewInsuredPerson viewInsuredPerson, Users user, String date, String time);
+
+    List<ViewInsuredPerson> savePersonFromReceptionExcel(boolean bimarestani, File fileUpload, Users user);
+
+    PaginatedListImpl<ViewReceptionExcel> receptionExcelNotExistIpReport(boolean flag, int page, BigDecimal policyID, String nationalID, String mainNationalID, String createDateFrom, String createDateTo);
+
+    void deleteOldSheba(ViewInsuredPerson viewInsuredPerson, Users user, String date, String time);
+
+    PaginatedListImpl<ViewReceptionExcel> receptionExcelReport(boolean flag, int page, BigDecimal policyID, String nationalID, String mainNationalID, String createDateFrom, String createDateTo);
+
+    PaginatedListImpl<ViewInsuredPerson> insuredPersonListReport(boolean flag, int page, String personelID, BigDecimal policyID, String nationalID, String mainNationalID, String createDateFrom, String createDateTo, Long hasShebaID, Long hasMobileID, String sheba, BigInteger mobile, Long stateCode);
+
+
+    List<ViewInsuredPerson> savePersonFromReceptionExcelWithSheba(boolean bimarestani, File fileUpload, Users user);
+
+    List<ViewPolicy> readExcelFileForSaveBimehGozar(File fileUpload, Map<Integer, Map<Integer, String>> errorMap);
+
+    void saveBimehGozar(ViewPolicy viewPolicy, Users user, String date, String time);
+
+    PaginatedListImpl<ViewPolicy> getViewPolicyPaginatedList(int page, List<ViewPolicy> viewPolicyList);
+
+    List<ViewInsuredPerson> readExcelFileForSaveMobile(File fileUpload, Map<Integer, Map<Integer, String>> errorMap);
+
+    void deleteOldMobile(ViewInsuredPerson viewInsuredPerson, Users user, String date, String time);
+
+    ViewInsuredPerson saveMobile(ViewInsuredPerson viewInsuredPerson, Users user, String date, String time);
+
+    List<ViewInsuredPerson> searchMainInsuredPerson( BigDecimal policyID, String mainNationalID);
+
+    List<ViewInsuredPerson> suspendInsuredPerson(List<ViewInsuredPerson> viewInsuredPersonList, BigDecimal mainInsuredPersonID, Users user);
+
+    List<ViewInsuredPerson> fixTheSuspensionInsuredPerson(List<ViewInsuredPerson> viewInsuredPersonList, BigDecimal mainInsuredPersonID, Users user);
+
+    List<ViewReceptionExcel> validateExcelKhesaratWithSheba(boolean bimarestani, File fileUpload, Map<Integer, Map<Integer, String>> errorMap, Users user, List<ViewReceptionExcel> viewReceptionExcelList, List<Errors> errorsList);
+
+    List<Credebit> getCredebitsForSendSmsDuplicate();
+
+    String sendSmsForDuplicate(Credebit credebit);
+
+    ReceptionExcelFiles saveReceptionExcelFile(File fileUpload, Users user);
+
+    BigInteger findSumOfMablagh(String invoiceNo, String nationalNO, String policyNO, Long state, String createDateFrom, String createDateTo, String elamBeMaliDateFrom, String elamBeMaliDateTo);
+
+Policy findPolicyByID(BigDecimal policyID);
+
+    Policy suspendPolicy(BigDecimal policyID,Users users);
+
+    Policy fixTheSuspensionPolicy(BigDecimal policyID, Users user);
+    List<ViewInsuredPerson> searchInsuredPerson(BigDecimal policyID, String nationalID);
+
+    InsuredPerson movingInsuredPerson(Users user, BigDecimal policyID, String mainNationalID, BigDecimal insuredPersonCode, List<Errors> errors);
+
+    InsuredPerson movingFamily(Users user, BigDecimal policyID, String personelID, BigDecimal mainInsuredPersonID, List<Errors> errors);
+}

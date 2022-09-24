@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="soorathesabLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="59c6ffcf-398d-4425-9d54-bfffcfa99646">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.background.image.properties" value="true,true,0.25,-8,-8,0,0,1233,1738"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<import value="parsian.util.*"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{realPath}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="realPath" class="java.lang.String" isForPrompting="false"/>
+	<field name="viewResidArrayList" class="org.apache.struts2.views.jasperreports.ValueStackDataSource"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="121" splitType="Stretch">
+			<subreport>
+				<reportElement uuid="309e4e66-a9ef-4168-a84f-2b510a23b8bc" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="200" height="100" isPrintWhenDetailOverflows="true"/>
+				<subreportParameter name="realPath">
+					<subreportParameterExpression><![CDATA[$P{realPath}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$F{viewResidArrayList}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{realPath} + "reports/soorathesabResidDetail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

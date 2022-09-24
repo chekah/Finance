@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.mapper.action.prefix.enabled" value="true"/>
+    <constant name="struts.action.excludePattern" value=".*DarmanWebService.*"/>
+    <package name="DarmanTest" extends="struts-default" namespace="/">
+
+        <result-types>
+            <result-type name="jasper" class="org.apache.struts2.views.jasperreports.JasperReportsResult"/>
+        </result-types>
+
+
+        <interceptors>
+            <interceptor name="DateInterceptor" class="aminParsian.interceptor.DateInterceptor"/>
+        </interceptors>
+
+        <action name="pageLogin">
+            <result>/LoginPage.jsp</result>
+        </action>
+
+        <action name="TabAction" class="aminParsian.action.TabAction" method="execute">
+            <result name="success">jsp/kartabl.jsp</result>
+        </action>
+
+        <action name="loginUser" class="aminParsian.action.LoginAction" method="login">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="removeSessionByName" class="aminParsian.util.BaseAction" method="removeSessionByName">
+            <result name="back">${url}</result>
+        </action>
+
+        <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+        <!--مدير فني-->
+
+        <action name="sideTab_FanniManager" class="aminParsian.action.ACHAction" method="sideTab_FanniManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="searchFanniManager" class="aminParsian.action.ACHAction" method="searchFanniManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="error">jsp/kartabl.jsp</result>
+        </action>
+
+        <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+        <!--مدير مالي-->
+        <!--       <action name="sideTabMaliManagerReport" class="aminParsian.action.ACHAction" method="sideTab_MaliManager_Report">
+                   <result name="success">/jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+                   &lt;!&ndash;<result name="success">jsp/kartabl.jsp</result>&ndash;&gt;
+                   &lt;!&ndash;<result name="error">/jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>&ndash;&gt;
+                   <result name="nosession">LoginPage.jsp</result>
+               </action>-->
+        <action name="sideTab_MaliManagerReport" class="aminParsian.action.ACHAction"
+                method="sideTab_MaliManagerReport">
+            <result name="success">/jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="sideTab_MaliManager" class="aminParsian.action.ACHAction" method="sideTab_MaliManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="searchMaliManager" class="aminParsian.action.ACHAction" method="searchMaliManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="error">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ersalBeBank" class="aminParsian.action.ACHAction" method="ersalBeBank">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="error">jsp/kartabl.jsp</result>
+            <result name="ersalBeBank">jsp/kartabl.jsp</result>
+        </action>
+
+        <action name="teedGrouhiErsalBeBank" class="aminParsian.action.ACHAction" method="teedGrouhiErsalBeBank">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="success">jsp/kartabl.jsp</result>
+        </action>
+
+        <action name="searchMaliManagerForPardakhtCheck" class="aminParsian.action.ACHAction"
+                method="searchMaliManagerForPardakhtCheck">
+            <result name="success">jsp/pardakhtCheck.jsp</result>
+            <result name="error">jsp/pardakhtCheck.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="pardakhtBaCheck" class="aminParsian.action.ACHAction" method="pardakhtBaCheck">
+            <result name="message">jsp/pardakhtCheck.jsp</result>
+            <result name="error">jsp/pardakhtCheck.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="mali_report_first" class="aminParsian.action.ACHAction" method="mali_report_first">
+            <result name="success">jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="error">jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="mali_report_pardakht1" class="aminParsian.action.ACHAction" method="mali_report_sanadPardakht1">
+            <result name="success">jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="error">jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="mali_report_pardakht2" class="aminParsian.action.ACHAction" method="mali_report_sanadPardakht2">
+            <result name="success">jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="error">jsp/maliSubManager/sideTab_MaliManager_Report.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+        <!--معاون فني-->
+        <action name="sideTab_FanniSubManager" class="aminParsian.action.ACHAction" method="sideTab_FanniSubManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="searchFanniSubManager" class="aminParsian.action.ACHAction" method="searchFanniSubManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="error">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="teedMoavenFani" class="aminParsian.action.ACHAction" method="teedMoavenFani">
+            <result name="error">jsp/kartabl.jsp</result>
+            <result name="message">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="teedGrouhiMoavenFani" class="aminParsian.action.ACHAction" method="teedGrouhiMoavenFani">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+        <!--معاون مالي-->
+        <action name="sideTab_MaliSubManager" class="aminParsian.action.ACHAction" method="sideTab_MaliSubManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="searchMaliSubManager" class="aminParsian.action.ACHAction" method="searchMaliSubManager">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="error">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="teedMoavenMali" class="aminParsian.action.ACHAction" method="teedMoavenMali">
+            <result name="error">jsp/kartabl.jsp</result>
+            <result name="message">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="teedGrouhiMoavenMali" class="aminParsian.action.ACHAction" method="teedGrouhiMoavenMali">
+            <result name="success">jsp/kartabl.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+
+        <action name="viewCharkhe" class="aminParsian.action.ACHAction" method="viewCharkhe">
+            <result>jsp/viewCharkhe.jsp</result>
+        </action>
+        <action name="userManagementEnterChangePassword" class="aminParsian.action.UserAction"
+                method="userManagementEnterChangePassword">
+            <result name="success">jsp/ChangePassword.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="userManagementChangePassword" class="aminParsian.action.UserAction"
+                method="userManagementChangePassword">
+            <result name="success">jsp/ChangePassword.jsp</result>
+            <result name="error">jsp/ChangePassword.jsp</result>
+            <result name="notCorrect">jsp/ChangePassword.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="sideTab_MaliManager_PardakhCheck" class="aminParsian.action.ACHAction"
+                method="sideTab_MaliManager_PardakhCheck">
+            <result name="success">jsp/pardakhtCheck.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="feedback" class="aminParsian.action.ACHAction" method="feedBack">
+            <result name="success"></result>
+        </action>
+
+        <action name="sideTab_MaliMoghayerat" class="aminParsian.action.ACHAction" method="sideTab_MaliMoghayerat">
+            <result name="success">jsp/maliSubManager/sideTab_moghayerat.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="mali_MoghaieratGiri" class="aminParsian.action.ACHAction" method="mali_MoghaieratGiri">
+            <result name="success">jsp/maliSubManager/sideTab_moghayerat.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="error">jsp/maliSubManager/sideTab_moghayerat.jsp</result>
+        </action>
+
+
+        <!--مدیریت سیستم-->
+
+        <action name="ModiriatSystemExcelPaziresh" class="aminParsian.action.ACHAction"
+                method="ModiriatSystemExcelPaziresh">
+            <result name="success">jsp/modiriatSystem/ExcelPaziresh.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemSabteExcelPaziresh" class="aminParsian.action.ACHAction"
+                method="ModiriatSystemSabteExcelPaziresh">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInReceptionExcel" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSaveReceptionExcelFile">jsp/modiriatSystem/ExcelPaziresh.jsp</result>
+            <result name="saveReceptionExcelFile" type="redirectAction">
+                <param name="actionName">ModiriatSystemSaveReceptionExcelFile</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="ModiriatSystemSaveReceptionExcelFile" class="aminParsian.action.ACHAction"
+                method="ModiriatSystemSaveReceptionExcelFile">
+            <result name="success">jsp/modiriatSystem/ExcelPaziresh.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+
+        <action name="ModiriatSystemAddPerson" class="aminParsian.action.ACHAction" method="ModiriatSystemAddPerson">
+            <result name="success">jsp/modiriatSystem/AddPerson.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <action name="ModiriatSystemSavePerson" class="aminParsian.action.ACHAction" method="ModiriatSystemSavePerson">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInFileUpload" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSavePersonFile">jsp/modiriatSystem/AddPerson.jsp</result>
+            <result name="successSavePersonFile" type="redirectAction">
+                <param name="actionName">ModiriatSystemSavePersonFile</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="ModiriatSystemSavePersonFile" class="aminParsian.action.ACHAction" method="ModiriatSystemSavePersonFile">
+            <result name="success">jsp/modiriatSystem/AddPerson.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemGenerateLetter" class="aminParsian.action.ACHAction" method="ModiriatSystemGenerateLetter">
+            <result name="successChapLetter" type="jasper">
+                <param name="location">reports/soorathesabLetter.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+
+<!--            <result name="success">jsp/modiriatSystem/AddPerson.jsp</result>-->
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemDownloadSampleSabteBimehShode" class="aminParsian.action.ACHAction" method="ModiriatSystemDownloadSampleSabteBimehShode">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="successInDownloadFile" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInDownloadFile">jsp/modiriatSystem/AddPerson.jsp</result>
+        </action>
+
+        <!--**********************-->
+
+        <action name="ModiriatSystemAddSheba" class="aminParsian.action.ACHAction" method="ModiriatSystemAddSheba">
+            <result name="success">jsp/modiriatSystem/AddSheba.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemDownLoadSampleFileForSabteSheba" class="aminParsian.action.ACHAction" method="ModiriatSystemDownLoadSampleFileForSabteSheba">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="successInDownloadFile" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInDownloadFile">jsp/modiriatSystem/AddSheba.jsp</result>
+        </action>
+
+
+        <action name="ModiriatSystemSaveSheba" class="aminParsian.action.ACHAction" method="ModiriatSystemSaveSheba">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInFileUpload" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSaveSheba">jsp/modiriatSystem/AddSheba.jsp</result>
+            <result name="successSaveSheba" type="redirectAction">
+                <param name="actionName">ModiriatSystemSaveShebaFile</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="ModiriatSystemSaveShebaFile" class="aminParsian.action.ACHAction" method="ModiriatSystemSaveShebaFile">
+            <result name="success">jsp/modiriatSystem/AddSheba.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <!--گزارش ها -->
+        <action name="ReportsReceptionExcelNotExistIpReport" class="aminParsian.action.ACHAction" method="ReportsReceptionExcelNotExistIpReport">
+            <result name="success">jsp/reports/ReceptionExcelNotExistIpReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ReportsSearchReceptionExcelNotExistIpReport" class="aminParsian.action.ACHAction" method="ReportsSearchReceptionExcelNotExistIpReport">
+            <result name="success">jsp/reports/ReceptionExcelNotExistIpReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ReportsReceptionExcelReport" class="aminParsian.action.ACHAction" method="ReportsReceptionExcelReport">
+            <result name="success">jsp/reports/ReceptionExcelReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="ReportsSearchReceptionExcelReport" class="aminParsian.action.ACHAction" method="ReportsSearchReceptionExcelReport">
+            <result name="success">jsp/reports/ReceptionExcelReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="ReportsInsuredPersonListReport" class="aminParsian.action.ACHAction" method="ReportsInsuredPersonListReport">
+            <result name="success">jsp/reports/InsuredPersonListReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="ReportsSearchInsuredPersonListReport" class="aminParsian.action.ACHAction" method="ReportsSearchInsuredPersonListReport">
+            <result name="success">jsp/reports/InsuredPersonListReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+       <!--*****************************-->
+        <action name="ModiriatSystemExcelPazireshWithSheba" class="aminParsian.action.ACHAction"
+                method="ModiriatSystemExcelPazireshWithSheba">
+            <result name="success">jsp/modiriatSystem/ExcelPazireshWithSheba.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemSabteExcelPazireshWithSheba" class="aminParsian.action.ACHAction"
+                method="ModiriatSystemSabteExcelPazireshWithSheba">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInReceptionExcel" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSaveReceptionExcelFile">jsp/modiriatSystem/ExcelPazireshWithSheba.jsp</result>
+            <result name="saveReceptionExcelFile" type="redirectAction">
+                <param name="actionName">ModiriatSystemSaveReceptionExcelFileWithSheba</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="ModiriatSystemSaveReceptionExcelFileWithSheba" class="aminParsian.action.ACHAction"
+                method="ModiriatSystemSaveReceptionExcelFile">
+            <result name="success">jsp/modiriatSystem/ExcelPazireshWithSheba.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <!--**********************************-->
+        <action name="ModiriatSystemSabteBimehGozar" class="aminParsian.action.ACHAction" method="ModiriatSystemSabteBimehGozar">
+            <result name="success">jsp/modiriatSystem/AddBimehGozar.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemDownLoadSampleFileForSabteBimehGozar" class="aminParsian.action.ACHAction" method="ModiriatSystemDownLoadSampleFileForSabteBimehGozar">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="successInDownloadFile" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInDownloadFile">jsp/modiriatSystem/AddBimehGozar.jsp</result>
+        </action>
+
+
+        <action name="ModiriatSystemSaveBimehGozar" class="aminParsian.action.ACHAction" method="ModiriatSystemSaveBimehGozar">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInFileUpload" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSaveBimehGozar">jsp/modiriatSystem/AddBimehGozar.jsp</result>
+            <result name="successSaveBimehGozar" type="redirectAction">
+                <param name="actionName">ModiriatSystemSaveBimehGozarFile</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="ModiriatSystemSaveBimehGozarFile" class="aminParsian.action.ACHAction" method="ModiriatSystemSaveBimehGozarFile">
+            <result name="success">jsp/modiriatSystem/AddBimehGozar.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <!--********************************************-->
+
+        <action name="ModiriatSystemSabtMobile" class="aminParsian.action.ACHAction" method="ModiriatSystemSabtMobile">
+            <result name="success">jsp/modiriatSystem/AddMobile.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemDownLoadSampleFileForSabteMobile" class="aminParsian.action.ACHAction" method="ModiriatSystemDownLoadSampleFileForSabteMobile">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="successInDownloadFile" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInDownloadFile">jsp/modiriatSystem/AddMobile.jsp</result>
+        </action>
+
+
+        <action name="ModiriatSystemSaveMobile" class="aminParsian.action.ACHAction" method="ModiriatSystemSaveMobile">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInFileUpload" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSaveMobile">jsp/modiriatSystem/AddMobile.jsp</result>
+            <result name="successSaveMobile" type="redirectAction">
+                <param name="actionName">ModiriatSystemSaveMobileFile</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="ModiriatSystemSaveMobileFile" class="aminParsian.action.ACHAction" method="ModiriatSystemSaveMobileFile">
+            <result name="success">jsp/modiriatSystem/AddMobile.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <!--***********************************************-->
+        <action name="ModiriatSystemInsuredPersonSuspendManagement" class="aminParsian.action.ACHAction" method="ModiriatSystemInsuredPersonSuspendManagement">
+            <result name="success">jsp/modiriatSystem/InsuredPersonSuspendManagement.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="ModiriatSystemSearchMainInsuredPerson" class="aminParsian.action.ACHAction" method="ModiriatSystemSearchMainInsuredPerson">
+            <result name="success">jsp/modiriatSystem/InsuredPersonSuspendManagement.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemSuspendInsuredPerson" class="aminParsian.action.ACHAction" method="ModiriatSystemSuspendInsuredPerson">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="error">jsp/modiriatSystem/InsuredPersonSuspendManagement.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">ModiriatSystemInsuredPersonSuspendManagement</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+
+        <action name="ModiriatSystemFixTheSuspension" class="aminParsian.action.ACHAction" method="ModiriatSystemFixTheSuspension">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="error">jsp/modiriatSystem/InsuredPersonSuspendManagement.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">ModiriatSystemInsuredPersonSuspendManagement</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+
+        <!--***********************************************-->
+        <action name="ModiriatSystemPolicySuspendManagement" class="aminParsian.action.ACHAction" method="ModiriatSystemPolicySuspendManagement">
+            <result name="success">jsp/modiriatSystem/PolicySuspendManagement.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+		<action name="ModiriatSystemSearchPolicy" class="aminParsian.action.ACHAction" method="ModiriatSystemSearchPolicy">
+            <result name="success">jsp/modiriatSystem/PolicySuspendManagement.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+ 		<action name="ModiriatSystemSuspondPolicy" class="aminParsian.action.ACHAction" method="ModiriatSystemSuspondPolicy">
+            <result name="error">jsp/modiriatSystem/PolicySuspendManagement.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">ModiriatSystemPolicySuspendManagement</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+                <param name="policyID">${policy.id}</param>
+            </result>
+        </action>
+		<action name="ModiriatSystemFixTheSuspensionForPolicy" class="aminParsian.action.ACHAction" method="ModiriatSystemFixTheSuspensionForPolicy">
+            <result name="error">jsp/modiriatSystem/PolicySuspendManagement.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">ModiriatSystemPolicySuspendManagement</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+                <param name="policyID">${policy.id}</param>
+            </result>
+        </action>
+        <action name="ModiriatSystemMovingInsuredPerson" class="aminParsian.action.ACHAction" method="ModiriatSystemMovingInsuredPerson">
+            <result name="success">jsp/modiriatSystem/MovingInsuredPersons.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemSearchInsuredPerson" class="aminParsian.action.ACHAction" method="ModiriatSystemSearchInsuredPerson">
+            <result name="success">jsp/modiriatSystem/MovingInsuredPersons.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="ModiriatSystemMoveInsuredPerson" class="aminParsian.action.ACHAction" method="ModiriatSystemMoveInsuredPerson">
+            <result name="success">jsp/modiriatSystem/MovingInsuredPersons.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="ModiriatSystemMoveFamily" class="aminParsian.action.ACHAction" method="ModiriatSystemMoveFamily">
+            <result name="success">jsp/modiriatSystem/MovingInsuredPersons.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterGenerateLetter" class="aminParsian.action.LetterAction" method="letterGenerateLetter">
+            <result name="successChapLetter" type="jasper">
+                <param name="location">reports/soorathesabLetter.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/printLetter.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="LetterGenerateLetterWithoutBack" class="aminParsian.action.LetterAction" method="letterGenerateLetterWithoutBack">
+            <result name="successChapLetterWithoutBack" type="jasper">
+                <param name="location">reports/soorathesabLetterWithoutBack.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/printLetter.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterPrint" class="aminParsian.action.LetterAction" method="printInvoice">
+            <result name="success">jsp/Letter/printLetter.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        
+        <action name="LetterProduce" class="aminParsian.action.LetterAction" method="letterProduce">
+            <result name="success"> jsp/Letter/produceLetter.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterProduceLetterInsured" class="aminParsian.action.LetterAction" method="letterProduceLetterInsured">
+            <result name="success">jsp/Letter/produceLetter.jsp</result>
+            <result name="error">jsp/Letter/produceLetter.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterGenerateLetterInsured" class="aminParsian.action.LetterAction" method="letterGenerateLetterInsured">
+            <result name="successChapLetter" type="jasper">
+                <param name="location">reports/soorathesabLetter.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/printLetter.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <action name="LetterReportPrintAll" class="aminParsian.action.LetterAction" method="letterGenerateLetterInsured">
+            <result name="successChapLetter" type="jasper">
+                <param name="location">reports/soorathesabLetter.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/printLetter.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <action name="LetterGenerateLetterInsuredWithoutBack" class="aminParsian.action.LetterAction" method="letterGenerateLetterInsuredWithoutBack">
+            <result name="successChapLetterWithoutBack" type="jasper">
+                <param name="location">reports/soorathesabLetterWithoutBack.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/printLetter.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterPrintForInsured" class="aminParsian.action.LetterAction" method="printInvoiceForInsured">
+            <result name="success">jsp/Letter/printLetterForInsured.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterSavePerson" class="aminParsian.action.LetterAction" method="letterSavePerson">
+            <result name="success">jsp/Letter/AddListBimeShode.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterInsertBimeShode" class="aminParsian.action.LetterAction" method="letterInsertBimeShode">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInFileUpload" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSavePersonFile">jsp/Letter/AddListBimeShode.jsp</result>
+            <result name="successSavePersonFile" type="redirectAction">
+                <param name="actionName">LetterSavePersonFile</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+        <action name="LetterSavePersonFile" class="aminParsian.action.LetterAction" method="letterSavePersonFile">
+            <result name="success">jsp/Letter/AddListBimeShode.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterReport" class="aminParsian.action.LetterAction" method="letterReport">
+            <result name="success">jsp/Letter/LetterReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="LetterDeleteInvoice" class="aminParsian.action.LetterAction" method="letterDeleteInvoice">
+            <result name="success">jsp/Letter/LetterReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="LetterEditInvoice" class="aminParsian.action.LetterAction" method="letterEditInvoice">
+            <result name="success">jsp/Letter/LetterReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterReportSearch" class="aminParsian.action.LetterAction" method="letterReportSearch">
+            <result name="success"> jsp/Letter/LetterReport.jsp</result>
+            <result name="error"> jsp/Letter/LetterReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterResidReport" class="aminParsian.action.LetterAction" method="letterResidReport">
+            <result name="success">jsp/Letter/ResidReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterGenerateResid" class="aminParsian.action.LetterAction" method="letterGenerateResid">
+            <result name="success"> jsp/Letter/ResidReport.jsp</result>
+            <result name="error">jsp/Letter/ResidReport.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <action name="LetterPrintResid" class="aminParsian.action.LetterAction" method="letterPrintResid">
+            <result name="successChapResid" type="jasper">
+                <param name="location">reports/soorathesabResid.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/ResidReport.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterPrintResidAll" class="aminParsian.action.LetterAction" method="letterPrintResid">
+            <result name="successChapResid" type="jasper">
+                <param name="location">reports/soorathesabResid.pdf</param>
+                <param name="dataSource">viewLetter</param>
+                <param name="format">PDF</param>
+                <param name="realPath">${realPath}</param>
+            </result>
+            <result name="error">jsp/Letter/ResidReport.jsp</result>
+
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterUploadFileBank" class="aminParsian.action.LetterAction" method="letterEnterSaveFileBank">
+            <result name="success">jsp/Letter/LetterUploadFileBank.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+        <action name="LetterEditBimeGozar" class="aminParsian.action.LetterAction" method="letterEditBimeGozar">
+            <result name="success">jsp/Letter/LetterEditBimeGozar.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <action name="LetterSearchBimeGozar" class="aminParsian.action.LetterAction" method="letterSearchBimeGozar">
+            <result name="error">jsp/Letter/LetterEditBimeGozar.jsp</result>
+            <result name="success">jsp/Letter/LetterEditBimeGozar.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="LetterShowPolicyForEdit" class="aminParsian.action.LetterAction" method="letterShowPolicyForEdit">
+            <result name="error">jsp/Letter/LetterEditBimeGozar.jsp</result>
+            <result name="success">jsp/Letter/LetterShowPolicyForEdit.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+        <action name="LetterChangePolicyData" class="aminParsian.action.LetterAction" method="letterChangePolicyData">
+            <result name="error">jsp/Letter/LetterShowPolicyForEdit.jsp</result>
+            <result name="success">jsp/Letter/LetterShowPolicyForEdit.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+        <action name="LetterSaveFileBank" class="aminParsian.action.LetterAction" method="letterSaveFileBank">
+            <result name="nosession">LoginPage.jsp</result>
+            <result name="errorInFileUpload" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">20480</param>
+            </result>
+            <result name="errorInSaveFileBank">jsp/Letter/LetterUploadFileBank.jsp</result>
+            <result name="successSaveFileBank" type="redirectAction">
+                <param name="actionName">LetterSaveFileBank</param>
+                <param name="errormessage">${errormessage}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+        <action name="LetterAfterSaveFileBank" class="aminParsian.action.LetterAction" method="letterAfterSaveFileBank">
+            <result name="success">jsp/Letter/LetterUploadFileBank.jsp</result>
+            <result name="nosession">LoginPage.jsp</result>
+        </action>
+
+
+    </package>
+
+</struts>

@@ -1,0 +1,779 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package aminParsian.model;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import aminParsian.util.DateUtil;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.*;
+
+
+@Entity
+@Table(name = "POLICY")
+@NamedQueries({
+    @NamedQuery(name = "Policy.findAll", query = "SELECT p FROM Policy p")})
+public class Policy implements Serializable, Comparator, Comparable  {
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+//    @SequenceGenerator(name="ID", initialValue=1, allocationSize=1)
+//    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="ID")
+//    @Basic(optional = false)
+    @Column(name = "ID")
+    private BigDecimal id;
+
+    @JoinColumn(name = "agencyid", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Agency agencyid;
+
+    @JoinColumn(name = "TEMPLATEID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY )
+    private Policy templateID;
+    @Column(name = "AGREEMENTID")
+    private BigInteger agreementID;
+    @Column(name = "ALLPRM")
+    private BigInteger allprm;
+    @Column(name = "BEGINDATE")
+    private Long begindate;
+    @Column(name = "BENEFID")
+    private BigInteger benefid;
+    @Column(name = "CALCTYPE")
+    private Long calctype;
+    @Column(name = "CREATEDATE")
+    private String createdate;
+    @Column(name = "CREATETIME")
+    private String createtime;
+    @Column(name = "CURRENCYID")
+    private BigInteger currencyid;
+    @Column(name = "DESCRIPTION")
+    private String description;
+    @Column(name = "ENDDATE")
+    private Long enddate;
+    @Column(name = "FINANCIALTYPE")
+    private Long financialtype;
+    @Column(name = "ISSUANCEDATE")
+    private Long issuancedate;
+    @Column(name = "ISSUANCEPRICE")
+    private BigInteger issuanceprice;
+    @Column(name = "ISSUANCETIME")
+    private Long issuancetime;
+    @Column(name = "MARKETERID")
+    private BigDecimal marketerid;
+    @Column(name = "MARKETINGPRICE")
+    private BigInteger marketingprice;
+    @Column(name = "OFFERID")
+    private BigInteger offerid;
+    @Column(name = "PLANID")
+    private BigInteger planid;
+    @Column(name = "POLICYNAME")
+    private String policyname;
+    @Column(name = "POLICYNO")
+    private String policyno;
+    @Column(name = "STATE")
+    private Long state;
+    @Column(name = "POLICYTYPE")
+    private Long policytype;
+    @Column(name = "PREVPOLICYISSUANCEDATE")
+    private Long prevpolicyissuancedate;
+    @Column(name = "SUBPOLICYBRANCHID")
+    private Long subpolicybranchid;
+    @Column(name = "TENDERID")
+    private BigInteger tenderid;
+    @Column(name = "WAGEPRICE")
+    private BigInteger wageprice;
+    @Column(name = "TAX")
+    private BigInteger tax;
+    @Column(name = "PREVPOLICY")
+    private String prevpolicy;
+    @Column(name = "SEMATSIGNER1")
+    private String sematSigner1;
+    @Column(name = "SEMATSIGNER2")
+    private String sematSigner2;
+
+    @Column(name = "PRMUNDERSIXTY")
+    private BigInteger prmUnderSixty;
+
+    @Column(name = "ALPRMWITHTAX")
+    private BigInteger allPrmWithTax;
+    @Column(name = "NUMBEROFPEOPLE")
+    private Long numberofpeople;
+
+    @JoinColumn(name = "SIGNER1", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Users users;
+    @JoinColumn(name = "CREATEUSERID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Users users1;
+    @JoinColumn(name = "SIGNER2", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Users users2;
+    @OneToMany(mappedBy = "policy", fetch = FetchType.LAZY)
+    private transient Collection<Policy> policyCollection;
+    @JoinColumn(name = "PREVPOLICYID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Policy policy;
+    @JoinColumn(name = "ISSUANCEID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Agency agency;
+
+    @OneToMany(mappedBy = "policy", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SUBSELECT)
+    private  Collection<InsuredPerson> insuredPersonCollection;
+
+    @JoinColumn(name = "LASTEDITUSERID", referencedColumnName = "ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Users lastEditUserID;
+
+    @Column(name = "LASTEDITDATE")
+    private String lastEditDate;
+
+    @Column(name = "LASTEDITTIME")
+    private String lastEditTime;
+
+    @Column(name = "ACTION")
+    private String action;
+
+    @Column(name = "IP")
+    private String ip;
+
+
+    private transient BigInteger allprmNahaee;
+    private transient String stateStr;
+    private transient String lastEndorseNo;
+    private transient String offTypeStr;
+    private transient String begindateStr;
+    private transient String enddateStr;
+    private transient BigDecimal finalPrm;
+    private transient BigDecimal finalCountInsuredPerson;
+    private transient BigInteger monthlyPrm;
+    private transient Integer tedadAqsat;
+
+   private transient  BigInteger endorsePrmForRemove;
+    private transient Long countEndorse;
+
+    private transient BigDecimal hagheBimeGhablTakhfif;
+
+    private transient String calcTypeStr;
+    private transient String issuancedateStr;
+    private transient BigDecimal tedadAvalie;
+
+    private transient Long suspond;
+
+    public Policy() {
+    }
+
+
+    public Policy(Policy policy) {
+        this.agencyid = policy.getAgencyid();
+        this.agency = policy.getAgency();
+       this.templateID = policy.templateID;
+        this.allprm = policy.getAllprm();
+        this.begindate = policy.getBegindate();
+        this.benefid = policy.getBenefid();
+        this.calctype = policy.getCalctype();
+        this.createdate = policy.getCreatedate();
+        this.createtime = policy.getCreatetime();
+        this.currencyid = policy.getCurrencyid();
+        this.description = policy.getDescription();
+        this.enddate = policy.getEnddate();
+        this.financialtype = policy.getFinancialtype();
+        this.issuancedate = policy.getIssuancedate();
+        this.issuanceprice = policy.getIssuanceprice();
+        this.issuancetime = policy.getIssuancetime();
+        this.marketerid = policy.getMarketerid();
+        this.marketingprice = policy.getMarketingprice();
+        this.offerid = policy.getOfferid();
+        this.planid = policy.getPlanid();
+        this.policyname = policy.getPolicyname();
+        this.policyno = policy.getPolicyno();
+        this.state = policy.getState();
+        this.policytype = policy.getPolicytype();
+        this.prevpolicyissuancedate = policy.getPrevpolicyissuancedate();
+        this.subpolicybranchid = policy.getSubpolicybranchid();
+        this.tenderid = policy.getTenderid();
+        this.wageprice = policy.getWageprice();
+        this.users = policy.getUsers();
+        this.users1 = policy.getUsers1();
+        this.users2 = policy.getUsers2();
+        this.policy = policy;
+        this.tax = policy.getTax();
+        this.policy = policy.getPolicy();
+        this.prmUnderSixty = policy.getPrmUnderSixty();
+        this.numberofpeople=policy.getNumberofpeople();
+        this.allPrmWithTax = policy.getAllPrmWithTax();
+
+    }
+
+    public Long getSuspond() {
+        return suspond;
+    }
+
+    public void setSuspond(Long suspond) {
+        this.suspond = suspond;
+    }
+
+    public BigDecimal getHagheBimeGhablTakhfif() {
+        return hagheBimeGhablTakhfif;
+    }
+
+    public void setHagheBimeGhablTakhfif(BigDecimal hagheBimeGhablTakhfif) {
+        this.hagheBimeGhablTakhfif = hagheBimeGhablTakhfif;
+    }
+
+    public BigInteger getPrmUnderSixty() {
+        return prmUnderSixty;
+    }
+
+    public void setPrmUnderSixty(BigInteger prmUnderSixty) {
+        this.prmUnderSixty = prmUnderSixty;
+    }
+
+    public Long getCountEndorse() {
+        return countEndorse;
+    }
+
+    public void setCountEndorse(Long countEndorse) {
+        this.countEndorse = countEndorse;
+    }
+
+    public BigInteger getEndorsePrmForRemove() {
+        return endorsePrmForRemove;
+    }
+
+    public void setEndorsePrmForRemove(BigInteger endorsePrmForRemove) {
+        this.endorsePrmForRemove = endorsePrmForRemove;
+    }
+
+    public BigDecimal getTedadAvalie() {
+        return tedadAvalie;
+    }
+
+    public void setTedadAvalie(BigDecimal tedadAvalie) {
+        this.tedadAvalie = tedadAvalie;
+    }
+
+    public String getIssuancedateStr() {
+        return issuancedateStr;
+    }
+
+    public void setIssuancedateStr(String issuancedateStr) {
+        this.issuancedateStr = issuancedateStr;
+    }
+
+    public String getCalcTypeStr() {
+        return calcTypeStr;
+    }
+
+    public void setCalcTypeStr(String calcTypeStr) {
+        this.calcTypeStr = calcTypeStr;
+    }
+
+    public BigDecimal getFinalPrm() {
+        return finalPrm;
+    }
+
+    public void setFinalPrm(BigDecimal finalPrm) {
+        this.finalPrm = finalPrm;
+    }
+
+    public BigDecimal getFinalCountInsuredPerson() {
+        return finalCountInsuredPerson;
+    }
+
+    public void setFinalCountInsuredPerson(BigDecimal finalCountInsuredPerson) {
+        this.finalCountInsuredPerson = finalCountInsuredPerson;
+    }
+
+    public Integer getTedadAqsat() {
+        return tedadAqsat;
+    }
+
+    public void setTedadAqsat(Integer tedadAqsat) {
+        this.tedadAqsat = tedadAqsat;
+    }
+
+    public String getBegindateStr() {
+        return begindateStr;
+    }
+
+    public void setBegindateStr(String begindateStr) {
+        this.begindateStr = begindateStr;
+    }
+
+    public String getEnddateStr() {
+        return enddateStr;
+    }
+
+    public void setEnddateStr(String enddateStr) {
+        this.enddateStr = enddateStr;
+    }
+
+    public Long getNumberofpeople() {
+        return numberofpeople;
+    }
+
+    public void setNumberofpeople(Long numberofpeople) {
+        this.numberofpeople = numberofpeople;
+    }
+
+    public String getOffTypeStr() {
+        return offTypeStr;
+    }
+
+    public void setOffTypeStr(String offTypeStr) {
+        this.offTypeStr = offTypeStr;
+    }
+
+    public BigInteger getAllprmNahaee() {
+        return allprmNahaee;
+    }
+
+    public void setAllprmNahaee(BigInteger allprmNahaee) {
+        this.allprmNahaee = allprmNahaee;
+    }
+
+    public Policy(BigDecimal id) {
+        this.id = id;
+    }
+
+    public BigDecimal getId() {
+        return id;
+    }
+
+    public void setId(BigDecimal id) {
+        this.id = id;
+    }
+
+    public Agency getAgencyid() {
+        return agencyid;
+    }
+
+    public void setAgencyid(Agency agencyid) {
+        this.agencyid = agencyid;
+    }
+
+    public Policy getTemplateID() {
+        return templateID;
+    }
+
+    public void setTemplateID(Policy templateID) {
+        this.templateID = templateID;
+    }
+
+    public BigInteger getAgreementID() {
+        return agreementID;
+    }
+
+    public void setAgreementID(BigInteger agreementID) {
+        this.agreementID = agreementID;
+    }
+
+    public BigInteger getAllprm() {
+        return allprm;
+    }
+
+    public void setAllprm(BigInteger allprm) {
+        this.allprm = allprm;
+    }
+
+    public Long getBegindate() {
+        return begindate;
+    }
+
+    public void setBegindate(Long begindate) {
+        this.begindate = begindate;
+    }
+
+    public BigInteger getBenefid() {
+        return benefid;
+    }
+
+    public void setBenefid(BigInteger benefid) {
+        this.benefid = benefid;
+    }
+
+    public Long getCalctype() {
+        return calctype;
+    }
+
+    public void setCalctype(Long calctype) {
+        this.calctype = calctype;
+    }
+
+    public String getCreatedate() {
+        return createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime;
+    }
+
+    public BigInteger getCurrencyid() {
+        return currencyid;
+    }
+
+    public void setCurrencyid(BigInteger currencyid) {
+        this.currencyid = currencyid;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Long enddate) {
+        this.enddate = enddate;
+    }
+
+    public Long getFinancialtype() {
+        return financialtype;
+    }
+
+    public void setFinancialtype(Long financialtype) {
+        this.financialtype = financialtype;
+    }
+
+    public Long getIssuancedate() {
+        return issuancedate;
+    }
+
+    public void setIssuancedate(Long issuancedate) {
+        this.issuancedate = issuancedate;
+    }
+
+    public BigInteger getIssuanceprice() {
+        return issuanceprice;
+    }
+
+    public void setIssuanceprice(BigInteger issuanceprice) {
+        this.issuanceprice = issuanceprice;
+    }
+
+    public Long getIssuancetime() {
+        return issuancetime;
+    }
+
+    public void setIssuancetime(Long issuancetime) {
+        this.issuancetime = issuancetime;
+    }
+
+    public BigDecimal getMarketerid() {
+        return marketerid;
+    }
+
+    public void setMarketerid(BigDecimal marketerid) {
+        this.marketerid = marketerid;
+    }
+
+    public BigInteger getMarketingprice() {
+        return marketingprice;
+    }
+
+    public void setMarketingprice(BigInteger marketingprice) {
+        this.marketingprice = marketingprice;
+    }
+
+    public BigInteger getOfferid() {
+        return offerid;
+    }
+
+    public void setOfferid(BigInteger offerid) {
+        this.offerid = offerid;
+    }
+
+    public BigInteger getPlanid() {
+        return planid;
+    }
+
+    public void setPlanid(BigInteger planid) {
+        this.planid = planid;
+    }
+
+    public String getPolicyname() {
+        return policyname;
+    }
+
+    public void setPolicyname(String policyname) {
+        this.policyname = policyname;
+    }
+
+    public String getPolicyno() {
+        return policyno;
+    }
+
+    public void setPolicyno(String policyno) {
+        this.policyno = policyno;
+    }
+
+    public Long getState() {
+        return state;
+    }
+
+    public void setState(Long state) {
+        this.state = state;
+    }
+
+    public Long getPolicytype() {
+        return policytype;
+    }
+
+    public void setPolicytype(Long policytype) {
+        this.policytype = policytype;
+    }
+
+    public Long getPrevpolicyissuancedate() {
+        return prevpolicyissuancedate;
+    }
+
+    public void setPrevpolicyissuancedate(Long prevpolicyissuancedate) {
+        this.prevpolicyissuancedate = prevpolicyissuancedate;
+    }
+
+    public Long getSubpolicybranchid() {
+        return subpolicybranchid;
+    }
+
+    public void setSubpolicybranchid(Long subpolicybranchid) {
+        this.subpolicybranchid = subpolicybranchid;
+    }
+
+    public BigInteger getTenderid() {
+        return tenderid;
+    }
+
+    public void setTenderid(BigInteger tenderid) {
+        this.tenderid = tenderid;
+    }
+
+    public BigInteger getWageprice() {
+        return wageprice;
+    }
+
+    public void setWageprice(BigInteger wageprice) {
+        this.wageprice = wageprice;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Users getUsers1() {
+        return users1;
+    }
+
+    public void setUsers1(Users users1) {
+        this.users1 = users1;
+    }
+
+    public Users getUsers2() {
+        return users2;
+    }
+
+    public void setUsers2(Users users2) {
+        this.users2 = users2;
+    }
+
+    public Collection<Policy> getPolicyCollection() {
+        return policyCollection;
+    }
+
+    public void setPolicyCollection(Collection<Policy> policyCollection) {
+        this.policyCollection = policyCollection;
+    }
+
+    public Policy getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
+    }
+
+    public Agency getAgency() {
+        return agency;
+    }
+
+    public void setAgency(Agency agency) {
+        this.agency = agency;
+    }
+
+	public Collection<InsuredPerson> getInsuredPersonCollection() {
+        return insuredPersonCollection;
+    }
+
+    public void setInsuredPersonCollection(Collection<InsuredPerson> insuredPersonCollection) {
+        this.insuredPersonCollection = insuredPersonCollection;
+    }
+
+    public BigInteger getMonthlyPrm() {
+        return monthlyPrm;
+    }
+
+    public void setMonthlyPrm(BigInteger monthlyPrm) {
+        this.monthlyPrm = monthlyPrm;
+    }
+
+    public BigInteger getAllPrmWithTax() {
+        return allPrmWithTax;
+    }
+
+    public void setAllPrmWithTax(BigInteger allPrmWithTax) {
+        this.allPrmWithTax = allPrmWithTax;
+    }
+
+    public BigInteger getTax() {
+        return tax;
+    }
+
+    public void setTax(BigInteger tax) {
+        this.tax = tax;
+    }
+
+    public String getStateStr() {
+        return stateStr;
+    }
+
+    public void setStateStr(String stateStr) {
+        this.stateStr = stateStr;
+    }
+
+    public String getLastEndorseNo() {
+        return lastEndorseNo;
+    }
+
+    public void setLastEndorseNo(String lastEndorseNo) {
+        this.lastEndorseNo = lastEndorseNo;
+    }
+
+
+    public String getSematSigner1() {
+        return sematSigner1;
+    }
+
+    public void setSematSigner1(String sematSigner1) {
+        this.sematSigner1 = sematSigner1;
+    }
+
+    public String getSematSigner2() {
+        return sematSigner2;
+    }
+
+    public void setSematSigner2(String sematSigner2) {
+        this.sematSigner2 = sematSigner2;
+    }
+
+    public String getPrevpolicy() {
+        return prevpolicy;
+    }
+
+    public void setPrevpolicy(String prevpolicy) {
+        this.prevpolicy = prevpolicy;
+    }
+
+
+    public Users getLastEditUserID() {
+        return lastEditUserID;
+    }
+
+    public void setLastEditUserID(Users lastEditUserID) {
+        this.lastEditUserID = lastEditUserID;
+    }
+
+    public String getLastEditDate() {
+        return lastEditDate;
+    }
+
+    public void setLastEditDate(String lastEditDate) {
+        this.lastEditDate = lastEditDate;
+    }
+
+    public String getLastEditTime() {
+        return lastEditTime;
+    }
+
+    public void setLastEditTime(String lastEditTime) {
+        this.lastEditTime = lastEditTime;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Policy)) {
+            return false;
+        }
+        Policy other = (Policy) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.Policy[ id=" + id + " ]";
+    }
+    
+    @Override
+        public int compareTo(Object o) {
+            return this.getId().compareTo(((Policy)o).getId());
+}
+    }
+

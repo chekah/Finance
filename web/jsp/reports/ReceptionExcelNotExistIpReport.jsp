@@ -1,0 +1,159 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ach
+  Date: 8/19/2020
+  Time: 7:18 PM
+  To change this template use File | Settings | File Templates.
+--%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<script src="/js/reports.js"></script>
+<script src="/js/project.js"></script>
+
+<div id="flip" class="flip" name="">جستجو</div>
+<form action = "">
+    <table class="table">
+        <tbody>
+
+        <tr>
+
+            <td class="texttd">
+                شماره بيمه نامه
+
+            </td>
+
+            <td class="rightAlign">
+                <div>
+                    <input type="hidden" id="queryinfopolicyNo" name="queryinfo" value="1"/>
+                    <input type="hidden" id="policyID" name="policyID" value="${policyID}"  />
+                    <s:textfield id="policyNo" name="policyNo" class="form-control" theme="simple" onchange="makeEmpty('policyNo','policyID');"></s:textfield>
+
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="texttd"/>کد ملی بیمار</td>
+            <td class="rightAlign">
+                <input type="text" class="form-control"   id="nationalID" name="nationalID" value="${nationalID}"/>
+            </td>
+            <td class="texttd">کد ملی بیمه شده اصلی</td>
+            <td class="rightAlign">
+                <input type="text"   class="form-control"  id="mainNationalID" name="mainNationalID" value="${mainNationalID}"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="texttd">تاريخ از</td>
+            <td class="rightAlign">
+                <input type="text" class=" date form-control lefttoright  " id="createDateFrom"name="createDateFrom" value="${createDateFrom}"/>
+            </td>
+            <td class="texttd">تاريخ تا</td>
+            <td class="rightAlign">
+                <input type="text"  class=" date form-control lefttoright  " id="createDateTo" name="createDateTo" value="${createDateTo}"/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="submit" class="submitButton" name="submit0" value=" جست و جو" formaction="ReportsSearchReceptionExcelNotExistIpReport"/>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</form>
+
+<div id="response" align="center">
+    <div class="div_errormessage" dir="rtl" style="color: red;">
+        <strong>
+            <s:actionerror/>
+            <s:property value="errormessage"/>
+        </strong>
+    </div>
+    <div class="div_message" dir="rtl">
+        <strong>
+            <s:property value="message"/>
+        </strong>
+    </div>
+</div>
+
+
+
+<s:div id="flip3" class="flip">لیست خسارت های ثبت نشده در سیستم</s:div>
+<%--<s:div id="panel3" class="searchpanel">--%>
+<div style="overflow: auto;">
+    <display:table export="true" name="paginatedViewReceptionExcelList" id="paginatedViewReceptionExcelList"
+                   uid="viewReceptionExcel" class="table table-bordered displaytable"
+                   sort="external" htmlId="dbList" excludedParams="" requestURI="/ReportsSearchReceptionExcelNotExistIpReport.action">
+
+        <display:column
+                title="رديف">${(paginatedViewReceptionExcelList.objectsPerPage)*(paginatedViewReceptionExcelList.pageNumber-1)+viewReceptionExcel_rowNum}</display:column>
+
+        <display:column property="id" title="شناسه یکتا"> </display:column>
+        <display:column property="asliFullName" title="نام بيمه شده اصلی"> </display:column>
+        <display:column property="noeHavale" title="نوع حواله"> </display:column>
+        <display:column property="shomareHavale" title="شماره حواله"> </display:column>
+        <display:column property="tarikhHavale" title=" تاريخ حواله"> </display:column>
+        <display:column property="shomareParvande" title="شماره پرونده"> </display:column>
+        <display:column property="vahedePardakhti" title="واحد پرداخت"> </display:column>
+        <display:column property="noeTarh" title="نوع طرح"> </display:column>
+        <display:column property="patientName" title="نام بيمه شده"> </display:column>
+        <display:column property="bimeGozar" title="بيمه گذار"> </display:column>
+        <display:column property="asliNationalID" title="کدملي بيمه شده اصلي"> </display:column>
+        <display:column property="vahedeSazmani" title=" واحد سازماني"> </display:column>
+        <display:column property="policyno" title="شماره بيمه نامه"> </display:column>
+        <display:column property="policy.policyno" title="کد رايانه بيمه نامه"> </display:column>
+        <display:column property="codeBimeShode" title="كد بيمه شده"> </display:column>
+        <display:column property="patientNationalID" title="کد ملی"> </display:column>
+        <display:column property="serialMoarefiName" title="سريال معرفينامه"> </display:column>
+        <display:column property="personelID" title="كد پرسنلي"> </display:column>
+        <display:column property="pardakhtAzMahal" title=" پرداخت از محل"> </display:column>
+        <%--<display:column property="receptionExcelNotExistIP" title=" تاريخ شروع بيمه نامه"> </display:column>--%>
+        <%--<display:column property="receptionExcelNotExistIP" title="تاريخ پايان بيمه نامه"> </display:column>--%>
+        <display:column property="codeTarh" title="کد طرح"></display:column>
+        <display:column property="policyName" title="نام طرح"></display:column>
+        <display:column property="tasvieShode" title="تسويه شده"></display:column>
+        <display:column property="shomareBaygani" title="شماره بایگانی"></display:column>
+        <display:column property="grouhKariBimeGozar" title="گروه کاری بیمه گذار"></display:column>
+        <display:column property="tarikhBimari" title="تاريخ بيماري"></display:column>
+        <display:column property="tarikhElamKhesarat" title="تاريخ اعلام خسارت"></display:column>
+        <display:column property="noeBimari" title="نوع بيماري"></display:column>
+        <display:column property="karshenasParvande" title="كارشناس پرونده"></display:column>
+        <display:column property="codeKarshenas" title="كد كارشناس"></display:column>
+        <display:column property="vehedeSodour" title="واحد صدور"></display:column>
+        <display:column property="vehedeMoaref" title="واحد معرف"></display:column>
+        <display:column property="nameKarshenas" title="نام كارشناس"></display:column>
+        <display:column property="nameMarkazDarmani" title="نام مركز درماني"></display:column>
+        <display:column property="noeTahvilMadarek" title="نوع تحويل مدارك"></display:column>
+        <display:column property="vazeiatParvande" title="وضعیت پرونده"></display:column>
+        <display:column property="karbarSabteParvande" title="کاربر ثبت پرونده"></display:column>
+        <display:column property="gruheBimari" title="گروه بیماری"></display:column>
+        <display:column property="codeRayaneMoredKhesarat" title="کد رایانه مورد خسارت"></display:column>
+        <display:column title="هزينه پاراكلينيكي اعلام شده"><fmt:formatNumber type="number"
+                                                                              maxFractionDigits="3">${viewReceptionExcel.hazineParaElami}</fmt:formatNumber></display:column>
+
+        <display:column title="مبلغ محاسبه شده مطابق تعرفه"><fmt:formatNumber type="number"
+                                                                              maxFractionDigits="3">${viewReceptionExcel.mablaghMohasebeSodeMotabeghTarefe}</fmt:formatNumber></display:column>
+
+        <display:column title="هزينه پاراکلينيکي پرداخت شده"><fmt:formatNumber type="number"
+                                                                               maxFractionDigits="3">${viewReceptionExcel.hazineParaPardakhti}</fmt:formatNumber></display:column>
+        <display:column title="هزينه بیمارستانی اعلام شده"><fmt:formatNumber type="number"
+                                                                             maxFractionDigits="3">${viewReceptionExcel.hazineBimarestaniElami}</fmt:formatNumber></display:column>
+        <display:column title="هزينه بیمارستانی پرداخت شده"><fmt:formatNumber type="number"
+                                                                              maxFractionDigits="3">${viewReceptionExcel.hazineBimarestaniPardakhti}</fmt:formatNumber></display:column>
+        <display:column property="maliat" title="ماليات"></display:column>
+        <display:column title="فرانشيز"><fmt:formatNumber type="number"
+                                                          maxFractionDigits="3">${viewReceptionExcel.franshiz}</fmt:formatNumber></display:column>
+
+    </display:table>
+
+
+
+</div>
+

@@ -1,0 +1,368 @@
+package aminParsian.DAO;
+
+import org.hibernate.Query;
+import org.springframework.jmx.export.naming.IdentityNamingStrategy;
+import aminParsian.displaytag.PaginatedListImpl;
+import aminParsian.displaytag.PagingUtil;
+import aminParsian.model.*;
+import aminParsian.util.BaseDAO;
+import aminParsian.util.DataValidation;
+import aminParsian.util.DateUtil;
+import aminParsian.viewModel.*;
+
+
+import java.lang.Exception;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.*;
+
+public class InsuredPersonDAO extends BaseDAO {
+	private ErrorsDAO errorsDAO;
+
+
+
+	public ErrorsDAO getErrorsDAO() {
+		return errorsDAO;
+	}
+
+	public void setErrorsDAO(ErrorsDAO errorsDAO) {
+		this.errorsDAO = errorsDAO;
+	}
+
+	public InsuredPerson findById(BigDecimal id) {
+
+
+		return (InsuredPerson) super.findById(InsuredPerson.class, id);
+	}
+
+	public List<InsuredPerson> findByNationalID(String nationalID, BigDecimal mainPolicyId) {
+
+		String hql = "select ip from InsuredPerson ip  join  ip.person pe  join   ip.policy po  join po.mainPolicy mp  where ip.state < 100 and pe.nationalid=:nationalID and mp.id=:mainPolicyId and po.state< 100 and mp.state< 100 ";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("nationalID", nationalID);
+		query.setParameter("mainPolicyId", mainPolicyId);
+		return query.list();
+
+	}
+	public InsuredPerson findByNationalAndPolicyID(String nationalID, BigDecimal policyId) {
+
+		//String hql = "select ip from InsuredPerson ip  join  ip.person pe  join   ip.policy po  join po.mainPolicy mp  where ip.state < 100 and pe.nationalid=:nationalID and mp.id=:mainPolicyId and po.state< 100 and mp.state< 100 ";
+		String hql = "select ip from InsuredPerson ip inner join ip.person per where ip.state=1 and ip.policy.id = " + policyId + " and per.nationalid='"+nationalID+"'";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		try {
+			InsuredPerson insuredPerson = (InsuredPerson) query.uniqueResult();
+			return insuredPerson;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	public InsuredPerson findInsuredPersonByNationalIDAndPolicy(String nationalID, BigDecimal policyID) {
+
+		String hql = "select ip from InsuredPerson ip " +
+				" join  ip.person pe " +
+				" join   ip.policy po " +
+				" where po.id=:policyID and pe.nationalid=:nationalID " +
+				" and  ip.state < 100 and po.state< 100 and (ip.state = 1 or ip.state=2 or ip.state=3) ";
+
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("nationalID", nationalID);
+		query.setParameter("policyID", policyID);
+		try {
+			InsuredPerson insuredPerson = (InsuredPerson) query.uniqueResult();
+			return insuredPerson;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+
+	public Object saveOrUpdate(InsuredPerson i) {
+		super.saveOrUpdate(i);
+		return super.findById(InsuredPerson.class, currentSession().getIdentifier(i));
+	}
+
+	public List<Errors> doDataValidation(InsuredPerson insuredPerson) {
+		List<Errors> errors = new ArrayList<Errors>();
+		//Date Validation
+		if (DataValidation.isValidJalaliDate(insuredPerson.getEmploymentdate().toString()) != 1) {
+			Errors error = (Errors) errorsDAO.findById(Errors.class, new BigDecimal(2));
+			error.setMsg(error.getMsg().replace("[thisfield]", "تاريخ استخدام "));
+			errors.add(error);
+		}
+		//Numberic Validation
+
+		if (DataValidation.isNumeric(insuredPerson.getPerson().getId().toString()) == false) {
+			Errors error = (Errors) errorsDAO.findById(Errors.class, new BigDecimal(4));
+			error.setMsg(error.getMsg().replace("[thisfield]", ""));
+			errors.add(error);
+		}
+
+
+		if (DataValidation.isNumeric(insuredPerson.getCardtype().toString()) == false) {
+			Errors error = (Errors) errorsDAO.findById(Errors.class, new BigDecimal(4));
+			error.setMsg(error.getMsg().replace("[thisfield]", ""));
+			errors.add(error);
+		}
+
+
+		return errors;
+	}
+
+
+
+
+	public String updateInsuredPersonState(Policy policy) {
+
+		try {
+
+			String sql = "UPDATE insuredperson" +
+					" SET state = 100" +
+					" WHERE ID IN" +
+					"  (SELECT ip.ID" +
+					"  FROM insuredperson ip" +
+					"  WHERE ip.state    = 1" +
+					" and ip.CHANGEDENDORSEID is null " +
+					"  AND ip.policyid          =" + policy.getId() +
+					"  )";
+			Query query = getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+			query.executeUpdate();
+			return "success";
+		} catch (Throwable e) {
+			return "error";
+		}
+	}
+
+	public List<InsuredPerson> findActiveInsuredPersonListByPolicy(Policy policy) {
+		String hql = "select ip from InsuredPerson ip  where ip.state =1 and ip.policy=:policy ";
+		try {
+			Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+			query.setParameter("policy", policy);
+			return query.list();
+		} catch (Throwable e) {
+			return null;
+		}
+
+	}
+
+
+
+	public Account findAccountByInsuredPerson(InsuredPerson insuredPerson) {
+
+		String hql = "select a  from   Account a" +
+				"  left join  a.insuredPerson ip  " +
+				"where a.state <> 100  and ip.id=:insuredPersonID ";
+
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("insuredPersonID", insuredPerson.getId());
+		List<Account> account = query.list();
+
+		if (account == null || account.size() == 0) {
+			return null;
+		}
+		return account.get(0);
+	}
+
+
+	public InsuredPerson findInsuredPersonByMainPersonAndNationalIDAndNameAndFamily(BigDecimal mainPersonID, String nationalID, String personName, String family) {
+
+		try {
+			String hql = " select ip from InsuredPerson ip " +
+					" inner join ip.person p" +
+					" where ip.mainInsuredPerson.id =:mainPersonID and ip.state =1 " +
+					" and p.nationalid=:nationalID and p.name=:name and p.family=:family  ";
+
+			Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+			query.setParameter("mainPersonID", mainPersonID);
+			query.setParameter("nationalID", nationalID);
+			query.setParameter("family", family);
+			query.setParameter("name", personName);
+			InsuredPerson insuredPerson = (InsuredPerson) query.uniqueResult();
+
+			return insuredPerson;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+
+
+	public List<InsuredPerson> findOnlyByNationalID(String nationalCode) {
+
+		String hql = "select ip from InsuredPerson ip join ip.person per where per.state<40 and ip.state<40 and per.nationalid='" + nationalCode + "' ";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		List<InsuredPerson> insuredPersonList = query.list();
+		return insuredPersonList;
+	}
+
+	public List<InsuredPerson> getInsuredPersonListByMainInsuredPerson(BigDecimal mainPersonID) {
+
+		String hql = " select ip from InsuredPerson ip " +
+				"  where ip.familyrelation <> 1 and ip.state<40 and ip.mainInsuredPerson.id=:MainPersonID ";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("MainPersonID", mainPersonID);
+		List<InsuredPerson> insuredPersonList = query.list();
+		return insuredPersonList;
+	}
+
+	public List<InsuredPerson> findByPersonId(BigDecimal personID, BigDecimal mainPolicyId) {
+		String hql = "select ip from InsuredPerson ip  join  ip.person pe  join   ip.policy po  where ip.state < 100 and ip.state<>4  and pe.id=:personID and po.id=:mainPolicyId and po.state< 90  and po.state< 100 ";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("personID", personID);
+		query.setParameter("mainPolicyId", mainPolicyId);
+		List<InsuredPerson> result = query.list();
+		if(result == null){
+			return new ArrayList<InsuredPerson>();
+		}
+		return query.list();
+	}
+
+
+	public InsuredPerson findByPersonIdandMainpolicy(BigDecimal personID, BigDecimal mainPolicyId) {
+		String hql = "select ip from InsuredPerson ip  join  ip.person pe  join   ip.policy po  join po.mainPolicy mp  where ip.state < 100 and ip.state<>4  and pe.id=:personID and mp.id=:mainPolicyId and po.state< 90  and mp.state< 100 ";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("personID", personID);
+		query.setParameter("mainPolicyId", mainPolicyId);
+		return (InsuredPerson) query.uniqueResult();
+	}
+
+
+	public BigDecimal findNumOfInsuredPersonByPolicyId(BigDecimal policyId) {
+
+		String queryStr = "SELECT count(*) FROM insuredperson where state=1 and policyid=" + policyId;
+
+		return (BigDecimal) super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(queryStr).uniqueResult();
+	}
+
+	public BigDecimal findNumOfIPPerEndorse(BigDecimal endorseId) {
+
+		String queryStr = "SELECT count(*) FROM insuredperson where state=1 and endorseid=" + endorseId;
+
+		return (BigDecimal) super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(queryStr).uniqueResult();
+	}
+
+
+
+
+	public String estelamShebaForMainInsuredPerson(String policyNo, String nationalCode) {
+
+		String queryStr = "SELECT a.sheba " +
+				"FROM account a " +
+				"inner join insuredperson mainip on mainip.id=a.insuredpersonid " +
+				"inner join insuredperson ip on mainip.id=ip.mainpersonid " +
+				"inner join policy p on p.id=ip.policyid " +
+				"inner join person per on per.id=ip.personid " +
+				"where ip.state<90 and a.state<90 and mainip.state<90 ";
+		if (policyNo != null && !policyNo.equals("")) {
+			queryStr += " and p.policyno='" + policyNo + "' ";
+		}
+		if (nationalCode != null && !nationalCode.equals("")) {
+			queryStr += " and per.nationalid='" + nationalCode + "' ";
+		}
+		return (String) super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(queryStr).uniqueResult();
+	}
+
+
+
+
+	public InsuredPerson findInsuredPersonByNationalIDAndNameAndFamily(Policy policy, String nationalID, String personName, String family) {
+		try {
+			String hql = " select ip from InsuredPerson ip " +
+					" inner join ip.person p" +
+					" where  ( ip.state =2  or  ip.state =3) " +
+					" and p.nationalid=:nationalID and ip.policy.id=:policyID " ;
+//					"and p.name=:name and p.family=:family  ";
+
+			Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+			query.setParameter("nationalID", nationalID);
+			query.setParameter("policyID", policy.getId());
+//			query.setParameter("family", family);
+//			query.setParameter("name", personName);
+			InsuredPerson insuredPerson = (InsuredPerson) query.uniqueResult();
+
+			return insuredPerson;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+
+
+	public List<InsuredPerson> findInsuredPersonsBetween60And70(Policy policy)
+	{
+		String hql = "select ip from InsuredPerson ip join ip.policy p join ip.person pe where (p.begindate-pe.persianbirthdate) between 600001 and 700000 and (ip.state=1 or ip.state=2) and p.id=:policyid";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("policyid",policy.getId());
+		List<InsuredPerson> insuredPersonList =(List<InsuredPerson>)query.list();
+		return insuredPersonList;
+	}
+
+	public List<InsuredPerson> findInsuredPersonsUpper70(Policy policy)
+	{
+		String hql = "select ip from InsuredPerson ip join ip.policy p join ip.person pe where (p.begindate-pe.persianbirthdate)>700000 and (ip.state=1 or ip.state=2) and p.id=:policyid";
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("policyid",policy.getId());
+		List<InsuredPerson> insuredPersonList =(List<InsuredPerson>)query.list();
+		return insuredPersonList;
+	}
+
+
+
+
+	public List<InsuredPerson> findIPByNationalNoPolicyIdDate(String nationalNo, Policy policy, String effectdate) {
+		String hql = "select ip from InsuredPerson ip left join ip.person person"
+				+ " left join ip.policy policy where and ip.state<90" +
+				" person.nationalid='" + nationalNo.replace("-", "") + "' and policy.id=" + policy.getId();
+		Query q = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		return (List<InsuredPerson>) q.list();
+
+	}
+
+
+	public BigDecimal findInsuredPersonByNationalIDPolicy(String nationalID, BigDecimal policyID) {
+		String sql="select ip.id from insuredperson ip join person per on per.id=ip.personid join policy p on p.id=ip.policyid where ip.state < 100  and per.nationalid=:nationalID and p.id=:policyID and p.state< 90 and p.policytype=3 ";
+		Query query=super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+		query.setParameter("nationalID",nationalID);
+		query.setParameter("policyID",policyID);
+		try {
+			return (BigDecimal) query.list().get(0);
+		}catch (Exception e){
+			return null;
+		}
+	}
+
+	public Contact getContact(BigDecimal  mainInsuredPersonID) {
+
+		List<Contact> contactList = null;
+		Contact  contact =  null;
+		String hql  =   " select c from Contact c " +
+				" inner join c.person  p " +
+				" inner join  p.insuredPerson ip  where  ip.id=:mainInsuredPersonID " ;
+		Query query = getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("mainInsuredPersonID",mainInsuredPersonID);
+		contactList = (List<Contact>) query.list();
+		if(contactList != null && contactList.isEmpty() == false && contactList.get(0) != null){
+			contact =(Contact) contactList.get(0);
+		}
+		return contact;
+	}
+
+
+
+
+	public InsuredPerson findMainPersonByPersonelIDAndPolicyID(String personelID, BigDecimal policyID) {
+		String hql="select ip from InsuredPerson ip " +
+				" where ip.state =1 and ip.familyrelation =1 and ip.personelid=:personelID and ip.policy.id=:policyID  ";
+		Query query=super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("personelID",personelID);
+		query.setParameter("policyID",policyID);
+		try {
+			return (InsuredPerson) query.list().get(0);
+		}catch (Exception e){
+			return null;
+		}
+	}
+}

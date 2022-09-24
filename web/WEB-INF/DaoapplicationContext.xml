@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="holdingDAO" class="aminParsian.DAO.HoldingDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="invoiceDAO" class="aminParsian.DAO.InvoiceDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="organizationDAO" class="aminParsian.DAO.OrganizationDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="sanadDAO" class="aminParsian.DAO.SanadDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="sanadArticleDAO" class="aminParsian.DAO.SanadArticleDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="policyCredebitDAO" class="aminParsian.DAO.PolicyCredebitDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="actionReqDAO" class="aminParsian.DAO.ActionReqDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="agencyDAO" class="aminParsian.DAO.AgencyDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="usersDAO" ref="usersDAO"/>
+        <property name="ErrorsDAO" ref="errorsDAO"/>
+    </bean>
+    <bean id="comboDAO" class="aminParsian.DAO.ComboDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="errorsDAO" class="aminParsian.DAO.ErrorsDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="personDAO" class="aminParsian.DAO.PersonDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="ErrorsDAO" ref="errorsDAO"/>
+    </bean>
+    <bean id="queriesDAO" class="aminParsian.DAO.QueriesDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="roleDAO" class="aminParsian.DAO.RoleDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="sematDAO" class="aminParsian.DAO.SematDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="sematRoleDAO" class="aminParsian.DAO.SematRoleDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="tabDAO" class="aminParsian.DAO.TabDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="tabRelationDAO" class="aminParsian.DAO.TabRelationDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="actionReqDAO" ref="actionReqDAO"/>
+        <property name="tabDAO" ref="tabDAO"/>
+    </bean>
+    <bean id="usersDAO" class="aminParsian.DAO.UsersDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="tabRelationDAO" ref="tabRelationDAO"/>
+        <property name="roleDAO" ref="roleDAO"/>
+    </bean>
+    <bean id="achDAO" class="aminParsian.DAO.AchDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="credebitDAO" class="aminParsian.DAO.CredebitDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="credebitStateDAO" ref="credebitStateDAO"/>
+    </bean>
+    <bean id="credebitStateDAO" class="aminParsian.DAO.CredebitStateDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="smsLogDAO" class="aminParsian.DAO.SmsLogDAO">
+        <property name="errorsDAO" ref="errorsDAO"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="listCredebitBankDAO" class="aminParsian.DAO.ListCredebitBankDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="credebitStateDAO" ref="credebitStateDAO"/>
+        <property name="credebitDAO" ref="credebitDAO"/>
+    </bean>
+    <bean id="listCredebitBankLogDAO" class="aminParsian.DAO.ListCredebitBankLogDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="credebitStateDAO" ref="credebitStateDAO"/>
+        <property name="credebitDAO" ref="credebitDAO"/>
+    </bean>
+
+    <bean id="receptionExcelDAO" class="aminParsian.DAO.ReceptionExcelDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="receptionExcelNotExistIPDAO" class="aminParsian.DAO.ReceptionExcelNotExistIPDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="credebitReceptionExcelDAO" class="aminParsian.DAO.CredebitReceptionExcelDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="policyDAO" class="aminParsian.DAO.PolicyDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="ErrorsDAO" ref="errorsDAO"/>
+    </bean>
+
+    <bean id="insuredPersonDAO" class="aminParsian.DAO.InsuredPersonDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="errorsDAO" ref="errorsDAO"/>
+    </bean>
+
+    <bean id="contactDAO" class="aminParsian.DAO.ContactDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="errorsDAO" ref="errorsDAO"/>
+    </bean>
+
+
+    <bean id="accountDAO" class="aminParsian.DAO.AccountDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="errorsDAO" ref="errorsDAO"/>
+    </bean>
+
+    <bean id="excelMappingDAO" class="aminParsian.DAO.ExcelMappingDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="suspendDAO" class="aminParsian.DAO.SuspendDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="receptionExcelFileDAO" class="aminParsian.DAO.ReceptionExcelFileDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="sarresidElamBedehkarDAO" class="aminParsian.DAO.SarresidElamBedehkarDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="invoiceCredebitDAO" class="aminParsian.DAO.InvoiceCredebitDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="policyPrmDAO" class="aminParsian.DAO.PolicyPrmDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+</beans>

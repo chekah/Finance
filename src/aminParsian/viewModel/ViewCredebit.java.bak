@@ -1,0 +1,144 @@
+package aminParsian.viewModel;
+
+import aminParsian.model.CredebitState;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+/**
+ * Created by a-naderi on 7/25/2017.
+ */
+public class ViewCredebit {
+
+    private BigDecimal credebitID;
+    private String policyNo;
+    private String orgName;
+    private String nationalID;
+    private String personName;
+    private String invoiceNo;
+    private BigInteger mablagh;
+    private String state;
+    private String entryDate;
+    private String entryTime;
+    private String entryUser;
+    ArrayList<ViewCredebitState> credebitStateArrayList;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    public ArrayList<ViewCredebitState> getCredebitStateArrayList() {
+        return credebitStateArrayList;
+    }
+
+    public void setCredebitStateArrayList(ArrayList<ViewCredebitState> credebitStateArrayList) {
+        this.credebitStateArrayList = credebitStateArrayList;
+    }
+
+    public String getPolicyNo() {
+        return policyNo;
+    }
+
+    public void setPolicyNo(String policyNo) {
+        this.policyNo = policyNo;
+    }
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
+    public String getNationalID() {
+        return nationalID;
+    }
+
+    public void setNationalID(String nationalID) {
+        this.nationalID = nationalID;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public String getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public BigInteger getMablagh() {
+        return mablagh;
+    }
+
+    public void setMablagh(BigInteger mablagh) {
+        this.mablagh = mablagh;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(String entryDate) {
+        this.entryDate = entryDate;
+    }
+
+    public String getEntryUser() {
+        return entryUser;
+    }
+
+    public void setEntryUser(String entryUser) {
+        this.entryUser = entryUser;
+    }
+
+    public BigDecimal getCredebitID() {
+        return credebitID;
+    }
+
+    public void setCredebitID(BigDecimal credebitID) {
+        this.credebitID = credebitID;
+    }
+
+    public String getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(String entryTime) {
+        this.entryTime = entryTime;
+    }
+
+    //    ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public ViewCredebit(){
+
+    }
+
+    public ViewCredebit(String policyNo, String orgName, String nationalID, String personName, String invoiceNo, BigInteger mablagh, String state, String entryDate, String entryUser, BigDecimal credebitID) {
+        this.policyNo = policyNo;
+        this.orgName = orgName;
+        this.nationalID = nationalID;
+        this.personName = personName;
+        this.invoiceNo = invoiceNo;
+        this.mablagh = mablagh;
+        this.state = state;
+        this.entryDate = entryDate;
+        this.entryUser = entryUser;
+        this.credebitID=credebitID;
+    }
+}

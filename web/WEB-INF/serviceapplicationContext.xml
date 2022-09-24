@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+       xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+       http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
+        http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
+
+
+
+    <bean id="tabService" class="aminParsian.service.implementation.TabService">
+        <property name="tabDAO" ref="tabDAO"/>
+        <property name="tabRelationDAO" ref="tabRelationDAO"/>
+        <property name="actionReqDAO" ref="actionReqDAO"/>
+    </bean>
+
+    <bean id="userService" class="aminParsian.service.implementation.UserService">
+        <property name="usersDAO" ref="usersDAO"/>
+        <property name="roleDao" ref="roleDAO"/>
+        <property name="agencyDAO" ref="agencyDAO"/>
+        <property name="sematDAO" ref="sematDAO"/>
+        <property name="personDAO" ref="personDAO"/>
+        <property name="sematRoleDAO" ref="sematRoleDAO"/>
+
+    </bean>
+
+    <bean id="darmanWebService" class="aminParsian.service.implementation.DarmanWebService">
+        <property name="usersDAO" ref="usersDAO"/>
+        <property name="credebitDAO" ref="credebitDAO"/>
+        <property name="listCredebitBankDAO" ref="listCredebitBankDAO"/>
+        <property name="achService" ref="achService"/>
+
+    </bean>
+
+    <bean id="ComboService" class="aminParsian.service.implementation.ComboService">
+        <property name="comboDAO" ref="comboDAO"/>
+    </bean>
+
+    <bean id="policyInvoiceService" class="aminParsian.service.implementation.PolicyInvoiceService">
+
+    </bean>
+
+    <bean id="letterService" class="aminParsian.service.implementation.LetterService">
+        <property name="sarresidElamBedehkarDAO" ref="sarresidElamBedehkarDAO"/>
+        <property name="personDAO" ref="personDAO"/>
+        <property name="invoiceDAO" ref="invoiceDAO"/>
+        <property name="policyDao" ref="policyDAO"/>
+        <property name="invoiceCredebitDAO" ref="invoiceCredebitDAO"/>
+        <property name="policyPrmDAO" ref="policyPrmDAO"/>
+    </bean>
+
+    <bean id="achService" class="aminParsian.service.implementation.ACHService">
+        <property name="credebitDAO" ref="credebitDAO"/>
+        <property name="credebitStateDAO" ref="credebitStateDAO"/>
+        <property name="usersDAO" ref="usersDAO"/>
+        <property name="smsLogDAO" ref="smsLogDAO"/>
+        <property name="listCredebitBankDAO" ref="listCredebitBankDAO"/>
+        <property name="listCredebitBankLogDAO" ref="listCredebitBankLogDAO"/>
+        <property name="receptionExcelDAO" ref="receptionExcelDAO"/>
+        <property name="receptionExcelNotExistIPDAO" ref="receptionExcelNotExistIPDAO"/>
+        <property name="credebitReceptionExcelDAO" ref="credebitReceptionExcelDAO"/>
+        <property name="insuredPersonDAO" ref="insuredPersonDAO"/>
+        <property name="policyDAO" ref="policyDAO"/>
+        <property name="accountDAO" ref="accountDAO"/>
+        <property name="contactDAO" ref="contactDAO"/>
+        <property name="personDAO" ref="personDAO"/>
+        <property name="excelMappingDAO" ref="excelMappingDAO"/>
+        <property name="agencyDAO" ref="agencyDAO"/>
+        <property name="suspendDAO" ref="suspendDAO"/>
+        <property name="receptionExcelFileDAO" ref="receptionExcelFileDAO"/>
+    </bean>
+
+    <bean id="feedBackServiceTask" class="aminParsian.service.jobs.FeedBackServiceTask">
+        <property name="achService" ref="achService"/>
+        <property name="credebitDAO" ref="credebitDAO"/>
+        <property name="credebitStateDAO" ref="credebitStateDAO"/>
+    </bean>
+    <bean id="smsServiceTask" class="aminParsian.service.jobs.SmsServiceTask">
+        <property name="achService" ref="achService"/>
+        <property name="credebitDAO" ref="credebitDAO"/>
+        <property name="credebitStateDAO" ref="credebitStateDAO"/>
+    </bean>
+
+    <bean id="ersalBeBankTask" class="aminParsian.service.jobs.ErsalBeBankTask">
+        <property name="achService" ref="achService"/>
+        <property name="listCredebitBankDAO" ref="listCredebitBankDAO"/>
+        <property name="listCredebitBankLogDAO" ref="listCredebitBankLogDAO"/>
+    </bean>
+
+    <bean id="myUserDetailsService" class="aminParsian.service.implementation.UserService">
+        <property name="usersDAO" ref="usersDAO"/>
+    </bean>
+
+    <bean id="attributeSource" class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource"/>
+
+    <bean id="namingStrategy" class="org.springframework.jmx.export.naming.MetadataNamingStrategy">
+        <property name="attributeSource" ref="attributeSource"/>
+    </bean>
+
+    <bean id="exporterAssembler" class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+        <property name="attributeSource" ref="attributeSource"/>
+    </bean>
+
+    <bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+        <property name="locateExistingServerIfPossible" value="true"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="txManager"/>
+    </bean>
+
+    <bean id="fillReceptionExcelTask" class="aminParsian.service.jobs.FillReceptionExcelTask">
+        <property name="receptionExcelNotExistIPDAO" ref="receptionExcelNotExistIPDAO"/>
+        <property name="achService" ref="achService"/>
+        <property name="insuredPersonDAO" ref="insuredPersonDAO"/>
+        <property name="receptionExcelDAO" ref="receptionExcelDAO"/>
+        <property name="userDAO" ref="usersDAO"/>
+        <property name="policyDAO" ref="policyDAO"/>
+    </bean>
+
+    <bean id="createCredebitForReceptionExcelTask" class="aminParsian.service.jobs.CreateCredebitForReceptionExcelTask">
+        <property name="achService" ref="achService"/>
+        <property name="receptionExcelDAO" ref="receptionExcelDAO"/>
+        <property name="userDAO" ref="usersDAO"/>
+        <property name="credebitDAO" ref="credebitDAO"/>
+        <property name="credebitReceptionExcelDAO" ref="credebitReceptionExcelDAO"/>
+    </bean>
+
+
+    <wss:binding url="/services/DarmanWebService">
+        <wss:service>
+            <ws:service bean="#darmanWebService" />
+        </wss:service>
+    </wss:binding>
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+ <aop:config>
+     <aop:advisor advice-ref="txAdvice" pointcut="execution(* aminParsian.service.IACHService.*(..))"/>
+     <aop:advisor advice-ref="txAdvice" pointcut="execution(* aminParsian.service.IUserService.*(..))"/>
+     <aop:advisor advice-ref="txAdvice" pointcut="execution(* aminParsian.service.IPolicyInvoiceService.*(..))"/>
+     <aop:advisor advice-ref="txAdvice" pointcut="execution(* aminParsian.service.ILetterService.*(..))"/>
+     <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* aminParsian.service.IWebService.*(..))"/>-->
+ </aop:config>
+
+</beans>

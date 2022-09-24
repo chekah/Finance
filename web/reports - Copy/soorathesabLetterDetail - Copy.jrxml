@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="soorathesabLetter" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21887c4c-cfd3-4c18-a83b-2e76dc0991e7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="436"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<import value="parsian.util.*"/>
+	<parameter name="realPath" class="java.lang.String" isForPrompting="false"/>
+	<field name="policyno" class="java.lang.String"/>
+	<field name="sarresid" class="java.lang.String"/>
+	<field name="shenaseBank" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="matn" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="letterno" class="java.lang.String"/>
+	<field name="mablaghElhaghie" class="java.lang.Long"/>
+	<field name="mablagh" class="java.lang.Long"/>
+	<field name="mablaghBimename" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="740" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e0f94c22-0be3-4eb4-bee4-ebc267555a67" x="-5" y="216" width="555" height="50"/>
+				<textElement textAlignment="Justified">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ با توجه به صدور بیمه نامه درمان تکمیلی گروهی کارکنان آن شرکت محترم و افراد تحت تکفل ایشان، خواهشمند است دستور فرمایید در خصوص واریز مبلغ به شرح جدول ذیل بابت بدهی اقساط حق بیمه های سررسید شده بیمه نامه و الحاقیه های صادره با احتساب سررسید به شماره حساب مندرج در جدول مشخصات حساب و ارسال فیش واریزی به این شرکت، اقدام مقتضی مبذول نمایند]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement uuid="84016b82-fd66-4e9c-b90c-a58dc7a51f06" x="-2" y="280" width="552" height="74"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="b7683abf-dd28-498c-af5b-f2429bd81766" x="-2" y="316" width="552" height="2"/>
+			</line>
+			<line>
+				<reportElement uuid="fc29724c-1d2e-4e2c-8746-c12784c5de1f" x="432" y="282" width="1" height="73"/>
+			</line>
+			<line>
+				<reportElement uuid="6e4f497d-7a22-4a00-8c60-2c106b5d6c7d" x="358" y="281" width="1" height="73"/>
+			</line>
+			<line>
+				<reportElement uuid="14358fcf-5465-4421-87b7-2878e6795420" x="262" y="282" width="1" height="73"/>
+			</line>
+			<line>
+				<reportElement uuid="f762de92-5d11-48b1-8e6d-97e9c96b11d8" x="168" y="282" width="1" height="73"/>
+			</line>
+			<line>
+				<reportElement uuid="5e6fe2c1-3da3-41cf-92c0-879590e140ff" x="71" y="282" width="1" height="73"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5838c453-5568-4efa-9ae3-954a13ffeb55" x="440" y="368" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="14" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[جدول مشخصات حساب:]]></text>
+			</staticText>
+			<rectangle radius="10">
+				<reportElement uuid="0f7d7241-7c0d-40b4-bf81-66a4eccc8898" x="-4" y="396" width="552" height="113"/>
+			</rectangle>
+			<line>
+				<reportElement uuid="15e48d09-4ed7-4f3e-9eea-3b84c750c4e7" x="-2" y="431" width="550" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="4c934bb3-c2eb-4190-bab3-8ecd05b2fbb3" x="0" y="471" width="550" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="953f6eaf-60a9-4aff-b877-5e6c8ddea29d" x="439" y="393" width="1" height="79"/>
+			</line>
+			<line>
+				<reportElement uuid="db8d2bd1-a8e4-4289-81e6-db11abf27584" x="357" y="393" width="1" height="79"/>
+			</line>
+			<line>
+				<reportElement uuid="2d2a9a0e-bb53-4076-a8e4-66e89c6ee8e4" x="197" y="398" width="1" height="74"/>
+			</line>
+			<line>
+				<reportElement uuid="ff9ae4df-6136-410d-95df-30b398e1eb9b" x="76" y="397" width="1" height="75"/>
+			</line>
+			<staticText>
+				<reportElement uuid="4ca3f106-1c2a-428e-9588-b8e7f968b42e" x="444" y="405" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[صاحب حساب]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="491a98cf-3972-44a0-a79a-d793dd36dc9b" x="359" y="405" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[بانک /  شعبه ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e3ff7676-5fdc-496e-b404-b041ef70685a" x="216" y="405" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شماره شبا]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4aa3252e-d828-4a57-b6b7-ef5953f2e7af" x="86" y="405" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شماره حساب]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e42df3ba-8c92-44c8-a6d6-de84bf8435cb" x="0" y="405" width="77" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شناسه ملی]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7cbeb7aa-f07b-44ac-a86a-5dd0c09f77a2" x="440" y="435" width="106" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شرکت خدمات بیمه ای
+امین پارسیان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c9f37776-1212-4a47-9220-8f0283660866" x="358" y="435" width="77" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[پارسیان / تهران
+(میدان آرژانتین)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f8dab20-a53c-477c-baa3-0f6d87774e1d" x="198" y="435" width="152" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[810540103381020569097003]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0dc0bbde-541b-4241-9c90-3edb2f20c55f" x="96" y="435" width="96" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[00200569097003]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fdfb9b58-beda-45c8-a835-d676bfb5d3fc" x="0" y="435" width="77" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[10102780407]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd010c9d-e46b-45a0-a778-5c913f62634d" x="10" y="478" width="530" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="12" isBold="true" isUnderline="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[با توجه به شناسه دار بودن شماره حساب اعلامی، واریز حق بیمه درمان، صرفا با اعمال شناسه واریز مربوطه امکان پذیر می باشد.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4ccbb2c8-b4ed-4523-908a-b6ae8a5964dc" x="454" y="287" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شماره بیمه نامه]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e2c884a2-bbb4-4366-a2e3-81a7c5914397" x="359" y="281" width="73" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[نوع بیمه نامه]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e88c67e6-b49d-4857-88f7-185b80f8d9c5" stretchType="RelativeToTallestObject" x="273" y="287" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[مبلغ بدهی قسط اصلی(ریال)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dcfb240a-aac2-464b-bddb-38f108d10948" x="178" y="287" width="80" height="29"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[مبلغ بدهی الحاقیه های افزایشی(ریال)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a307a14-0886-4190-a2aa-aa031beea04f" x="77" y="287" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شناسه واریز
+اختصاصی هر قسط]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="31500d20-3b92-4c81-a5ac-c2701c38a530" x="-5" y="287" width="80" height="29"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[مبلغ قابل پرداخت
+(ریال)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dad3d3cc-84ce-4eb0-8f4b-7c11714599fc" x="362" y="318" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[درمان تکمیلی گروهی]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="15faabdc-b551-441c-bd99-33e0e8b0f599" x="232" y="684" width="308" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[-پیگیری کننده: آقای اکبری، شماره تماس: 87753230-021]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97f7d627-44b8-4812-ac22-2ccae046d3af" x="447" y="186" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[با سلام و احترام]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="58c78e25-298f-40d2-9a72-61c66f09c6ec" x="301" y="147" width="241" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="14" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="77dd67dd-647d-4475-9f32-a59f2794e3d2" x="432" y="325" width="118" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{policyno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="f2e2f7fc-7372-4157-baff-6a12a65b4585" x="263" y="325" width="96" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mablaghBimename}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="e6d6a287-6566-4401-865e-fa7eaee78d6f" x="178" y="325" width="72" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mablaghElhaghie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2fcf0df9-69e5-4ad9-b89f-b8c996064958" x="74" y="325" width="95" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="B Nazanin" size="12" isBold="false" isUnderline="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shenaseBank}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="4667dcc6-8327-4aa7-aaa0-76359190af5a" x="0" y="325" width="71" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mablagh}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="0a197357-1bc6-4c15-bab5-2a4fb8a7ee56" x="362" y="298" width="70" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="9a698520-f6d5-4462-8b11-fd1eb79be9cd" x="361" y="334" width="71" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="46278870-64cc-402c-9c3d-5e46cc6f552e" x="359" y="300" width="73" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[سررسید]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b70a73f8-75f9-45d7-9a46-67549e961edb" x="96" y="95" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[تاریخ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6158bd8b-1d8e-45a7-8d72-899201ca111b" x="96" y="121" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[شماره نامه:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="54a26222-4870-4301-83d1-08c26d1595e0" x="96" y="147" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[پیوست:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0abfbe48-c0c9-4a0c-909e-1164522a2030" x="12" y="147" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ندارد]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement uuid="b4832de1-f368-41cc-b20c-3e0b6073490e" x="359" y="334" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sarresid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="dae280a1-8da4-4ef1-bfa1-898e6e47e742" x="10" y="95" width="86" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="522d8172-2726-4bdd-b592-6172c15840eb" x="27" y="554" width="100" height="150"/>
+				<imageExpression><![CDATA["E:\\work\\amin parsian\\Ach\\web\\image\\signiture.jpeg"]]></imageExpression>
+			</image>
+			<textField pattern="#,##0">
+				<reportElement uuid="a8e5fe30-79f9-4c39-9c87-4500b93ee2e4" x="10" y="121" width="86" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="12" isBold="false" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{letterno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="95d3fbc2-b903-496e-9b57-3c00ddb68cb0" x="4" y="572" width="136" height="33"/>
+				<textElement textAlignment="Center">
+					<font fontName="B Nazanin" size="14" isBold="true" pdfFontName="net/sf/jasperreports/fonts/farsi/BNazanin.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[علیرضا آزادمنش
+مدیر فنی و بازاریابی بیمه های اشخاص]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
